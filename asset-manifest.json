@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/land-search-front-end/static/css/main.84487ea8.css",
+    "main.js": "/land-search-front-end/static/js/main.ae4c7bd9.js",
+    "index.html": "/land-search-front-end/index.html",
+    "main.84487ea8.css.map": "/land-search-front-end/static/css/main.84487ea8.css.map",
+    "main.ae4c7bd9.js.map": "/land-search-front-end/static/js/main.ae4c7bd9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.84487ea8.css",
+    "static/js/main.ae4c7bd9.js"
+  ]
+}
