@@ -3,16 +3,18 @@ import MyButton from "../form-components/MyButton";
 import Section from "../main-components/section";
 import {Link} from "react-router-dom";
 import MinistryBar from "../main-components/ministrybar";
-const adminHome = ()=>{
+
+const AdminHome = ()=>{
+    
     return(
         <Section>
             <MyDiv>
             <MinistryBar />
             <div className="greating">
-            <h1>Hello Admin Your welcome</h1>
+            <h1>Hello Admin You are welcome</h1>
             <p>feel free to ! </p>
             <Link to="/adminlogin"><MyButton placeholder="Navigate"/></Link>
-             <Link to="/" className="mylink">home</Link>
+             <Link to="/" className="mylink">back to search</Link>
             </div>
             </MyDiv>
         </Section>
@@ -34,4 +36,4 @@ height:100%;
 }
 `;
 
-export default adminHome;
+export default AdminHome;

@@ -12,7 +12,7 @@ function MyNav(){
     return(
     <Navbar key={expand} bg={colors.white_alpha_25} expand={expand} className="mb-3">
           <Container fluid bg={colors.white_alpha_25} >
-            <Navbar.Brand href="#">Ministry Of Lands Housing And Urban Development</Navbar.Brand>
+            <Navbar.Brand>Ministry Of Lands Housing And Urban Development</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`}  />
             <Navbar.Offcanvas 
               id={`offcanvasNavbar-expand-${expand}`}
@@ -27,13 +27,13 @@ function MyNav(){
               <Offcanvas.Body bg={colors.white_alpha_25} >
                 <Nav className="justify-content-center flex-grow-1 pe-3">
                   
-                  <Nav.Link><MySpan><Link to="/" className="mylink">home</Link></MySpan></Nav.Link>
+                  <MySpan><Link to="/" className="mylink">home</Link></MySpan>
                   
-                  <Nav.Link><MySpan><Link to="/search"  className="mylink">search</Link></MySpan></Nav.Link>
+                  <MySpan><Link to="/search"  className="mylink">search</Link></MySpan>
                   
-                  <Nav.Link><MySpan><Link to="/adminhome"  className="mylink">admin</Link></MySpan></Nav.Link>
+                  <MySpan><Link to="/adminhome"  className="mylink">admin</Link></MySpan>
                   
-                  <Nav.Link><MySpan><Link to="/adminupload"  className="mylink">upload</Link></MySpan></Nav.Link>
+                  <MySpan><Link to="/adminupload"  className="mylink">upload</Link></MySpan>
                   
                   
                   

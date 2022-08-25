@@ -5,7 +5,7 @@ import Axios from "axios";
 import {Form ,Button} from 'react-bootstrap';
 
 
-import Messagealert from './fileupload/messages';
+import MyAlert from '../form-components/MyAlert';
 
 const FileUpload = () => {
     const [file , setfile] = useState("");
@@ -56,6 +56,7 @@ const FileUpload = () => {
 
   return (
     <MySection>
+        {uploadedfile && <MyAlert variant="success" msg={message}/>}
         <Form onSubmit={onSubmit}>
         <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>{filename}</Form.Label>
@@ -64,8 +65,6 @@ const FileUpload = () => {
         <Button type="submit" variant="outline-primary">Primary</Button>
       </Form.Group>
       </Form>
-
-      {uploadedfile && <Messagealert msg={message}/>}
     </MySection>
   )
 }
