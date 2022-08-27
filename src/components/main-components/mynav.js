@@ -33,10 +33,6 @@ function MyNav(){
                   
                   <MySpan><Link to="/adminhome"  className="mylink">admin</Link></MySpan>
                   
-                  <MySpan><Link to="/adminupload"  className="mylink">upload</Link></MySpan>
-                  
-                  
-                  
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

@@ -1,42 +1,73 @@
-import { useState } from "react";
-import HomeSection from "./components/userpages/home-section";
-import SearchSection from "./components/userpages/search-section";
-import AdminHome from "./components/adminpages/adminhome";
-import MyForm from "./components/adminpages/Login";
-import {Routes,Route} from "react-router-dom";
-import SignUp from "./components/adminpages/signup";
-import FileUpload from "./components/adminpages/fileupload";
+import { useState , useEffect} from "react";
+import HomeSection from "./pages/userpages/HomeSection";
+import SearchSection from "./pages/userpages/SearchSection";
+import AdminHome from "./pages/adminpages/AdminHome";
+import LoginForm from "./pages/adminpages/Login";
+import AdminDashboard from "./pages/adminpages/AdminDashboard";
+import {Routes,Route, useLocation,useNavigate} from "react-router-dom";
+import SignUp from "./pages/adminpages/SignUp";
+import FileUpload from "./pages/adminpages/FileUpload";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {isAdminAuth} from "./components/adminpages/adminAuthContext";
-import ProtectedRoutes from "./components/ProtectedRoutes";
+import {isAdminAuth , isAdminData} from "./pages/adminpages/AdminAuthContext";
+import ProtectedRoutes from "./ProtectedRoutes";
+import axios from "axios";
 
 function App() {
-  const [adminAuth , setAdminAuth] = useState(true);
+  
+  const [adminAuth , setAdminAuth] = useState(false);
+  const [adminData , setAdminData] = useState([]);
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    console.log("refresh");
+    console.log(pathname);
+    axios.post("/refresh").then(
+      (response)=>{
+        if(response.data.auth){
+          setAdminData(response.data.data);
+          console.log(response.data.data);
+          console.log("admindata after : ",adminData);
+        setAdminAuth(response.data.auth);
+        navigate(pathname);
+        }
+      }
+    );
+    
+  },[ ]);
+  
   return (
     <>
-      
         <Routes>
                   <Route exact path="/" element={<HomeSection/> }/>
-
+              
                   <Route exact path="/search" element={<SearchSection/> }/>
                   
                   <Route exact path="/adminhome" element={<AdminHome/> }/>
 
                   <Route exact path="/adminlogin" element={
                   <isAdminAuth.Provider value={{adminAuth , setAdminAuth}}>
-                    <MyForm/> </isAdminAuth.Provider>}/>
+                    <isAdminData.Provider value={{adminData , setAdminData}}>
+                    <LoginForm/>
+                    </isAdminData.Provider> 
+                    </isAdminAuth.Provider>}/>
 
                   <Route exact path="/adminsignup" element={
                   <isAdminAuth.Provider value={{adminAuth ,setAdminAuth}}>
-                    <SignUp/></isAdminAuth.Provider>  }/>
+                    <SignUp/>
+                    </isAdminAuth.Provider>  }/>
+                    
+                    
 
             <Route element ={
             <isAdminAuth.Provider value={{adminAuth , setAdminAuth}}>
+            <isAdminData.Provider value={{adminData , setAdminData}}>
             <ProtectedRoutes />
+            </isAdminData.Provider>
             </isAdminAuth.Provider>
             }>
-
+            <Route exact path="/admindashboard" element={<AdminDashboard />}/>
             <Route exact path="/adminupload" element={<FileUpload/> }/>
               </Route>
          </Routes>

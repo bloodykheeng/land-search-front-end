@@ -1,8 +1,8 @@
 import Styled from "styled-components";
-import MyButton from "../form-components/MyButton";
-import Section from "../main-components/section";
+import MyButton from "../../components/form-components/MyButton";
+import Section from "../../components/main-components/Section";
 import {Link} from "react-router-dom";
-import MinistryBar from "../main-components/ministrybar";
+import MinistryBar from "../../components/main-components/MinistryBar"; 
 
 const AdminHome = ()=>{
     
@@ -12,7 +12,7 @@ const AdminHome = ()=>{
             <MinistryBar />
             <div className="greating">
             <h1>Hello Admin You are welcome</h1>
-            <p>feel free to ! </p>
+            <strong>feel free to  </strong>
             <Link to="/adminlogin"><MyButton placeholder="Navigate"/></Link>
              <Link to="/" className="mylink">back to search</Link>
             </div>

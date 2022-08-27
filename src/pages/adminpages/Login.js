@@ -1,49 +1,45 @@
 import React ,{useContext, useState} from 'react';
-import MySection from "../main-components/section";
-import MyInput from "../form-components/MyInput";
+import MySection  from "../../components/main-components/Section";
+import MyInput from "../../components/form-components/MyInput";
 import styled from "styled-components";
-import MyButton from "../form-components/MyButton";
-import {Link, Navigate, useNavigate} from "react-router-dom";
-import MinistryBar from '../main-components/ministrybar';
+import MyButton from "../../components/form-components/MyButton";
+import {Link, useNavigate} from "react-router-dom";
+import MinistryBar from '../../components/main-components/MinistryBar';
 import Axios from "axios";
-import { isAdminAuth } from './adminAuthContext';
-
+import { isAdminAuth, isAdminData } from './AdminAuthContext';
+import MyAlert from "../../components/form-components/MyAlert";
 
 
 function MyForm(){
-    const {adminAuth,setAdminAuth} = useContext(isAdminAuth);
+    const navigate = useNavigate();
+    const { setAdminAuth} = useContext(isAdminAuth);
+    const {setAdminData} = useContext(isAdminData);
     const [username , setusername] = useState("");
     const [password , setpassword] = useState("");
-    const navigate = useNavigate();
-   
+    const [message , setMessage] = useState("fill in to LogIn");
+    const [loginStatus, setLoginStatus] = useState("");
+
     const login = ()=>{
-        <Navigate replace to="/adminupload"/>
-      
+
         const data = {
             username: username,
             password:password
         }
-      console.log(username);
-      console.log(password);
+      
         Axios.post("/login",data, {withCredentials : false})
         .then((response)=>{
-            console.log(response.data);
-            if(response.data.auth === false){
-               
-                navigate("/adminupload");
-                console.log("tsap")
+            if(!response.data.auth){
                 setAdminAuth(false);
+                setLoginStatus(false)
+                setMessage(response.data.message);
             }else{
+                setMessage(response.data.message);
+                setLoginStatus(true)
                 setAdminAuth(true);
-                navigate("/");
-                
-                console.log("admin auth : ",adminAuth);
+                setAdminData(response.data.data[0]);
+                navigate("/admindashboard");
             }
-            setAdminAuth(true);
-            console.log("admin auth : ",adminAuth);
-           
         })
-     
     }
     return(
         <MySection style={{
@@ -56,6 +52,9 @@ function MyForm(){
         }}>
             <MinistryBar />
             <MyFormStyled>
+                {loginStatus === "" && <MyAlert variant="success" msg={message} />  }
+                {loginStatus === true && <MyAlert variant="success" msg={message} />  }
+                {loginStatus === false && <MyAlert variant="danger" msg={message} /> }
             <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="firstname"/>
             <MyInput type="text" onChange={(e)=>setpassword(e.target.value)}  placeholder="LastName"/>
             <MyButton type="submit" onClick={login} placeholder="Login"/><br></br>

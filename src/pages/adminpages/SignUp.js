@@ -1,13 +1,13 @@
 import React,{useState} from "react";
- import MySection from "../main-components/section";
- import MyInput from "../form-components/MyInput";
+ import MySection  from "../../components/main-components/Section";
+ import MyInput from "../../components/form-components/MyInput";
  import styled from "styled-components";
- import MyButton from "../form-components/MyButton";
+ import MyButton from "../../components/form-components/MyButton";
  import {Link} from "react-router-dom";
-import MinistryBar from "../main-components/ministrybar";
+import MinistryBar from "../../components/main-components/MinistryBar";
 
 import Axios from "axios";
-import MyAlert from "../form-components/MyAlert";
+import MyAlert from "../../components/form-components/MyAlert";
 
  const SignUp = ()=>{
     const [signupstatus, setsignupstatus] = useState("start");

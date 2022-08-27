@@ -1,8 +1,8 @@
-import MySection from "../main-components/section";
-import Ministrybar from "../main-components/ministrybar";
+import MySection from "../../components/main-components/Section";
+import Ministrybar from "../../components/main-components/MinistryBar";
 import styled from "styled-components";
-import MyButton from "../form-components/MyButton";
-import MyNav from "../main-components/mynav";
+import MyButton from "../../components/form-components/MyButton";
+import MyNav from "../../components/main-components/MyNav";
 //import Axios from "axios";
 function SearchSection(){
 

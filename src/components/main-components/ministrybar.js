@@ -19,7 +19,7 @@ border-radius:10px;
 border:1px solid var(--white-alpha-40);
 img{
     width:80%;
-    height:90%;
+    max-height:90%;
     object-fit:cover;
   }
 `;

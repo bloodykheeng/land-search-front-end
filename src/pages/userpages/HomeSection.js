@@ -1,9 +1,9 @@
 //import "./home-section.css";
 import {Link} from "react-router-dom";
-import MySection from "../main-components/section";
+import MySection from "../../components/main-components/Section";
 import Styled from "styled-components";
-import MyButton from "../form-components/MyButton";
-import Ministrybar from "../main-components/ministrybar";
+import MyButton from "../../components/form-components/MyButton";
+import Ministrybar from "../../components/main-components/MinistryBar";
 function HomeSection(){
     return(
         <MySection>  
