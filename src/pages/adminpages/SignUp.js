@@ -66,16 +66,17 @@ import MyAlert from "../../components/form-components/MyAlert";
             {signupstatus === false && <MyAlert variant="danger" msg={signupmsg} /> }
 
 
-            <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="firstname"/>
-            <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="LastName"/>
-            <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="UserName"/>
-            <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="Email"/>
+            <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
+            <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
+            <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
+            <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="enter Email"/>
             </MyFormStyled>
             <MyFormStyled>
-            <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="Date OF Birth"/>
-            <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="PhoneNumber"/>
-            <MyInput type="text" onChange={(e)=>setpassword(e.target.value)} placeholder="password"/>
-            <MyInput type="text" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="Confirm Password"/>
+            <strong>Enter Date Of Birth</strong>
+            <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
+            <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
+            <MyInput type="text" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
+            <MyInput type="text" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
             <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
             <h3><Link style={{textDecoration :"none"}} to="/adminlogin">Login</Link></h3>
             </MyFormStyled>

@@ -26,16 +26,20 @@ function App() {
     axios.post("/refresh").then(
       (response)=>{
         if(response.data.auth){
-          setAdminData(response.data.data);
-          console.log(response.data.data);
-          console.log("admindata after : ",adminData);
+        setAdminData(response.data.data);
+        console.log(response.data.data);
+        console.log("admindata after : ",adminData);
         setAdminAuth(response.data.auth);
         navigate(pathname);
+        }else{
+          setAdminData(null);
+          setAdminAuth(response.data.auth)
+          navigate("/adminlogin");
         }
       }
     );
     
-  },[ ]);
+  },[adminAuth]);
   
   return (
     <>

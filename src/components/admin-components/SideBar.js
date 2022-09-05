@@ -23,10 +23,12 @@ const SideBar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
+          <Link to="/admindashboard" style={{ textDecoration: "none" }}>
           <li>
             <Dashboard className="icon" />
             <span>Dashboard</span>
           </li>
+          </Link>
           <p className="title">SERVICES</p>
           <Link to="/adminupload" style={{ textDecoration: "none" }}>
             <li>

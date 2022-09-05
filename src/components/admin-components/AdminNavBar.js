@@ -15,7 +15,7 @@ const logouthandler = ()=>{
         axios.post("/logout").then((response)=>{
             setAdminAuth(response.data.auth);
             setAdminData(null);
-            navigate("/adminhome");
+            navigate("/adminlogin");
         })
     }
   return (
