@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminNavBar = () => {
 const {setAdminAuth} = useContext(isAdminAuth);
-const {setAdminData} = useContext(isAdminData);
+const { adminData ,setAdminData} = useContext(isAdminData);
 const navigate = useNavigate();
     
 const logouthandler = ()=>{
@@ -25,11 +25,13 @@ const logouthandler = ()=>{
         <strong>Ministry Of Land Housing And Urban Planning</strong>
       </div>
       <div className="items">
-     
+      <div className="item">
+        <strong> {adminData.firstName} </strong>
+        </div>
         <div className="item">
           <img
-            src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
+            src="images/emblem.jpeg"
+            alt="emblem"
             className="avatar"
           />
         </div>
@@ -52,6 +54,7 @@ const NavBar = styled.div`
     align-items: center;
     font-size: 14px;
     color: #555;
+    margin:0;
   
     .wrapper {
       width: 100%;

@@ -7,6 +7,7 @@ import AdminContainer from '../../components/admin-components/AdminContainer';
 import { isAdminData ,isAdminAuth } from './AdminAuthContext';
 import styled from 'styled-components';
 import AdminButton from '../../components/admin-components/AdminButton';
+import AdminTable from '../../components/admin-components/AdminTable';
 
 const FileUpload = () => {
     const {adminData } = useContext(isAdminData);
@@ -19,6 +20,7 @@ const FileUpload = () => {
     const [message,setmessage] = useState("");
     const [uploadpercentage, setuploadpercentage] = useState(0);
     const [success , setsuccess] = useState("");
+    const [result , setresult] = useState("");
 
     const onChange = (e)=>{
         if(e.target.id === "xcellupload"){
@@ -87,8 +89,6 @@ const FileUpload = () => {
                     setfile(null);
                     setzipfile(null);
                 },1000);
-
-                console.log(res.data.message);
                 if(res.data.status === "cookie-failed"){
                     setmessage(res.data.auth);
                     setAdminAuth(res.data.auth)
@@ -97,7 +97,9 @@ const FileUpload = () => {
                     setAdminAuth(res.data.auth)
                 }
                 else{
-                    setsuccess("files uploaded succesfuly jjjj");
+                    setsuccess("files uploaded succesfuly");
+                    setmessage(null);
+                    setresult(res.data);
                 }
                 
                 
@@ -106,33 +108,112 @@ const FileUpload = () => {
                 // console.log(fileName);
                 // setuploadedfile({fileName,filePath});
                 }catch(err){
-                if(err.response.status === 500){
-                    setmessage("There was a problem with the server");
+                // if(err.response.status === 500){
+                //     setmessage("There was a problem with the server");
+                // }else{
+                //     setmessage(err.response.data.msg);
+                // }
+               
+                if(err.response){
+                    if(err.response.status === 500){
+                            setmessage("There was a problem with the server");
+                        }else{
+                            setmessage(err.response.data.msg);
+                        }
                 }else{
-                    setmessage(err.response.data.msg);
+                    console.log("error ",err);
                 }
                 setuploadpercentage(0);
                 } 
+
             }
           
          
     }
+
+    
     }
+
+
+
+      let erows =[], srows = [];
+      const [errrows, seterrrows ] = useState();
+      const [successrows, setsuccessrows ] = useState();
+      const [showtable, setshowtable] = useState(false);
+
+      const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'message', headerName: 'message', width: 130 },
+      ];
+
+
+      const viewsummary = (cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname)=>{
+
+        if(cld){
+             srows.push(cld.CLD_response); 
+             erows.push(cld.CLD_err);
+             setsuccessrows(srows); 
+             seterrrows(erows);
+             setshowtable(true);
+
+        }
+        if(rptowner){
+            srows.push(rptowner.rptowner_response);
+            erows.push(rptowner.rptowner_err);
+            setsuccessrows(srows); 
+            seterrrows(erows);
+            setshowtable(true); 
+
+        }
+        if(rptneighbour){
+            srows.push(rptneighbour.rptneighbor_response);
+            erows.push(rptneighbour.rptneighbor_err);
+            setsuccessrows(srows); 
+            seterrrows(erows);
+            setshowtable(true);
+        }
+        if(rptwitness){
+            srows.push(rptwitness.rptwitness_response);
+            erows.push(rptwitness.rptwitness_err);
+            setsuccessrows(srows); 
+            seterrrows(erows);
+            setshowtable(true);
+        }
+        if(rptinspection){
+            srows.push(rptinspection.rptinspection_response);
+            erows.push(rptinspection.rptinspection_err);
+            setsuccessrows(srows); 
+            seterrrows(erows);
+            setshowtable(true);
+        }
+        if(rptform){
+            srows.push(rptform.rptform_response);
+            erows.push(rptform.rptform_err);
+            setsuccessrows(srows); 
+            seterrrows(erows);
+            setshowtable(true);
+        }
+        if(wrongworksheetname && wrongworksheetname.wrongworksheetname.length > 0 ){
+            srows.push(wrongworksheetname.wrongworksheetname); 
+            setsuccessrows(srows);
+            setshowtable(true); 
+        }
+
+      }
 
   return (
     <AdminContainer>
          <UploadContainer>
+            {result && console.log("result after : ",result)}
+           {successrows &&  console.log("successrows: ",successrows)}
+           {successrows && console.log("errrows: ",errrows)}
+            
                 <MyProgress percentage={uploadpercentage}/>
-                <p style={{margin:0}}>Hello Mr {adminData.firstName} !</p>
-                <p style={{margin:0,padding:0}}>choose an excell and a geodatabase shape file to upload data : </p> 
-
                 {success && <p style={{color:"green",
                 margin:0,padding:0}}>{success}</p> }
 
                 {(!file || !zipfile) && <p style={{color:"red"}}>{message}</p> }
-             
-            
-                        
+
                         {/* label and input field for xcel upload */}
 
                         <label htmlFor="xcellupload">{file ? <AdminButton  style={{color:"green"}} placeholder={filename} /> :<AdminButton style={{color:"red"}} placeholder="Choose an Excell File *"/> }</label>
@@ -141,7 +222,8 @@ const FileUpload = () => {
                             setfile(null);
                             e.target.value = null;
                             setsuccess("");
-                            }} onChange = {onChange} />
+                            setresult("");
+                            }} onChange = {onChange} /> <br />
 
                         {/* label and input field for zip upload */}
 
@@ -151,11 +233,68 @@ const FileUpload = () => {
                             setzipfile(null);
                             e.target.value = null;
                             setsuccess("");
-                            }} onChange = {onChange} /><br />
+                            setresult("");
+                            }} onChange = {onChange} /><br /> 
 
                         <Button onClick={onSubmit} variant="outline-primary">Upload Files</Button>
                    
       </UploadContainer>
+      <UploadContainer>
+        {!result ? "Result not set " :
+        <div className='result'>
+               <p>result set</p>
+        {result.map(({cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname},key)=>{
+            return (
+            <div key={key} style={{borderBottom:"1px solid green",cursor: "pointer"}} className='result-items' onClick={()=>{viewsummary(cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname);}}>
+              { cld && <>
+               <p>Customary_Land_Dermacation__0 total success : {cld.CLD_response.length}</p>
+               <p>Customary_Land_Dermacation__0 total failure : {cld.CLD_err.length}</p>
+               </>
+               }
+
+                { rptowner && <>
+               <p> rptowner_1 total success : {rptowner.rptowner_response.length}</p>
+               <p>rptowner_1 total failure : {rptowner.rptowner_err.length}</p>
+               </>
+               }
+               { rptneighbour && <>
+               <p>rptneighbor_2 total success : {rptneighbour.rptneighbor_response.length}</p>
+               <p>rptneighbor_2 total failure : {rptneighbour.rptneighbor_err.length}</p>
+               </>
+               }
+               { rptwitness && <>
+               <p>rptwitness_3 total success : {rptwitness.rptwitness_response.length}</p>
+               <p>rptwitness_3 total failure : {rptwitness.rptwitness_err.length}</p>
+               </>
+               }
+               { rptinspection && <>
+               <p>rptinspection_4 total success : {rptinspection.rptinspection_response.length}</p>
+               <p>rptinspection_4 total failure : {rptinspection.rptinspection_err.length}</p>
+               </>
+               }
+               { rptform && <>
+               <p>rptform1_5 total success : {rptform.rptform_response.length}</p>
+               <p>rptform1_5 total failure : {rptform.rptform_err.length}</p>
+               </>
+               }
+               {/* displays the number of wrong worksheet names */}
+                { wrongworksheetname && (wrongworksheetname.wrongworksheetname.length > 0 && <p>total Number of wrong worksheet names : {wrongworksheetname.wrongworksheetname.length }</p>)
+               }
+            </div>
+         
+            );
+        })}
+        </div>
+          }
+
+        
+
+      </UploadContainer>
+
+      <TableContainer>
+      {showtable && <AdminTable columns= {columns[0]} rows = {successrows[0]} /> } 
+      </TableContainer>
+      
       </AdminContainer>
   )
 }
@@ -166,7 +305,21 @@ const UploadContainer = styled.div`
     padding: 20px;
     margin: 20px;
     border-radius:10px;
-    width:50%;
+    width:40%;
+    height:50%;
+    overflow-y:scroll;
+    overflow-x:hidden;
+`;
+const TableContainer = styled.div`
+-webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+padding: 20px;
+margin: 20px;
+border-radius:10px;
+width:95%;
+height:50%;
+overflow-y:scroll;
+overflow-x:hidden;
 `;
 
 export default FileUpload;

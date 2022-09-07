@@ -9,15 +9,29 @@ const AdminContainer = ({children}) => {
       <SideBar />
         <div className="homeContainer">
             <AdminNavBar/>
+            <div className = "children">
             {children}
+            </div>
         </div>
     </Container>
   )
 }
 const  Container = styled.div`
-    display: flex;
-    .homeContainer {
-      flex: 6;
-    }
+display: flex;
+overflow:hidden;
+width:100vw;
+height:100vh;
+.homeContainer {
+  overflow:hidden;
+  flex: 6;
+  div.children{
+    overflow:scroll;
+    display:flex;
+    height:100%;
+    width:100%;
+    flex-wrap:wrap;
+   
+  }
+}
 `;
 export default AdminContainer;
