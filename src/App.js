@@ -33,8 +33,13 @@ function App() {
         navigate(pathname);
         }else{
           setAdminData(null);
-          setAdminAuth(response.data.auth)
-          navigate("/adminlogin");
+          setAdminAuth(response.data.auth);
+          if(pathname.includes("admindashboard") || pathname.includes("adminupload") ){
+            navigate("/adminlogin");
+          }else{
+            navigate(pathname);
+          } 
+         
         }
       }
     );

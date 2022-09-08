@@ -142,8 +142,8 @@ const FileUpload = () => {
       const [showtable, setshowtable] = useState(false);
 
       const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'message', headerName: 'message', width: 130 },
+        { field: 'status', headerName: 'status', width: 130 },
+        { field: 'err', headerName: 'Reason', width: 500 },
       ];
 
 
@@ -192,10 +192,13 @@ const FileUpload = () => {
             setsuccessrows(srows); 
             seterrrows(erows);
             setshowtable(true);
+            console.log("rptform");
         }
         if(wrongworksheetname && wrongworksheetname.wrongworksheetname.length > 0 ){
-            srows.push(wrongworksheetname.wrongworksheetname); 
-            setsuccessrows(srows);
+            console.log("wrong worksheet name");
+            erows.push(wrongworksheetname.wrongworksheetname);
+            console.log("wwww.wwww : ",wrongworksheetname.wrongworksheetname) 
+            seterrrows(erows);
             setshowtable(true); 
         }
 
@@ -205,8 +208,8 @@ const FileUpload = () => {
     <AdminContainer>
          <UploadContainer>
             {result && console.log("result after : ",result)}
-           {successrows &&  console.log("successrows: ",successrows)}
-           {successrows && console.log("errrows: ",errrows)}
+           {successrows &&  console.log("successrows[0]: ",successrows[0])}
+           {successrows && console.log("errrows[0]: ",errrows[0])}
             
                 <MyProgress percentage={uploadpercentage}/>
                 {success && <p style={{color:"green",
@@ -223,6 +226,7 @@ const FileUpload = () => {
                             e.target.value = null;
                             setsuccess("");
                             setresult("");
+                            setshowtable(false);
                             }} onChange = {onChange} /> <br />
 
                         {/* label and input field for zip upload */}
@@ -234,6 +238,7 @@ const FileUpload = () => {
                             e.target.value = null;
                             setsuccess("");
                             setresult("");
+                            setshowtable(false);
                             }} onChange = {onChange} /><br /> 
 
                         <Button onClick={onSubmit} variant="outline-primary">Upload Files</Button>
@@ -292,7 +297,7 @@ const FileUpload = () => {
       </UploadContainer>
 
       <TableContainer>
-      {showtable && <AdminTable columns= {columns[0]} rows = {successrows[0]} /> } 
+      {showtable && <AdminTable columns={columns} rows={errrows[0]} /> } 
       </TableContainer>
       
       </AdminContainer>
