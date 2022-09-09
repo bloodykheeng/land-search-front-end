@@ -6,7 +6,7 @@ import MyButton from "../../components/form-components/MyButton";
 import MyNav from "../../components/main-components/MyNav";
 import Axios from "axios";
 import UserTable from "./UserTable";
-import { CenterFocusStrong } from "@mui/icons-material";
+
 
 function SearchSection(){
 const [clinnumber, setclinnumber] = useState("");
@@ -148,9 +148,9 @@ return(
                     <MyButton  placeholder="Back" onClick={handleback}/>
                   </div> }
                   <div className="home-text" style={{visibility : showhometext}}>
-                  <h4>Hello ! You are Welcome</h4>
+                  <strong>Hello ! You are Welcome</strong>
                       <h2><b>Land Search Information System</b></h2>
-                      <p> You can easily perfom a search on your land by <br/> entering in your clin number for customary land <br /> entering plot and plot number for mailo land </p>
+                      <p> You can easily perfom a search on your land by :<br/> first choosing your prefered tenure system ,<br/> Then entering in your clin number or <br /> entering in plot and block number where necessary </p>
                       
                   </div>
                   <div className="row align-items-center search" style={{visibility:showhometext}}>
@@ -183,6 +183,7 @@ return(
                         }}/>
                    </div>
                    <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center"}}>
+                    
                     {customaryclick && <div className="row" style={{visibility:showhometext,display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
 
                                 {isempty && <p style={{color:"red"}}>please first enter a value</p>}

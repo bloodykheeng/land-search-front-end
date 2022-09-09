@@ -60,7 +60,7 @@ function MyForm(){
             <MyButton type="submit" onClick={login} placeholder="Login"/><br></br>
             
             <h3><Link style={{textDecoration :"none"}} to="/adminsignup">Sign Up</Link></h3>
-            <Link style={{textDecoration :"none"}} to="/adminhome"  className="mylink"><strong>Back</strong></Link>
+            <Link style={{textDecoration :"none"}} to="/adminportal"  className="mylink"><strong>Back</strong></Link>
             </MyFormStyled>
         </MySection>
     )

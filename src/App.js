@@ -9,6 +9,8 @@ import SignUp from "./pages/adminpages/SignUp";
 import FileUpload from "./pages/adminpages/FileUpload";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import AboutLand from "./pages/userpages/AboutLand";
+
 import {isAdminAuth , isAdminData} from "./pages/adminpages/AdminAuthContext";
 import ProtectedRoutes from "./ProtectedRoutes";
 import axios from "axios";
@@ -52,8 +54,11 @@ function App() {
                   <Route exact path="/" element={<HomeSection/> }/>
               
                   <Route exact path="/search" element={<SearchSection/> }/>
+
+                  <Route exact path="/aboutland" element={<AboutLand/> }/>
                   
-                  <Route exact path="/adminhome" element={<AdminHome/> }/>
+                  
+                  <Route exact path="/adminportal" element={<AdminHome/> }/>
 
                   <Route exact path="/adminlogin" element={
                   <isAdminAuth.Provider value={{adminAuth , setAdminAuth}}>
