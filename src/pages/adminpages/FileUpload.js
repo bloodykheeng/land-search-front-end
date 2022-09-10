@@ -136,7 +136,7 @@ const FileUpload = () => {
 
 
 
-      let erows =[], srows = [];
+      
       const [errrows, seterrrows ] = useState();
       const [successrows, setsuccessrows ] = useState();
       const [showtable, setshowtable] = useState(false);
@@ -146,10 +146,14 @@ const FileUpload = () => {
         { field: 'err', headerName: 'Reason', width: 500 },
       ];
 
+      //the function bellow inserts the data into the table when you press on a button in view summary
 
-      const viewsummary = (cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname)=>{
+      const viewsummary = (cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname,othererrors)=>{
+        
+        let erows =[], srows = [];
 
         if(cld){
+            //here we get the responses then push them in an array srows then put that array in a usestate variable eg seterrows
              srows.push(cld.CLD_response); 
              erows.push(cld.CLD_err);
              setsuccessrows(srows); 
@@ -197,7 +201,15 @@ const FileUpload = () => {
         if(wrongworksheetname && wrongworksheetname.wrongworksheetname.length > 0 ){
             console.log("wrong worksheet name");
             erows.push(wrongworksheetname.wrongworksheetname);
-            console.log("wwww.wwww : ",wrongworksheetname.wrongworksheetname) 
+            console.log("testing wrong worksheet names : ",wrongworksheetname.wrongworksheetname) 
+            seterrrows(erows);
+            setshowtable(true); 
+        }
+
+        if(othererrors && othererrors.othererrors.length > 0 ){
+            console.log("othererrors");
+            erows.push(othererrors.othererrors);
+            console.log("testing other errors : ",othererrors.othererrors); 
             seterrrows(erows);
             setshowtable(true); 
         }
@@ -207,9 +219,6 @@ const FileUpload = () => {
   return (
     <AdminContainer>
          <UploadContainer>
-            {result && console.log("result after : ",result)}
-           {successrows &&  console.log("successrows[0]: ",successrows[0])}
-           {successrows && console.log("errrows[0]: ",errrows[0])}
             
                 <MyProgress percentage={uploadpercentage}/>
                 {success && <p style={{color:"green",
@@ -248,9 +257,19 @@ const FileUpload = () => {
         {!result ? "Result not set " :
         <div className='result'>
                <p>result set</p>
-        {result.map(({cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname},key)=>{
+
+
+            {/* the function below maps the result to display the buttons in show result */}
+
+        {
+        result.map((
+            {cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname,othererrors},key)=>{
             return (
-            <div key={key} style={{borderBottom:"1px solid green",cursor: "pointer"}} className='result-items' onClick={()=>{viewsummary(cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform,wrongworksheetname);}}>
+            <div key={key} style={{borderBottom:"1px solid green",cursor: "pointer"}} className='result-items' onClick={()=>{
+                viewsummary(cld,rptowner,rptneighbour, rptwitness,rptinspection,rptform, wrongworksheetname, othererrors);}}>
+
+                {/* Below we check if a varible is set we display its button */}
+
               { cld && <>
                <p>Customary_Land_Dermacation__0 total success : {cld.CLD_response.length}</p>
                <p>Customary_Land_Dermacation__0 total failure : {cld.CLD_err.length}</p>
@@ -285,6 +304,9 @@ const FileUpload = () => {
                {/* displays the number of wrong worksheet names */}
                 { wrongworksheetname && (wrongworksheetname.wrongworksheetname.length > 0 && <p>total Number of wrong worksheet names : {wrongworksheetname.wrongworksheetname.length }</p>)
                }
+
+                { othererrors && (othererrors.othererrors.length > 0 && <p>total Number of other errors : {othererrors.othererrors.length }</p>)
+                            }
             </div>
          
             );
