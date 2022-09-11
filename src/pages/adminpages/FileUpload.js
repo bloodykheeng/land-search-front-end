@@ -1,13 +1,15 @@
 import React,{useState , useContext} from 'react'
 import MyProgress from "./fileupload/Progress";
 import Axios from "axios";
-import {Form ,Button} from 'react-bootstrap';
+import Button from '@mui/material/Button';
 
 import AdminContainer from '../../components/admin-components/AdminContainer';
 import { isAdminData ,isAdminAuth } from './AdminAuthContext';
 import styled from 'styled-components';
 import AdminButton from '../../components/admin-components/AdminButton';
 import AdminTable from '../../components/admin-components/AdminTable';
+import AdminLabel from '../../components/admin-components/AdminLabel';
+
 
 const FileUpload = () => {
     const {adminData } = useContext(isAdminData);
@@ -228,7 +230,7 @@ const FileUpload = () => {
 
                         {/* label and input field for xcel upload */}
 
-                        <label htmlFor="xcellupload">{file ? <AdminButton  style={{color:"green"}} placeholder={filename} /> :<AdminButton style={{color:"red"}} placeholder="Choose an Excell File *"/> }</label>
+                        <label htmlFor="xcellupload">{file ? <AdminButton  style={{color:"green"}} placeholder={filename} /> :<AdminLabel style={{color:"red"}} placeholder="Excell File *"/> }</label>
                         
                         <input id="xcellupload" style={{visibility:"hidden", margin:"0px",padding:"0px",lineHeight:0}} type="file" onClick={(e)=>{
                             setfile(null);
@@ -240,7 +242,7 @@ const FileUpload = () => {
 
                         {/* label and input field for zip upload */}
 
-                        <label htmlFor="zipupload">{zipfile ? <AdminButton  style={{color:"green"}} placeholder={zipfilename} /> :<AdminButton style={{color:"red"}} placeholder="Choose a zip File containing the GeoDatabase *"/> }</label>
+                        <label htmlFor="zipupload">{zipfile ? <AdminButton  style={{color:"green"}} placeholder={zipfilename} /> :<AdminLabel style={{color:"red"}} placeholder=" GeoDatabase zip File *"/> }</label>
                         
                         <input id="zipupload" style={{visibility:"hidden",margin:"0px",padding:"0px",lineHeight:0}} type="file" onClick={(e)=>{
                             setzipfile(null);
@@ -250,7 +252,7 @@ const FileUpload = () => {
                             setshowtable(false);
                             }} onChange = {onChange} /><br /> 
 
-                        <Button onClick={onSubmit} variant="outline-primary">Upload Files</Button>
+                        <Button onClick={onSubmit} variant="contained">Upload_Files</Button>
                    
       </UploadContainer>
       <UploadContainer>
@@ -334,8 +336,9 @@ const UploadContainer = styled.div`
     border-radius:10px;
     width:40%;
     height:50%;
-    overflow-y:scroll;
-    overflow-x:hidden;
+    overflow-y:auto;
+    overflow-x:auto;
+    background-color: #ffd8d8;
 `;
 const TableContainer = styled.div`
 -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
@@ -343,10 +346,11 @@ box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 padding: 20px;
 margin: 20px;
 border-radius:10px;
-width:95%;
+width:90%;
 height:50%;
-overflow-y:scroll;
+overflow-y:hidden;
 overflow-x:hidden;
+background-color: #ffd8d8;
 `;
 
 export default FileUpload;

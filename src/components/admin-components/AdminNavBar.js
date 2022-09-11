@@ -48,8 +48,9 @@ const logouthandler = ()=>{
   )
 }
 const NavBar = styled.div`
+  background-color: #ffd8d8;
     height: 50px;
-    border-bottom: 0.5px solid rgb(231, 228, 228);
+    border-bottom: 0.5px solid yellow;
     display: flex;
     align-items: center;
     font-size: 14px;

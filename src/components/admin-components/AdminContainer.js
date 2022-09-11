@@ -21,6 +21,7 @@ display: flex;
 overflow:hidden;
 width:100vw;
 height:100vh;
+background-color: #ffd8d8;
 .homeContainer {
   overflow:hidden;
   flex: 6;

@@ -7,6 +7,8 @@ import AdminDashboard from "./pages/adminpages/AdminDashboard";
 import {Routes,Route, useLocation,useNavigate} from "react-router-dom";
 import SignUp from "./pages/adminpages/SignUp";
 import FileUpload from "./pages/adminpages/FileUpload";
+import AdminSearch from "./pages/adminpages/AdminSearch";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AboutLand from "./pages/userpages/AboutLand";
@@ -73,7 +75,7 @@ function App() {
                     </isAdminAuth.Provider>  }/>
                     
                     
-
+                    {/* The component bellow  helps us to make our admin routes secure thus we pass our routes through a protected routes component then we wrap our protected component with providers to pass in our use context variables */}
             <Route element ={
             <isAdminAuth.Provider value={{adminAuth , setAdminAuth}}>
             <isAdminData.Provider value={{adminData , setAdminData}}>
@@ -82,7 +84,8 @@ function App() {
             </isAdminAuth.Provider>
             }>
             <Route exact path="/admindashboard" element={<AdminDashboard />}/>
-            <Route exact path="/adminupload" element={<FileUpload/> }/>
+            <Route exact path="/adminupload" element={<FileUpload /> }/>
+            <Route exact path="/adminsearch" element={<AdminSearch /> }/>
               </Route>
          </Routes>
        

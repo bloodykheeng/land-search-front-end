@@ -68,6 +68,7 @@ let witnesscolumn = [
     if(!clinnumber){
         setisempty(true);
     }else{
+        setisempty(false)
         setshowhometext("hidden");
         
         const data = {

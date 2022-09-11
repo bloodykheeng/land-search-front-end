@@ -27,11 +27,13 @@ function MyNav(){
               <Offcanvas.Body bg={colors.white_alpha_25} >
                 <Nav className="justify-content-center flex-grow-1 pe-3">
                   
-                  <MySpan><Link to="/" className="mylink">home</Link></MySpan>
+                  <MySpan><Link to="/" className="mylink"><strong>Home</strong></Link></MySpan>
                   
-                  <MySpan><Link to="/search"  className="mylink">search</Link></MySpan>
+                  <MySpan><Link to="/search"  className="mylink"><strong>Search</strong></Link></MySpan>
+
+                  <MySpan><Link to="/aboutland"  className="mylink"><strong>Purchase</strong></Link></MySpan>
                   
-                  <MySpan><Link to="/adminhome"  className="mylink">admin</Link></MySpan>
+                  <MySpan><Link to="/adminportal"  className="mylink">admin</Link></MySpan>
                   
                 </Nav>
               </Offcanvas.Body>

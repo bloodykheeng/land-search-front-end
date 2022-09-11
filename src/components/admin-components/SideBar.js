@@ -1,17 +1,36 @@
-import {
-    Dashboard ,
-    PersonOutline,
-    LocalShipping,
-    CreditCard , 
-    Store, 
-    InsertChart,
-    ExitToApp, 
-    AccountCircleOutlined} from "@mui/icons-material";
-
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import {useContext} from 'react';
+import axios from 'axios';
+import { isAdminAuth , isAdminData } from '../../pages/adminpages/AdminAuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
+import {
+    Dashboard ,
+    ExitToApp, 
+    } from "@mui/icons-material";
+    import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+    import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
+
+    
+
 
 const SideBar = () => {
+
+  const {setAdminAuth} = useContext(isAdminAuth);
+  const { adminData ,setAdminData} = useContext(isAdminData);
+  const navigate = useNavigate();
+      
+  const logouthandler = ()=>{
+          axios.post("/logout").then((response)=>{
+              setAdminAuth(response.data.auth);
+              setAdminData(null);
+              navigate("/adminlogin");
+          })
+      }
+
+
   return (
     <AdminSideBar>
       <div className="top">
@@ -32,48 +51,23 @@ const SideBar = () => {
           <p className="title">SERVICES</p>
           <Link to="/adminupload" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutline className="icon" />
+              <CloudUploadIcon className="icon" />
               <span>File Upload</span>
             </li>
           </Link>
-          <Link to="/admindashboard" style={{ textDecoration: "none" }}>
+          <Link to="/adminsearch" style={{ textDecoration: "none" }}>
             <li>
-              <Store className="icon" />
-              <span>Tables</span>
+              <ScreenSearchDesktopIcon className="icon" />
+              <span>Search</span>
             </li>
           </Link>
-          <li>
-            <CreditCard className="icon" />
-            <span>test</span>
-          </li>
-          <li>
-            <LocalShipping className="icon" />
-            <span>test</span>
-          </li>
-          <p className="title">USEFUL</p>
-          <li>
-            <InsertChart className="icon" />
-            <span>Stats</span>
-          </li>
           
-          <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlined className="icon" />
-            <span>Profile</span>
-          </li>
-          <li>
+          <p className="title">LEAVE</p>
+          <li onClick={logouthandler}>
             <ExitToApp className="icon" />
             <span>Logout</span>
           </li>
         </ul>
-      </div>
-      <div className="bottom">
-        <div
-          className="colorOption"
-        ></div>
-        <div
-          className="colorOption"
-        ></div>
       </div>
       </AdminSideBar>
   )
@@ -81,9 +75,9 @@ const SideBar = () => {
 const AdminSideBar = styled.div`
 
     flex: 1;
-    border-right: 0.5px solid rgb(230, 227, 227);
+    border-right: 1px solid yellow;
     min-height: 100vh;
-    background-color: white;
+    background-color:#ffd8d8;
   
     .top {
       height: 50px;
@@ -144,29 +138,7 @@ const AdminSideBar = styled.div`
       }
     }
   
-    .bottom{
-        display: flex;
-        align-items: center;
-        margin: 10px;
-  
-        .colorOption{
-            width: 20px;
-            height: 20px;
-            border-radius: 5px;
-            border: 1px solid #7451f8;
-            cursor: pointer;
-            margin: 5px;
-  
-            &:nth-child(1){
-                background-color: whitesmoke;
-            }
-            &:nth-child(2){
-                background-color: #333;
-            }
-            &:nth-child(3){
-                background-color: darkblue;
-            }
-        }
+    
     }
   
   
