@@ -22,13 +22,12 @@ const TenureTypes = ()=>{
 
         <p>It is under such tenure systems under which land can be acquired, owned, utilized and disposed off. If you do not belong to any of the systems of tenure, you do not own land in Uganda. However, you can only be defined as a tenant on a property, a squatter or bona-fide occupant as may the law determine based on circumstances of occupancy.</p>
         <p>Uganda is relatively a vast country with lots of un-utilized and underutilized land. Uganda’s land to a bigger scope is fertile and very excellent for large scale industrialization, residential setups and farming.</p>
-        <p><strong>The following are the</strong><strong>Types of Land Tenure Systems in Uganda</strong><strong>as enshrined in the 1995</strong><strong>Ugandan Constitution :</strong></p>
+        <p><strong>The following are the</strong><strong>Types of Land Tenure Systems in Uganda</strong><strong>as enshrined in the 1995 </strong><strong>Ugandan Constitution :</strong></p>
         <ol>
         <li><strong> Mailo Land Tenure System</strong></li>
         <li><strong>Freehold Land Tenure System</strong></li>
         <li><strong>Leasehold Tenure System</strong></li>
         <li><strong>Customary Land Tenure System</strong></li>
-        <li><strong>Public Land</strong></li>
         </ol>
         <h2><strong>Mailo Land Tenure System in Uganda</strong></h2>
         <p>Mailoland tenure system is a type of land ownership where land is privately held in perpetuity with no limited period. Mailoland can only be owned by Ugandans, organizations or companies whose majority shares or stake are by Ugandans. A title deed is issued for mailoalnd ownership.</p>

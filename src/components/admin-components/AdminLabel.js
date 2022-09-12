@@ -19,7 +19,6 @@ const AdminLabelDiv = styled.div`
     max-width:500px;
     cursor:pointer;
     font-weight:500;
-    margin:20px 0px 20px;
     &:hover{
         background-color:gold;
     }

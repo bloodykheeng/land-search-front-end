@@ -1,5 +1,5 @@
 import React,{useState , useContext} from 'react'
-import MyProgress from "./fileupload/Progress";
+import MyProgress from "../../components/admin-components/Progress";
 import Axios from "axios";
 import Button from '@mui/material/Button';
 
@@ -91,6 +91,7 @@ const FileUpload = () => {
                     setfile(null);
                     setzipfile(null);
                 },1000);
+
                 if(res.data.status === "cookie-failed"){
                     setmessage(res.data.auth);
                     setAdminAuth(res.data.auth)
@@ -144,8 +145,8 @@ const FileUpload = () => {
       const [showtable, setshowtable] = useState(false);
 
       const columns = [
-        { field: 'status', headerName: 'status', width: 130 },
-        { field: 'err', headerName: 'Reason', width: 500 },
+        { field: 'status', headerName: 'status', Width: 100 },
+        { field: 'err', headerName: 'Reason', Width: 150 },
       ];
 
       //the function bellow inserts the data into the table when you press on a button in view summary
@@ -221,10 +222,12 @@ const FileUpload = () => {
   return (
     <AdminContainer>
          <UploadContainer>
-            
+                <div style={{width:"100%",marginBottom:"10px"}}>
                 <MyProgress percentage={uploadpercentage}/>
+                </div>
+                
                 {success && <p style={{color:"green",
-                margin:0,padding:0}}>{success}</p> }
+                margin:"10px",padding:0}}>{success}</p> }
 
                 {(!file || !zipfile) && <p style={{color:"red"}}>{message}</p> }
 
@@ -256,9 +259,9 @@ const FileUpload = () => {
                    
       </UploadContainer>
       <UploadContainer>
-        {!result ? "Result not set " :
+        {!result ? <strong>Results not set</strong> :
         <div className='result'>
-               <p>result set</p>
+               <strong>results set</strong>
 
 
             {/* the function below maps the result to display the buttons in show result */}
@@ -337,8 +340,12 @@ const UploadContainer = styled.div`
     width:40%;
     height:50%;
     overflow-y:auto;
-    overflow-x:auto;
+    overflow-x:hidden;
     background-color: #ffd8d8;
+    display:flex;
+    align-items:center;
+    align-items:center;
+    flex-direction:column;
 `;
 const TableContainer = styled.div`
 -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
