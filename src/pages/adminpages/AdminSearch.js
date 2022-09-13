@@ -3,6 +3,9 @@ import AdminContainer from '../../components/admin-components/AdminContainer';
 import AdminSearchBar from '../../components/admin-components/AdminSearchBar';
 import AdminTable from '../../components/admin-components/AdminTable';
 import MyButton from '../../components/form-components/MyButton';
+import Lottie from "lottie-react";
+import SearchingLottie from "../../lottiefiles/adminlotties/searchinglottie.json"
+import NoData from "../../lottiefiles/adminlotties/nodata.json"
 
 import {
     cldcolumn, ownercolumn, neighbourcolumn, witnesscolumn, inspectioncolumn, rptformcolumn} from './AdminColumns';
@@ -93,14 +96,28 @@ function AdminSearch(){
 
   return (
     <AdminContainer>
+         <div style={{width:"100%",height : "100%" , position:"relative"}}>
+
+
+    {showsearch && <Lottie style={{width:"100%",position:"absolute"}} animationData={SearchingLottie} loop={true}/>}
+         
         {showsearch && <AdminSearchBar click={click} onChange={(e)=>{ setclinnumber(e.target.value)}} errors={errors}/> }
-    {console.log("nouser : ",nouser)}
+   
+        
+    
         {nouser && 
                     <div style={{display:"flex", justifyContent:"center",alignItems:"center",flexDirection:"column",padding:"20px"}}>
+                    <div>
                     <h1>No record found attached to this clin number : {clinnumber}</h1>
                     <MyButton  placeholder="Back" onClick={handleback}/>
                     </div>
+                    <div style={{display:"flex", justifyContent:"center",alignItems:"center"}}>
+                    <Lottie style={{width:"100%"}} animationData={NoData} loop={true}/>
+                    </div>
+                    </div>
          }
+
+
 
             {showtable &&
                   <div style={{width:"100%",padding:"20px"}}>
@@ -133,7 +150,7 @@ function AdminSearch(){
                     </div><br />
                   </div>
                   }
-
+            </div>
      </AdminContainer>    
   );
 }

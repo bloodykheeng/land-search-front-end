@@ -2,6 +2,9 @@ import React,{useState , useContext} from 'react'
 import MyProgress from "../../components/admin-components/Progress";
 import Axios from "axios";
 import Button from '@mui/material/Button';
+import Lottie from "lottie-react";
+import Surveyor from "../../lottiefiles/adminlotties/filling.json"
+import DataCenter from "../../lottiefiles/adminlotties/datacenter.json"
 
 import AdminContainer from '../../components/admin-components/AdminContainer';
 import { isAdminData ,isAdminAuth } from './AdminAuthContext';
@@ -9,6 +12,7 @@ import styled from 'styled-components';
 import AdminButton from '../../components/admin-components/AdminButton';
 import AdminTable from '../../components/admin-components/AdminTable';
 import AdminLabel from '../../components/admin-components/AdminLabel';
+
 
 
 const FileUpload = () => {
@@ -145,8 +149,8 @@ const FileUpload = () => {
       const [showtable, setshowtable] = useState(false);
 
       const columns = [
-        { field: 'status', headerName: 'status', Width: 100 },
-        { field: 'err', headerName: 'Reason', Width: 150 },
+        { field: 'status', headerName: 'status', minWidth: 100 ,flex:1 },
+        { field: 'err', headerName: 'Reason', minWidth: 150 ,flex:1 },
       ];
 
       //the function bellow inserts the data into the table when you press on a button in view summary
@@ -259,7 +263,7 @@ const FileUpload = () => {
                    
       </UploadContainer>
       <UploadContainer>
-        {!result ? <strong>Results not set</strong> :
+        {!result ? <div>  <strong>Results not set</strong> <Lottie animationData={DataCenter} loop={true} style={{width:"90%"}}/> </div> :
         <div className='result'>
                <strong>results set</strong>
 
@@ -325,6 +329,7 @@ const FileUpload = () => {
 
       <TableContainer>
       {showtable && <AdminTable columns={columns} rows={errrows[0]} /> } 
+      {!showtable && <Lottie style={{height:"100%"}} animationData={Surveyor} loop={true}/>}
       </TableContainer>
       
       </AdminContainer>

@@ -31,7 +31,7 @@ function MyNav(){
                   
                   <MySpan><Link to="/search"  className="mylink"><strong>Search</strong></Link></MySpan>
 
-                  <MySpan><Link to="/aboutland"  className="mylink"><strong>Purchase</strong></Link></MySpan>
+                  <MySpan><Link to="/aboutland"  className="mylink"><strong>Tenure_Info</strong></Link></MySpan>
                   
                   <MySpan><Link to="/adminportal"  className="mylink">admin</Link></MySpan>
                   

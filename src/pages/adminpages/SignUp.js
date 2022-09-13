@@ -75,8 +75,8 @@ import MyAlert from "../../components/form-components/MyAlert";
             <strong>Enter Date Of Birth</strong>
             <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
             <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
-            <MyInput type="text" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
-            <MyInput type="text" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
+            <MyInput type="password" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
+            <MyInput type="password" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
             <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
             <h3><Link style={{textDecoration :"none"}} to="/adminlogin">Login</Link></h3>
             </MyFormStyled>

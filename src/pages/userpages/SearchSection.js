@@ -4,6 +4,10 @@ import Ministrybar from "../../components/main-components/MinistryBar";
 import styled from "styled-components";
 import MyButton from "../../components/form-components/MyButton";
 import MyNav from "../../components/main-components/MyNav";
+import Lottie from "lottie-react";
+import NoData from "../../lottiefiles/userlotties/nodata.json";
+import FileLost from "../../lottiefiles/userlotties/filelost.json";
+
 import Axios from "axios";
 import UserTable from "./UserTable";
 import {cldcolumn , ownercolumn, neighbourcolumn , witnesscolumn } from "./UserColumns";
@@ -110,9 +114,14 @@ return(
                   </div>
                   }
 
-                  {nouser && <div>
+                  {nouser && <div style={{height:"100%"}}>
+                    <div style={{height:"30%"}}>
                     <h1>No record found attached to this clin number : {clinnumber}</h1>
                     <MyButton  placeholder="Back" onClick={handleback}/>
+                    </div>
+                    <div style={{height:"70%"}}>
+                        <Lottie style={{height:"200px"}} animationData={FileLost} loop={true}/>
+                    </div>
                   </div> }
 
                   
@@ -169,9 +178,23 @@ return(
                                     
                                 </div>}
     
-                                {freeholdclick && <strong>Free Hold Data not yet set</strong>}
-                                {Mailolandclick && <strong>Mailo Land Data not yet set</strong>}
-                                {LeaseHoldclick && <strong>Lease Hold Data not yet set</strong>}
+                                {freeholdclick && 
+                                <div>
+                                <strong style={{color:"green"}}>Free Hold Land Data not yet set</strong>
+                                <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
+                                </div> }
+                                {Mailolandclick &&
+                                <div>
+                                    <strong style={{color:"brown"}}>Mailo Land Data not yet set</strong>
+                                    <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
+                                </div>
+                                }
+                                {LeaseHoldclick && 
+                                <div>
+                                    <strong style={{color:"red"}}>Lease Hold Data not yet set</strong>
+                                    <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
+                                </div>
+                                }
                        
                        </div>
                        

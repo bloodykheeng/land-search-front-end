@@ -56,7 +56,7 @@ function MyForm(){
                 {loginStatus === true && <MyAlert variant="success" msg={message} />  }
                 {loginStatus === false && <MyAlert variant="danger" msg={message} /> }
             <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter firstname"/>
-            <MyInput type="text" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter LastName"/>
+            <MyInput type="password" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter password"/>
             <MyButton type="submit" onClick={login} placeholder="Login"/><br></br>
             
             <h3><Link style={{textDecoration :"none"}} to="/adminsignup">Sign Up</Link></h3>

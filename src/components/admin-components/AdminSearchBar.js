@@ -25,6 +25,7 @@ function AdminSearchBar({click,errors,onChange}){
 
 const MainDiv =  styled.div`
     background-color: #ffd8d8;
+    background-color: transparent;
     width:100%;
     height:100%;
     display:flex;

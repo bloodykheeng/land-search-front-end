@@ -11,10 +11,10 @@ const AdminHome = ()=>{
             <MyDiv>
             <MinistryBar />
             <div className="greating">
-            <h1>Hello Admin You are welcome</h1>
+            <h1><strong>Hello Admin You are welcome</strong></h1>
             <strong>feel free to  </strong>
             <Link to="/adminlogin"><MyButton placeholder="Navigate"/></Link>
-             <Link to="/" className="mylink">back to search</Link>
+             <Link style={{textDecoration:"none"}} to="/" className="mylink"><strong>User Search</strong></Link>
             </div>
             </MyDiv>
         </Section>

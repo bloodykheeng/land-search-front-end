@@ -17,7 +17,7 @@ function HomeSection(){
               </div>
               <div className="home-img">
                   <div className="img-box">
-                      <img  src="images/emblem.jpeg" alt="home-img" />
+                      <img  src="images/coatOfArms.png" alt="home-img" />
                   </div>
               </div>
           </HomeRow>
@@ -41,6 +41,7 @@ const HomeRow = Styled.div`
   width : 50%;
   padding:15px;
   }
+
   .home-img ,home-box{
     max-width:360px;
     background-color:var(--white-alpha-25);
@@ -48,9 +49,9 @@ const HomeRow = Styled.div`
     border:8px solid var(--white-alpha-40);
     margin:auto;
   }
+
   .home-img .img-box img{
     width:100%;
-    border-radius:50%;
   }
     
   .home-text p{

@@ -75,7 +75,7 @@ const SideBar = () => {
 const AdminSideBar = styled.div`
 
     flex: 1;
-    border-right: 1px solid yellow;
+    border-right: 3px solid yellow;
     min-height: 100vh;
     background-color:#ffd8d8;
   

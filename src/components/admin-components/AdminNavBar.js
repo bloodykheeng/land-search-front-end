@@ -22,7 +22,7 @@ const logouthandler = ()=>{
     <NavBar>
     <div className="wrapper">
       <div className="title">
-        <strong>Ministry Of Land Housing And Urban Planning</strong>
+        <h2><strong>Ministry Of Land Housing And Urban Planning</strong></h2>
       </div>
       <div className="items">
       <div className="item">
@@ -50,7 +50,7 @@ const logouthandler = ()=>{
 const NavBar = styled.div`
   background-color: #ffd8d8;
     height: 50px;
-    border-bottom: 0.5px solid yellow;
+    border-bottom: 2px solid yellow;
     display: flex;
     align-items: center;
     font-size: 14px;
