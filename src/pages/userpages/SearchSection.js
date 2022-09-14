@@ -7,6 +7,7 @@ import MyNav from "../../components/main-components/MyNav";
 import Lottie from "lottie-react";
 import NoData from "../../lottiefiles/userlotties/nodata.json";
 import FileLost from "../../lottiefiles/userlotties/filelost.json";
+import Loading from "../../lottiefiles/userlotties/loading.json";
 
 import Axios from "axios";
 import UserTable from "./UserTable";
@@ -29,6 +30,8 @@ const [freeholdclick , setfreeholdclick] = useState(false);
 const [Mailolandclick , setMailolandclick] = useState(false);
 const [LeaseHoldclick , setLeaseHoldclick] = useState(false);
 
+const [isLoading, setIsLoading] = useState(false);
+
 
 
   const search = async ()=>{  
@@ -37,6 +40,7 @@ const [LeaseHoldclick , setLeaseHoldclick] = useState(false);
     }else{
         setisempty(false)
         setshowhometext(false);
+        setIsLoading(true);
         
         const data = {
             clinnumber
@@ -48,7 +52,7 @@ const [LeaseHoldclick , setLeaseHoldclick] = useState(false);
         try{
             let response = await Axios.post("/usersearch", data,{withCredentials : false});
             console.log(response.data);
-            
+            setIsLoading(false);
             if(response.data.status === "successfull"){
                 setshowhometext(false);
                 setshowtable(true);
@@ -121,6 +125,12 @@ return(
                     </div>
                     <div style={{height:"70%"}}>
                         <Lottie style={{height:"200px"}} animationData={FileLost} loop={true}/>
+                    </div>
+                  </div> }
+
+                  {isLoading && <div style={{height:"100%"}}>
+                    <div style={{height:"70%"}}>
+                        <Lottie style={{height:"600px"}} animationData={Loading} loop={true}/>
                     </div>
                   </div> }
 

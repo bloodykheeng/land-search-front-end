@@ -12,9 +12,12 @@ const LeaseHold = ()=>{
 
             <h2>How does Leasehold Tenure Work?</h2>
             <p>Leasehold tenure is a form of <strong>land tenure</strong> created either by contract or by operation of law. 
-            <p>
-            The terms and conditions of which may be regulated by law to the exclusion of any contractual agreement reached between the parties. Under leasehold, one person, namely the landlord or lessor, grants another person, namely the tenant or lessee an exclusive possession of land usually for a period of time.
             </p>
+              <p>
+              The terms and conditions of which may be regulated by law to the exclusion of any contractual agreement reached between the parties. Under leasehold, one person, namely the landlord or lessor, grants another person, namely the tenant or lessee an exclusive possession of land usually for a period of time.
+              </p>
+            
+            <p>
             The lease is usually in return for a rent which may be for a capital sum termed as a premium or for both a rent and a premium but may be in return for services or may be free of any required return. Under this tenure, both the landlord and the tenant may, subject to the terms and conditions of the lease and having due regard for the interests of the other party, exercise such of the powers of a freehold owner as are appropriate and possible given the specific nature of a leasehold tenure system.</p>
                                                                                     </div>
     </div>

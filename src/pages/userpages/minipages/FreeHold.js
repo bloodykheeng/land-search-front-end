@@ -3,7 +3,7 @@ import React from 'react'
 const FreeHold = ()=>{
   return (
     <div>
-        <div class="entry-content clearfix">
+        <div>
             <h1><strong>Freehold Land Tenure System in Uganda</strong></h1>
             <p>Freehold Land Tenure System is the way of owning land in Perpetuity or Time Without end and was set up by an agreement between the Kingdoms and the British Government. Grants of land in freehold were made by the Crown and later by the Uganda Land Commission. The grantee of land in freehold was and is entitled to a certificate of title. Most of this land was issued to church missionaries and academic Institutions and some individuals. Freehold is the premier mode of private land ownership under English law. Freehold tenure is among other four <strong>types of land tenure systems in Uganda</strong> under which people hold ownership of land.</p>
             <p>The Land Act recognizes it as one of the four regimes through which access to land rights may be obtained. Its incidents are defined to include registration of title in perpetuity and conferment of full powers of ownership that is the power of use, abuse and disposition. Transactions involving freehold land are governed by the Registration of Titles Act (Cap. 230). There is little land is held under freehold tenure in Uganda.<br />

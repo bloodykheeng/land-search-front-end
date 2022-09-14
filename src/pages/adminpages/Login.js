@@ -1,4 +1,4 @@
-import React ,{useContext, useState} from 'react';
+import React ,{useContext, useState,useEffect} from 'react';
 import MySection  from "../../components/main-components/Section";
 import MyInput from "../../components/form-components/MyInput";
 import styled from "styled-components";
@@ -6,18 +6,28 @@ import MyButton from "../../components/form-components/MyButton";
 import {Link, useNavigate} from "react-router-dom";
 import MinistryBar from '../../components/main-components/MinistryBar';
 import Axios from "axios";
-import { isAdminAuth, isAdminData } from './AdminAuthContext';
+import { isAdminAuth, isAdminData , isAdminSession} from './AdminAuthContext';
 import MyAlert from "../../components/form-components/MyAlert";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 
 function MyForm(){
     const navigate = useNavigate();
     const { setAdminAuth} = useContext(isAdminAuth);
     const {setAdminData} = useContext(isAdminData);
+    const {adminSession,setAdminSession} = useContext(isAdminSession);
     const [username , setusername] = useState("");
     const [password , setpassword] = useState("");
     const [message , setMessage] = useState("fill in to LogIn");
     const [loginStatus, setLoginStatus] = useState("");
+
+
+    useEffect(()=>{
+       
+         adminSession === "session expired" && toast("Session expired");
+         adminSession === "logged out" && toast("logged out");   
+    },[adminSession])
 
     const login = ()=>{
 
@@ -37,9 +47,12 @@ function MyForm(){
                 setLoginStatus(true)
                 setAdminAuth(true);
                 setAdminData(response.data.data[0]);
+                setAdminSession(true)
                 navigate("/admindashboard");
             }
-        })
+        });
+
+        
     }
     return(
         <MySection style={{
@@ -62,6 +75,17 @@ function MyForm(){
             <h3><Link style={{textDecoration :"none"}} to="/adminsignup">Sign Up</Link></h3>
             <Link style={{textDecoration :"none"}} to="/adminportal"  className="mylink"><strong>Back</strong></Link>
             </MyFormStyled>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </MySection>
     )
 }

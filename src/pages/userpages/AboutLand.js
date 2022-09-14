@@ -24,7 +24,7 @@ const [aboutLeaseHoldclick , setaboutLeaseHoldclick] = useState(false);
         <div className='Container'>
         <MinistryBar />
             <div className="contentContainer">
-                <div style={{display : "flex"}}>
+                <div style={{display : "flex", flexWrap : "wrap"}}>
                 <MyButton placeholder="Tenure Types" style={{margin:"10px"}} onClick={()=>{
                         settenuretypesclick(true);
                         setaboutmajorstepsclick(false);

@@ -1,11 +1,12 @@
 import React , {useContext}from 'react'
 import AdminContainer from '../../components/admin-components/AdminContainer';
-import { isAdminData } from './AdminAuthContext';
+import { isAdminData  } from './AdminAuthContext';
 import Lottie from "lottie-react";
 import AdministrationData from "../../lottiefiles/adminlotties/Administrationlottie.json";
 
 export const AdminDashboard = () => {
     const {adminData } = useContext(isAdminData);
+    
 
   return (
     <AdminContainer>

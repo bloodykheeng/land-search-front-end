@@ -3,11 +3,12 @@ import MyProgress from "../../components/admin-components/Progress";
 import Axios from "axios";
 import Button from '@mui/material/Button';
 import Lottie from "lottie-react";
-import Surveyor from "../../lottiefiles/adminlotties/filling.json"
-import DataCenter from "../../lottiefiles/adminlotties/datacenter.json"
+import Surveyor from "../../lottiefiles/adminlotties/filling.json";
+import DataCenter from "../../lottiefiles/adminlotties/datacenter.json";
+
 
 import AdminContainer from '../../components/admin-components/AdminContainer';
-import { isAdminData ,isAdminAuth } from './AdminAuthContext';
+import { isAdminData ,isAdminAuth , isAdminSession} from './AdminAuthContext';
 import styled from 'styled-components';
 import AdminButton from '../../components/admin-components/AdminButton';
 import AdminTable from '../../components/admin-components/AdminTable';
@@ -18,6 +19,7 @@ import AdminLabel from '../../components/admin-components/AdminLabel';
 const FileUpload = () => {
     const {adminData } = useContext(isAdminData);
     const {setAdminAuth} = useContext(isAdminAuth);
+    const {setAdminSession} = useContext(isAdminSession);
 
     const [file , setfile] = useState("");
     const [zipfile, setzipfile] = useState("");
@@ -27,6 +29,7 @@ const FileUpload = () => {
     const [uploadpercentage, setuploadpercentage] = useState(0);
     const [success , setsuccess] = useState("");
     const [result , setresult] = useState("");
+  
 
     const onChange = (e)=>{
         if(e.target.id === "xcellupload"){
@@ -57,6 +60,8 @@ const FileUpload = () => {
     
         if(!file || !zipfile){
             setmessage("please first choose an excell and a geodatabase zip file & then press upload");
+            setresult("");
+             setshowtable(false);
             console.log("no file set ");
         }else{
             const excelext = filename.split(".").pop();
@@ -98,8 +103,10 @@ const FileUpload = () => {
 
                 if(res.data.status === "cookie-failed"){
                     setmessage(res.data.auth);
-                    setAdminAuth(res.data.auth)
+                    setAdminAuth(res.data.auth);
+                    setAdminSession("session expired");
                 }else if(res.data.status === "token-failed"){
+                    setAdminSession("session expired");
                     setmessage(res.data.message)
                     setAdminAuth(res.data.auth)
                 }
@@ -263,7 +270,7 @@ const FileUpload = () => {
                    
       </UploadContainer>
       <UploadContainer>
-        {!result ? <div>  <strong>Results not set</strong> <Lottie animationData={DataCenter} loop={true} style={{width:"90%"}}/> </div> :
+        {!result ? <div>  <strong>Results not yet set</strong> <Lottie animationData={DataCenter} loop={true} style={{width:"90%"}}/> </div> :
         <div className='result'>
                <strong>results set</strong>
 
@@ -328,7 +335,7 @@ const FileUpload = () => {
       </UploadContainer>
 
       <TableContainer>
-      {showtable && <AdminTable columns={columns} rows={errrows[0]} /> } 
+      {showtable && <> <h1>Errors</h1> <AdminTable columns={columns} rows={errrows[0]} /> </>  } 
       {!showtable && <Lottie style={{height:"100%"}} animationData={Surveyor} loop={true}/>}
       </TableContainer>
       

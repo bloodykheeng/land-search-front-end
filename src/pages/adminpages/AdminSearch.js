@@ -5,17 +5,20 @@ import AdminTable from '../../components/admin-components/AdminTable';
 import MyButton from '../../components/form-components/MyButton';
 import Lottie from "lottie-react";
 import SearchingLottie from "../../lottiefiles/adminlotties/searchinglottie.json"
-import NoData from "../../lottiefiles/adminlotties/nodata.json"
+import NoData from "../../lottiefiles/adminlotties/nodata.json";
+import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
 
 import {
     cldcolumn, ownercolumn, neighbourcolumn, witnesscolumn, inspectioncolumn, rptformcolumn} from './AdminColumns';
 
 import Axios from "axios";
 
-import { isAdminData ,isAdminAuth } from './AdminAuthContext';
+import { isAdminData ,isAdminAuth ,isAdminSession } from './AdminAuthContext';
 
 function AdminSearch(){
     const {setAdminAuth} = useContext(isAdminAuth);
+    const {setAdminSession} = useContext(isAdminSession);
+    const {setAdminData } = useContext(isAdminData);
 
     const [errors , seterrors] = useState();
     const [clinnumber , setclinnumber] = useState();
@@ -29,6 +32,8 @@ function AdminSearch(){
     const [rptform, setrptform] = useState("");
     const [nouser , setnouser] = useState(false);
     const [showsearch , setshowsearch] = useState(true);
+    const [isLoading , setIsLoading] = useState(false);
+
 
 
     const click = async ()=>{
@@ -36,6 +41,7 @@ function AdminSearch(){
             seterrors("first enter a clin number");
         }else{
             seterrors();
+            setIsLoading(true);
             const data = {
                 clinnumber
             }
@@ -43,14 +49,20 @@ function AdminSearch(){
               try{
                 let res = await Axios.post("/adminsearch", data,{withCredentials : false});
                 console.log(res.data);
+                setIsLoading(false);
                 
                 if(res.data.status === "cookie-failed"){
                     console.log(res.data.auth);
-                    setAdminAuth(res.data.auth)
+                    setAdminAuth(res.data.auth);
+                    setAdminSession("session expired");
+                    setAdminData(false);
                 }else if(res.data.status === "token-failed"){
                     console.log(res.data.message)
                     setAdminAuth(res.data.auth)
+                    setAdminSession("session expired");
+                    setAdminData(false);
                 }else if(res.data.status === "successfull"){
+                    setAdminSession(true);
                     setshowtable(true);
                     setshowsearch(false)
                     setnouser(false)
@@ -116,6 +128,14 @@ function AdminSearch(){
                     </div>
                     </div>
          }
+
+                {isLoading && 
+                    <div style={{display:"flex", justifyContent:"center",alignItems:"center",flexDirection:"column",padding:"20px"}}>
+                    <div style={{display:"flex", justifyContent:"center",alignItems:"center"}}>
+                    <Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/>
+                    </div>
+                    </div>
+                }
 
 
 

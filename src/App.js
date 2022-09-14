@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AboutLand from "./pages/userpages/AboutLand";
 
-import {isAdminAuth , isAdminData} from "./pages/adminpages/AdminAuthContext";
+import {isAdminAuth , isAdminData, isAdminSession} from "./pages/adminpages/AdminAuthContext";
 import ProtectedRoutes from "./ProtectedRoutes";
 import axios from "axios";
 
@@ -21,6 +21,7 @@ function App() {
   
   const [adminAuth , setAdminAuth] = useState(false);
   const [adminData , setAdminData] = useState([]);
+  const [adminSession , setAdminSession] = useState(false);
   const {pathname} = useLocation();
   const navigate = useNavigate();
 
@@ -34,9 +35,11 @@ function App() {
         console.log(response.data.data);
         console.log("admindata after : ",adminData);
         setAdminAuth(response.data.auth);
+        setAdminSession(true)
         navigate(pathname);
         }else{
           setAdminData(null);
+          setAdminSession(false)
           setAdminAuth(response.data.auth);
           if(pathname.includes("admindashboard") || pathname.includes("adminupload") ){
             navigate("/adminlogin");
@@ -65,7 +68,9 @@ function App() {
                   <Route exact path="/adminlogin" element={
                   <isAdminAuth.Provider value={{adminAuth , setAdminAuth}}>
                     <isAdminData.Provider value={{adminData , setAdminData}}>
+                    <isAdminSession.Provider value={{adminSession , setAdminSession}}>
                     <LoginForm/>
+                    </isAdminSession.Provider>
                     </isAdminData.Provider> 
                     </isAdminAuth.Provider>}/>
 
@@ -77,11 +82,13 @@ function App() {
                     
                     {/* The component bellow  helps us to make our admin routes secure thus we pass our routes through a protected routes component then we wrap our protected component with providers to pass in our use context variables */}
             <Route element ={
+            <isAdminSession.Provider value={{adminSession , setAdminSession}}>
             <isAdminAuth.Provider value={{adminAuth , setAdminAuth}}>
             <isAdminData.Provider value={{adminData , setAdminData}}>
             <ProtectedRoutes />
             </isAdminData.Provider>
             </isAdminAuth.Provider>
+            </isAdminSession.Provider>
             }>
             <Route exact path="/admindashboard" element={<AdminDashboard />}/>
             <Route exact path="/adminupload" element={<FileUpload /> }/>

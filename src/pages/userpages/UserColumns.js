@@ -1,8 +1,8 @@
 let cldcolumn = [
     { field: 'Clin_Number', headerName: 'Clin_Number', minWidth: 150  },
     { field: 'Minute_Number', headerName: 'Minute_Number', minWidth: 350},
-    { field: 'OwnershipType_Name', headerName: 'OwnershipType_Name', minWidth: 130  },
-    { field: 'Cla_Name', headerName: 'Cla_Name', minWidth: 130  },
+    { field: 'OwnershipType_Name', headerName: 'OwnershipType_Name', minWidth: 200  },
+    { field: 'Cla_Name', headerName: 'Cla_Name', minWidth: 350  },
     { field: 'Cla_Certificate_Of_Incorporation_Number', headerName: 'Cla_Certificate_Of_Incorporation_Number', minWidth: 130  },
     { field: 'Name_Of_The_Community', headerName: 'Name_Of_The_Community', minWidth: 350  },
     { field: 'Region_Name', headerName: 'Region_Name', minWidth: 130  },

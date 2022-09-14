@@ -3,10 +3,11 @@ import Button from '@mui/material/Button';
 // import {Button} from "@mui/icons-material";
 import styled from "styled-components";
 import axios from 'axios';
-import { isAdminAuth , isAdminData } from '../../pages/adminpages/AdminAuthContext';
+import { isAdminAuth , isAdminData ,isAdminSession} from '../../pages/adminpages/AdminAuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const AdminNavBar = () => {
+  const {setAdminSession} = useContext(isAdminSession);
 const {setAdminAuth} = useContext(isAdminAuth);
 const { adminData ,setAdminData} = useContext(isAdminData);
 const navigate = useNavigate();
@@ -15,6 +16,7 @@ const logouthandler = ()=>{
         axios.post("/logout").then((response)=>{
             setAdminAuth(response.data.auth);
             setAdminData(null);
+            setAdminSession("logged out");
             navigate("/adminlogin");
         })
     }

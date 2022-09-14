@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {useContext} from 'react';
 import axios from 'axios';
-import { isAdminAuth , isAdminData } from '../../pages/adminpages/AdminAuthContext';
+import { isAdminAuth , isAdminData ,isAdminSession } from '../../pages/adminpages/AdminAuthContext';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -17,9 +17,9 @@ import {
 
 
 const SideBar = () => {
-
+  const {setAdminSession} = useContext(isAdminSession);
   const {setAdminAuth} = useContext(isAdminAuth);
-  const { adminData ,setAdminData} = useContext(isAdminData);
+  const {setAdminData} = useContext(isAdminData);
   const navigate = useNavigate();
       
   const logouthandler = ()=>{
@@ -27,6 +27,7 @@ const SideBar = () => {
               setAdminAuth(response.data.auth);
               setAdminData(null);
               navigate("/adminlogin");
+              setAdminSession("logged out");
           })
       }
 
