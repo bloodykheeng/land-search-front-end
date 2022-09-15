@@ -30,27 +30,31 @@ function MyForm(){
     },[adminSession])
 
     const login = ()=>{
-
-        const data = {
-            username: username,
-            password:password
+        if(!username || !password ){
+            setMessage("some inputs are empty");
+        }else{
+            const data = {
+                username: username,
+                password:password
+            };
+          
+            Axios.post("/login",data, {withCredentials : false})
+            .then((response)=>{
+                if(!response.data.auth){
+                    setAdminAuth(false);
+                    setLoginStatus(false)
+                    setMessage(response.data.message);
+                }else{
+                    setMessage(response.data.message);
+                    setLoginStatus(true)
+                    setAdminAuth(true);
+                    setAdminData(response.data.data[0]);
+                    setAdminSession(true)
+                    navigate("/admindashboard");
+                }
+            });
         }
-      
-        Axios.post("/login",data, {withCredentials : false})
-        .then((response)=>{
-            if(!response.data.auth){
-                setAdminAuth(false);
-                setLoginStatus(false)
-                setMessage(response.data.message);
-            }else{
-                setMessage(response.data.message);
-                setLoginStatus(true)
-                setAdminAuth(true);
-                setAdminData(response.data.data[0]);
-                setAdminSession(true)
-                navigate("/admindashboard");
-            }
-        });
+       
 
         
     }
@@ -72,9 +76,10 @@ function MyForm(){
             <MyInput type="password" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter password"/>
             <MyButton type="submit" onClick={login} placeholder="Login"/><br></br>
             
-            <h3><Link style={{textDecoration :"none"}} to="/adminsignup">Sign Up</Link></h3>
+            <h4><Link style={{textDecoration :"none"}} to="/forgotpassword">Forgot Password</Link></h4>
             <Link style={{textDecoration :"none"}} to="/adminportal"  className="mylink"><strong>Back</strong></Link>
             </MyFormStyled>
+            
             <ToastContainer
                 position="top-center"
                 autoClose={5000}

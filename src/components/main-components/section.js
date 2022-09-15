@@ -25,35 +25,10 @@ const fadein = keyframes`
 100%{opacity:1;}
 `;
 
-
-const CustomSection = Styled.section`
-background-color: var(--white-alpha-25);
-  border:1px solid var(--white-alpha-40);
-  min-height: 90vh;
-  border-radius:30px;
-  backdrop-filter: var(--backdrop-filter-blur);
-  min-height:calc(100vh - 70px);
-  ${props => props.className.includes("active") && css`
-  display:block;
-  animation:${fadein} 0.5s ease-in-out forwards;`}
-  ${props => props.className.includes("fade-out") && css `
-  animation:${fadeOut} 0.5s ease-in-out forwards;`}
-    display:flex;
-    align-items:center;
-    justify-content:center;
-   padding:120px 0;
-   margin:0 5%;
-  }
-  
-  .mycontainer{
-    width:100%;
-     padding:0 40px;
-   }
-`;
 const CustomBody = Styled.div`
   min-height :100vh;
   min-width:100vh;
-  background-image: linear-gradient(to bottom right , var(--pink-light), var(--cyan-light));
+  background: linear-gradient(to bottom right , var(--pink-light), var(--cyan-light));
 
   background-attachment: fixed;
   &::before , &::after{
@@ -78,5 +53,30 @@ const CustomBody = Styled.div`
   }
   
 `;
+
+const CustomSection = Styled.section`
+background-color: var(--white-alpha-25);
+  border:1px solid var(--white-alpha-40);
+  min-height: 90vh;
+  border-radius:30px;
+  backdrop-filter: var(--backdrop-filter-blur);
+  min-height:calc(100vh - 70px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:120px 0;
+  margin:0 5%;
+  ${props => props.className.includes("active") && css`
+  display:block;
+  animation:${fadein} 0.5s ease-in-out forwards;`}
+  ${props => props.className.includes("fade-out") && css `
+  animation:${fadeOut} 0.5s ease-in-out forwards;`}
+  .mycontainer{
+    width:100%;
+     padding:0 40px;
+   }
+`;
+
+
 export default MySection;
 

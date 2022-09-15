@@ -19,7 +19,7 @@ import {
 const SideBar = () => {
   const {setAdminSession} = useContext(isAdminSession);
   const {setAdminAuth} = useContext(isAdminAuth);
-  const {setAdminData} = useContext(isAdminData);
+  const {adminData,setAdminData} = useContext(isAdminData);
   const navigate = useNavigate();
       
   const logouthandler = ()=>{
@@ -62,7 +62,17 @@ const SideBar = () => {
               <span>Search</span>
             </li>
           </Link>
+
+        {/* create admin */}
+        {adminData.accountTypeName === "creator_admin" && <Link to="/adminsignup" style={{ textDecoration: "none" }}>
+            <li>
+              <ScreenSearchDesktopIcon className="icon" />
+              <span>CreateAdmin</span>
+            </li>
+          </Link> }
           
+       
+
           <p className="title">LEAVE</p>
           <li onClick={logouthandler}>
             <ExitToApp className="icon" />
@@ -76,7 +86,7 @@ const SideBar = () => {
 const AdminSideBar = styled.div`
 
     flex: 1;
-    border-right: 3px solid yellow;
+    border-right: 3px solid rgba(255,255,255,0.40);
     min-height: 100vh;
     background-color:#ffd8d8;
   

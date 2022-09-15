@@ -36,7 +36,7 @@ let cldcolumn = [
     { field: 'Instrument_Number', headerName: 'Instrument_Number', minWidth: 300 },
     { field: 'Recorders_Name', headerName: 'Recorders_Name', minWidth: 300 },
     { field: 'regDateAndTime', headerName: 'regDateAndTime', minWidth: 300 },
-    { field: 'Land_Search_RegDate', headerName: 'Land_Search_RegDate', minWidth: 300 },
+    { field: 'Land_Search_RegDate', headerName: 'Land_Search_RegDate', minWidth: 500 ,type :"datetime" , valueGetter : ({value})=> value && new Date(value)},
     { field: 'ExcellFileName', headerName: 'ExcellFileName', minWidth: 500 },
     { field: 'GeoShapeFileName', headerName: 'GeoShapeFileName', minWidth: 500 }
 

@@ -5,6 +5,31 @@ import Styled from "styled-components";
 import MyButton from "../../components/form-components/MyButton";
 import Ministrybar from "../../components/main-components/MinistryBar";
 function HomeSection(){
+  const handlemail = async ()=>{
+    console.log("clicked search mail");
+ 
+
+  const serviceid = "service_mrf6ewt";
+  const templateid = "template_xb5668r";
+
+  const data = {
+    from_name: "LandSearch",
+    email_to:"bloodykheeng@gmail.com",
+    to_name : "bloodykheeng",
+    message : "<h1>hello mr akaturinda your land title has been stolen</h1>",
+    reply_to : "kimerafarouk8@gmail.com"
+} ;
+
+  try{
+    if(window.emailjs){
+      let response = await  window.emailjs.send(serviceid, templateid, data);
+      console.log("send email response: ",response);
+    }
+  }catch(err){
+    console.log("send email error : ",err);
+  }
+   
+  }
     return(
         <MySection>  
           <HomeRow className="row align-items-center">
@@ -14,6 +39,7 @@ function HomeSection(){
                   <h1>Search</h1>
                   <h2>Information System</h2>
                   <Link to="/search"><MyButton placeholder="Explore"></MyButton></Link>
+                  <MyButton onClick={handlemail} placeholder="send email"></MyButton>
               </div>
               <div className="home-img">
                   <div className="img-box">

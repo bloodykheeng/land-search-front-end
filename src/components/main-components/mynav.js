@@ -10,16 +10,16 @@ import styled from 'styled-components';
 function MyNav(){
     const expand= false;
     return(
-    <Navbar key={expand} bg={colors.white_alpha_25} expand={expand} className="mb-3">
-          <Container fluid bg={colors.white_alpha_25} >
-            <Navbar.Brand>Ministry Of Lands Housing And Urban Development</Navbar.Brand>
+    <Navbar key={expand}  expand={expand} className="mb-3">
+          <Container fluid  >
+            <Navbar.Brand>Ministry Of Lands Housing And Urban Developmen</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`}  />
             <Navbar.Offcanvas 
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end" 
+              placement="end" style={{background : "linear-gradient(to bottom right , var(--pink-light), var(--cyan-light))"}}
             >
-              <Offcanvas.Header closeButton>
+              <Offcanvas.Header closeButton  style={{backgroundColor :colors.white_alpha_25}}>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                 Ministry Of Lands Housing And Urban Development
                 </Offcanvas.Title>

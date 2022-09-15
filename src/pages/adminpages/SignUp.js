@@ -6,6 +6,12 @@ import React,{useState} from "react";
  import {Link} from "react-router-dom";
 import MinistryBar from "../../components/main-components/MinistryBar";
 
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
 import Axios from "axios";
 import MyAlert from "../../components/form-components/MyAlert";
 
@@ -20,6 +26,13 @@ import MyAlert from "../../components/form-components/MyAlert";
     const [phonenumber , setphonenumber] = useState("");
     const [password , setpassword] = useState("");
     const [confirmpassword , setconfirmpassword] = useState("");
+    const [accounttypeid,setaccounttypeid] = useState("");
+
+
+   
+      const  handleselect = (event) => {
+        setaccounttypeid(event.target.value);
+      };
 
     const signuphandler = ()=>{
         
@@ -28,6 +41,7 @@ import MyAlert from "../../components/form-components/MyAlert";
             setsignupmsg("failed to confirm password");
         }else{
             let data ={
+                accounttypeid,
                 firstName : firstname,
                 lastName : lastname,
                 userName : username,
@@ -64,8 +78,22 @@ import MyAlert from "../../components/form-components/MyAlert";
             <MyFormStyled>
             {signupstatus === true && <MyAlert variant="success" msg={signupmsg} />  }
             {signupstatus === false && <MyAlert variant="danger" msg={signupmsg} /> }
-
-
+        
+            <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={accounttypeid}
+                label="AccountType"
+                onChange={ handleselect }
+                >
+                <MenuItem value={1}>creator_admin</MenuItem>
+                <MenuItem value={2}>normal_admin</MenuItem>
+                </Select>
+            </FormControl>
+            </Box>
             <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
             <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
             <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
