@@ -21,7 +21,8 @@ const SideBar = () => {
   const {setAdminAuth} = useContext(isAdminAuth);
   const {adminData,setAdminData} = useContext(isAdminData);
   const navigate = useNavigate();
-      
+  console.log("admin account type:  ", adminData.accountTypeName);
+
   const logouthandler = ()=>{
           axios.post("/logout").then((response)=>{
               setAdminAuth(response.data.auth);

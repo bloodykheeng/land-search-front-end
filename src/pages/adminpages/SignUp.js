@@ -1,10 +1,9 @@
 import React,{useState} from "react";
- import MySection  from "../../components/main-components/Section";
  import MyInput from "../../components/form-components/MyInput";
  import styled from "styled-components";
  import MyButton from "../../components/form-components/MyButton";
  import {Link} from "react-router-dom";
-import MinistryBar from "../../components/main-components/MinistryBar";
+import AdminContainer from "../../components/admin-components/AdminContainer";
 
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
@@ -38,7 +37,7 @@ import MyAlert from "../../components/form-components/MyAlert";
         
         if(password !== confirmpassword){
             setsignupstatus(false);
-            setsignupmsg("failed to confirm password");
+            setsignupmsg("passwords donot match");
         }else{
             let data ={
                 accounttypeid,
@@ -55,62 +54,52 @@ import MyAlert from "../../components/form-components/MyAlert";
                     console.log(response.data);
                     if(response.data.status === "FAILED"){
                         setsignupstatus(false);
-                        setsignupmsg(`signing in failed : ${response.data.message}`);
+                        setsignupmsg(`signup failed : ${response.data.message}`);
                     }else if(response.data.status === "SUCCESSFULL"){
                         setsignupstatus(true);
-                        setsignupmsg(`signing in successfull : ${response.data.message}`);
+                        setsignupmsg(`signup successfull : ${response.data.message}`);
                     }
             })   
         }
     }
 
     return(
-       <MySection style={{
-            display:"flex",
-            flexDirection:"row",
-            flexWrap:"wrap",
-            justifyContent:"center",
-            alignItems:"center",
-            height:"100%",
-            width:"100%"
-        }}>
-             <MinistryBar />
-            <MyFormStyled>
-            {signupstatus === true && <MyAlert variant="success" msg={signupmsg} />  }
-            {signupstatus === false && <MyAlert variant="danger" msg={signupmsg} /> }
-        
-            <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={accounttypeid}
-                label="AccountType"
-                onChange={ handleselect }
-                >
-                <MenuItem value={1}>creator_admin</MenuItem>
-                <MenuItem value={2}>normal_admin</MenuItem>
-                </Select>
-            </FormControl>
-            </Box>
-            <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
-            <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
-            <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
-            <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="enter Email"/>
-            </MyFormStyled>
-            <MyFormStyled>
-            <strong>Enter Date Of Birth</strong>
-            <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
-            <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
-            <MyInput type="password" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
-            <MyInput type="password" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
-            <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
-            <h3><Link style={{textDecoration :"none"}} to="/adminlogin">Login</Link></h3>
-            </MyFormStyled>
-            
-            
-        </MySection>      
+        <AdminContainer>
+        <div style={{display : "flex",alignItems:"center", padding:"20px"}}>
+        <MyFormStyled>
+              {signupstatus === true && <MyAlert variant="success" msg={signupmsg} />  }
+              {signupstatus === false && <MyAlert variant="danger" msg={signupmsg} /> }
+          
+              <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">AccountType</InputLabel>
+                  <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={accounttypeid}
+                  label="AccountType"
+                  onChange={ handleselect }
+                  >
+                  <MenuItem value={1}>creator_admin</MenuItem>
+                  <MenuItem value={2}>normal_admin</MenuItem>
+                  </Select>
+              </FormControl>
+              </Box>
+              <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
+              <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
+              <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
+              <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="enter Email"/>
+              </MyFormStyled>
+              <MyFormStyled>
+              <strong>Enter Date Of Birth</strong>
+              <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
+              <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
+              <MyInput type="password" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
+              <MyInput type="password" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
+              <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
+              </MyFormStyled>
+        </div>
+      </AdminContainer>
     )
  }
  const MyFormStyled = styled.div`

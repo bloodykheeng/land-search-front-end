@@ -4,13 +4,17 @@ import MySection from "../../components/main-components/Section";
 import Styled from "styled-components";
 import MyButton from "../../components/form-components/MyButton";
 import Ministrybar from "../../components/main-components/MinistryBar";
+import emailjs from "@emailjs/browser";
+
 function HomeSection(){
+
   const handlemail = async ()=>{
     console.log("clicked search mail");
  
 
   const serviceid = "service_mrf6ewt";
   const templateid = "template_xb5668r";
+  const publickey = "fcTjLWSnhcZiQlj1a";
 
   const data = {
     from_name: "LandSearch",
@@ -21,10 +25,10 @@ function HomeSection(){
 } ;
 
   try{
-    if(window.emailjs){
-      let response = await  window.emailjs.send(serviceid, templateid, data);
+    
+      let response = await emailjs.send(serviceid, templateid, data, publickey );
       console.log("send email response: ",response);
-    }
+   
   }catch(err){
     console.log("send email error : ",err);
   }
