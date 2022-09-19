@@ -8,6 +8,12 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import MyAlert from "../../components/form-components/MyAlert";
 import Axios from "axios";
 
+import Lottie from "lottie-react";
+import InvalidToken from "../../lottiefiles/adminlotties/invalidtoken.json";
+import PasswordUpdate from "../../lottiefiles/adminlotties/passwordupdate.json";
+import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
+
+
 
 
 function ResetPassword(){
@@ -16,6 +22,8 @@ function ResetPassword(){
     const [password , setpassword] = useState("");
     const [confirmpassword , setconfirmpassword] = useState("");
     const [message , setMessage] = useState("enter passwords");
+    const [response, setResponse] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const resetpassword = async ()=>{
         
@@ -28,15 +36,21 @@ function ResetPassword(){
                 password
             };
 
-         
+            setIsLoading(true);
             try{
                 const res = await Axios.post("/resetpassword",data, {withCredentials : false});
-
-                if(res.data.status === "SUCESSFULL" ){
+                setIsLoading(false);
+                console.log(res.data.status);
+                console.log(res.data.message);
+                if(res.data.status === "successfull" ){
+                    setResponse("successfull");
                     setMessage(res.data.message);
                     
                 }else if(res.data.status === "token-failed"){
+                    setResponse("token-failed");
                     setMessage("The Token is Invalid");
+                }else if(res.data.status === "failed"){
+                    setMessage(res.data.message);
                 }else{
                     setMessage("failed to update password try again or contact landsearch team");
                 }
@@ -59,15 +73,45 @@ function ResetPassword(){
     }}>
         <MinistryBar />
         <MyFormStyled>
-            {message && <MyAlert variant="danger" msg={message} />  }
+            {!response && 
+            <>
+                {message && <MyAlert variant="danger" msg={message} />  }
             <MyInput type="password" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter new password"/>
 
             <MyInput type="password" onChange={(e)=>setconfirmpassword(e.target.value)}  placeholder="repeat new password"/>
         
         <MyButton type="submit" onClick={resetpassword} placeholder="Submit"/><br></br>
+        {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> } 
+        <b />
 
-        {/* <MyInput type="password" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter password"/> */}
         <Link style={{textDecoration :"none"}} to="/forgotpassword"  className="mylink"><strong>Back</strong></Link>
+            </>}
+            {response === "successfull" && 
+            <div>
+                <h1>Succesfully updated password</h1>
+                <div>
+                     <Lottie style={{width:"100%"}} animationData={PasswordUpdate} loop={true}/>
+                </div>
+
+                <Link to="/adminlogin"><MyButton placeholder="Back"/></Link>
+           
+            </div>
+            }
+            
+            {response === "token-failed" && 
+                <div>
+                <h1>Faulty Token</h1>
+                <div>
+                     <Lottie style={{width:"100%"}} animationData={InvalidToken} loop={true}/>
+                </div>
+
+                <Link to="/adminlogin"><MyButton placeholder="Back"/></Link>
+           
+            </div>
+            }
+            
+
+            
         </MyFormStyled>
         
 

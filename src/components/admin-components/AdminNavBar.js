@@ -32,7 +32,7 @@ const logouthandler = ()=>{
         </div>
         <div className="item">
           <img
-            src="images/emblem.jpeg"
+            src="/images/emblem.jpeg"
             alt="emblem"
             className="avatar"
           />

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const ministrybar = () => {
   return (
     <MinistryBar className="row ministry-bar align-items-center">
-    <img src="images/ministry-tops.png" alt="ministry bar" />
+    <img src="/images/ministry-tops.png" alt="ministry bar" />
   </MinistryBar>
   )
 }

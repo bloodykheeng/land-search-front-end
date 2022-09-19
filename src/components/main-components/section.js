@@ -57,14 +57,14 @@ const CustomBody = Styled.div`
 const CustomSection = Styled.section`
 background-color: var(--white-alpha-25);
   border:1px solid var(--white-alpha-40);
-  min-height: 90vh;
+  min-height: 100vh;
   border-radius:30px;
   backdrop-filter: var(--backdrop-filter-blur);
   min-height:calc(100vh - 70px);
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:120px 0;
+  padding:50px 0;
   margin:0 5%;
   ${props => props.className.includes("active") && css`
   display:block;

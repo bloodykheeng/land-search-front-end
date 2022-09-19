@@ -13,6 +13,9 @@ import MenuItem from '@mui/material/MenuItem';
 
 import Axios from "axios";
 import MyAlert from "../../components/form-components/MyAlert";
+import Lottie from "lottie-react";
+import PasswordUpdate from "../../lottiefiles/adminlotties/passwordupdate.json";
+import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
 
  const SignUp = ()=>{
     const [signupstatus, setsignupstatus] = useState("start");
@@ -26,6 +29,8 @@ import MyAlert from "../../components/form-components/MyAlert";
     const [password , setpassword] = useState("");
     const [confirmpassword , setconfirmpassword] = useState("");
     const [accounttypeid,setaccounttypeid] = useState("");
+    const [showform,setShowForm] = useState(true);
+    const [isLoading,setIsLoading] = useState(false);
 
 
    
@@ -34,11 +39,13 @@ import MyAlert from "../../components/form-components/MyAlert";
       };
 
     const signuphandler = ()=>{
-        
+        setIsLoading(true);
         if(password !== confirmpassword){
+            setIsLoading(false);
             setsignupstatus(false);
             setsignupmsg("passwords donot match");
         }else{
+            
             let data ={
                 accounttypeid,
                 firstName : firstname,
@@ -51,13 +58,16 @@ import MyAlert from "../../components/form-components/MyAlert";
             }
             Axios.post("/signup",data,{withCredentials:false}).then(
                 (response)=>{
+                    setIsLoading(false);
                     console.log(response.data);
                     if(response.data.status === "FAILED"){
+                        setShowForm(true);
                         setsignupstatus(false);
                         setsignupmsg(`signup failed : ${response.data.message}`);
                     }else if(response.data.status === "SUCCESSFULL"){
                         setsignupstatus(true);
                         setsignupmsg(`signup successfull : ${response.data.message}`);
+                        setShowForm(false)
                     }
             })   
         }
@@ -66,45 +76,63 @@ import MyAlert from "../../components/form-components/MyAlert";
     return(
         <AdminContainer>
         <div style={{display : "flex",alignItems:"center", padding:"20px"}}>
-        <MyFormStyled>
-              {signupstatus === true && <MyAlert variant="success" msg={signupmsg} />  }
-              {signupstatus === false && <MyAlert variant="danger" msg={signupmsg} /> }
-          
-              <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">AccountType</InputLabel>
-                  <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={accounttypeid}
-                  label="AccountType"
-                  onChange={ handleselect }
-                  >
-                  <MenuItem value={1}>creator_admin</MenuItem>
-                  <MenuItem value={2}>normal_admin</MenuItem>
-                  </Select>
-              </FormControl>
-              </Box>
-              <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
-              <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
-              <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
-              <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="enter Email"/>
-              </MyFormStyled>
-              <MyFormStyled>
-              <strong>Enter Date Of Birth</strong>
-              <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
-              <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
-              <MyInput type="password" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
-              <MyInput type="password" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
-              <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
-              </MyFormStyled>
+            {showform && 
+            <>
+                <MyFormStyled>
+                {signupstatus === true && <h3 style={{color:"red"}}>{signupmsg}</h3>  }
+                {signupstatus === false &&<h3 style={{ color:"red",wordWrap : "wrap",width:"100%"}}>{signupmsg}</h3> }
+                <br />
+                <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">AccountType</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={accounttypeid}
+                    label="AccountType"
+                    onChange={ handleselect }
+                    >
+                    <MenuItem value={1}>creator_admin</MenuItem>
+                    <MenuItem value={2}>normal_admin</MenuItem>
+                    </Select>
+                </FormControl>
+                </Box>
+                <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
+                <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
+                <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
+                <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="enter Email"/>
+                </MyFormStyled>
+                <MyFormStyled>
+                <strong>Enter Date Of Birth</strong>
+                <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
+                <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
+                <MyInput type="password" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
+                <MyInput type="password" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
+                <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
+
+                {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> } 
+                </MyFormStyled>
+            </>
+            }
+
+        {!showform  && 
+                <div>
+                <h1>{signupmsg}</h1>
+                <div>
+                <Lottie style={{width:"100%"}} animationData={PasswordUpdate} loop={true}/>
+                </div>
+
+                <Link to="/adminsignup"><MyButton placeholder="Back"/></Link>
+           
+            </div>
+            }
+        
         </div>
       </AdminContainer>
     )
  }
  const MyFormStyled = styled.div`
- min-width:100px;
- max-width:70%;
+ width:50%;
  height:100%;
  display:flex;
  flex-direction:column;

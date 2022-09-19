@@ -4,12 +4,13 @@ import SearchSection from "./pages/userpages/SearchSection";
 import AdminHome from "./pages/adminpages/AdminHome";
 import LoginForm from "./pages/adminpages/Login";
 import AdminDashboard from "./pages/adminpages/AdminDashboard";
-import {Routes,Route, useLocation,useNavigate , useParams} from "react-router-dom";
+import {Routes,Route, useLocation,useNavigate } from "react-router-dom";
 import SignUp from "./pages/adminpages/SignUp";
 import FileUpload from "./pages/adminpages/FileUpload";
 import AdminSearch from "./pages/adminpages/AdminSearch";
 import ForgotPassword from "./pages/adminpages/forgotpassword";
 import ResetPassword from "./pages/adminpages/resetpassword";
+import AdminUsers from "./pages/adminpages/AdminUsers";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -66,7 +67,7 @@ function App() {
 
                   <Route exact path="/forgotpassword" element={<ForgotPassword/> }/>
 
-                  <Route  path="resetpassword/:adminid" element={<ResetPassword /> }/>
+                  <Route exact path="/resetpassword/:adminid/:token" element={<ResetPassword /> }/>
                   
                   
                   <Route exact path="/adminportal" element={<AdminHome/> }/>
@@ -93,10 +94,12 @@ function App() {
             </isAdminAuth.Provider>
             </isAdminSession.Provider>
             }>
+              
             <Route exact path="/admindashboard" element={<AdminDashboard />}/>
             <Route exact path="/adminupload" element={<FileUpload /> }/>
             <Route exact path="/adminsearch" element={<AdminSearch /> }/>
             <Route exact path="/adminsignup" element={<SignUp/> }/>
+            <Route exact path="/adminusers" element={<AdminUsers/> }/>
               </Route>
               {/* protected route end */}
          </Routes>

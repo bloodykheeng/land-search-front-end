@@ -21,7 +21,7 @@ const SideBar = () => {
   const {setAdminAuth} = useContext(isAdminAuth);
   const {adminData,setAdminData} = useContext(isAdminData);
   const navigate = useNavigate();
-  console.log("admin account type:  ", adminData.accountTypeName);
+  //console.log("admin account type:  ", adminData.accountTypeName);
 
   const logouthandler = ()=>{
           axios.post("/logout").then((response)=>{
@@ -71,7 +71,15 @@ const SideBar = () => {
               <span>CreateAdmin</span>
             </li>
           </Link> }
+
+          {/* viewadmin users */}
           
+          <Link to="/adminusers" style={{ textDecoration: "none" }}>
+            <li>
+              <ScreenSearchDesktopIcon className="icon" />
+              <span>Administrators</span>
+            </li>
+          </Link>
        
 
           <p className="title">LEAVE</p>
