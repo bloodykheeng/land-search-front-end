@@ -29,6 +29,8 @@ function ResetPassword(){
         
         if(!password ||  !confirmpassword){
             setMessage("some input fields are empty");
+        }else if(password !== confirmpassword){
+            setMessage("Password missmatch");
         }else{
             const data = {
                 adminid,
