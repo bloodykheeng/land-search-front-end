@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import NoData from "../../lottiefiles/userlotties/nodata.json";
 import FileLost from "../../lottiefiles/userlotties/filelost.json";
 import Loading from "../../lottiefiles/userlotties/loading.json";
+import { ToastContainer, toast } from 'react-toastify';
 
 import Axios from "axios";
 import UserTable from "./UserTable";
@@ -68,6 +69,10 @@ const [isLoading, setIsLoading] = useState(false);
             
         }catch(err){
             console.log(err);
+            setIsLoading(false);
+            setisempty(false)
+        setshowhometext(true);
+            toast.error("Server Down");
         }
        
     }
@@ -138,7 +143,7 @@ return(
 
 
                     {showhometext && 
-                    <>
+                    <div className="hometextcontainer">
                          <div className="home-text">
                         <strong>Hello ! You are Welcome</strong>
                             <h2><b>Land Search Information System</b></h2>
@@ -147,34 +152,34 @@ return(
                         </div> 
                         <div className="row align-items-center search" >
                         <div className="contact-form" style={{display:"flex"}}>
-                       <div style={{width:"50%"}}>
-                        <MyButton placeholder="customary" style={{margin:"10px"}} onClick={()=>{
+                       <div className="contact-form-buttons">
+                        <MyButton placeholder="customary" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(true);
                             setfreeholdclick(false);
                             setMailolandclick(false);
                             setLeaseHoldclick(false);
                         }} />
-                        <MyButton placeholder="free hold" style={{margin:"10px"}} onClick={()=>{
+                        <MyButton placeholder="free hold" style={{margin:"10px"}}  onClick={()=>{
                             setfreeholdclick(true);
                             setcustomaryclick(false);
                             setMailolandclick(false);
                             setLeaseHoldclick(false);
                             }}/>
-                        <MyButton placeholder="Mailo land" style={{margin:"10px"}} onClick={()=>{
+                        <MyButton placeholder="Mailo land" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(false);
                             setfreeholdclick(false);
                             setMailolandclick(true);
                             setLeaseHoldclick(false);
     
                             }}/>
-                        <MyButton placeholder="Lease Hold" style={{margin:"10px"}} onClick={()=>{
+                        <MyButton placeholder="Lease Hold" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(false);
                             setfreeholdclick(false);
                             setMailolandclick(false);
                             setLeaseHoldclick(true);
                             }}/>
                        </div>
-                       <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center"}}>
+                       <div style={{display : "flex", flexDirection : "column", justifyContent : "Center",alignItems : "center",width:"100%"}}>
                         
                         {customaryclick && <div className="row" style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
     
@@ -189,18 +194,18 @@ return(
                                 </div>}
     
                                 {freeholdclick && 
-                                <div>
+                                <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
                                 <strong style={{color:"green"}}>Free Hold Land Data not yet set</strong>
                                 <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
                                 </div> }
                                 {Mailolandclick &&
-                                <div>
+                                <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
                                     <strong style={{color:"brown"}}>Mailo Land Data not yet set</strong>
                                     <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
                                 </div>
                                 }
                                 {LeaseHoldclick && 
-                                <div>
+                                <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
                                     <strong style={{color:"red"}}>Lease Hold Data not yet set</strong>
                                     <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
                                 </div>
@@ -211,9 +216,9 @@ return(
     
                             
                         </div>
-                        
+            
                       </div>
-                    </>
+                    </div>
                        
                     }
                   
@@ -221,6 +226,18 @@ return(
 
                  
                   </SearchSectionDiv>
+
+                  <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
                   </MySection>
 );
 }
@@ -228,15 +245,51 @@ return(
 const SearchSectionDiv = styled.div`
 display:flex;
 flex-wrap:wrap;
+width:100%;
+height:100%;
+
+.hometextcontainer{
+    display:flex;
+width:100%;
+height:100%;
+flex-direction : row;
+@media (max-width : 1000px){
+    flex-direction : column;
+    display:flex;
+    flex-wrap:wrap;
+  }
+}
+
+ 
 .home-text, .search{
-  width : 50%;
+ width:50%;
   padding:15px;
+  @media (max-width : 1000px){
+    width : 100%;
+  }
   }
   .contact-form{
-      width:100%;
       height:100%;
       padding:0 15px;
       border-left: 1px dotted var(--white-alpha-40);
+      @media (max-width : 850px){
+        flex-direction:column;
+        width:100%;
+        border-top: 1px dotted var(--white-alpha-40);
+      }
+  }
+
+  .contact-form-buttons{
+    display:flex;
+    width:50%;
+    height:100%;
+    flex-direction:column;
+    @media (max-width : 850px){
+        display:flex;
+        width:100%;
+        flex-direction:row;
+        flex-wrap:wrap;
+      }
   }
   .contact-form .row{
       align-items:center;

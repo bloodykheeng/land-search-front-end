@@ -2,6 +2,7 @@ import React, { useState,useContext ,useEffect,useMemo} from 'react'
 import AdminContainer from '../../components/admin-components/AdminContainer';
 import AdminTable from '../../components/admin-components/AdminTable';
 import Lottie from "lottie-react";
+import { ToastContainer, toast } from 'react-toastify';
 
 import {  GridActionsCellItem} from '@mui/x-data-grid';
 
@@ -53,6 +54,8 @@ function AdminUsers(){
                 
             }catch(err){
                 console.log(err);
+                setIsLoading(false);
+                toast.error("Server Down");
             }
         }
 
@@ -87,6 +90,8 @@ function AdminUsers(){
             
         }catch(err){
             console.log(err);
+            setIsLoading(false);
+            toast.error("Server Down");
         }
     },[adminstatus]);
 
@@ -176,7 +181,7 @@ function AdminUsers(){
                   }
 
                 {(showtable && adminData.accountTypeName === "normal_admin" )&&
-                  <div style={{width:"100%",padding:"20px"}}>
+                  <div style={{width:"100%",height:"100%",padding:"20px"}}>
                
                     <div style={{height:"80%",marginBottom:"20px"}}>
                         <h2>View Admin Users Table</h2>
@@ -185,6 +190,17 @@ function AdminUsers(){
                   </div>
                   }
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
      </AdminContainer>    
   );
 }

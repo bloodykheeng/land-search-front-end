@@ -10,9 +10,9 @@ import styled from 'styled-components';
 function MyNav(){
     const expand= false;
     return(
-    <Navbar key={expand}  expand={expand} className="mb-3">
+    <Navbar key={expand} style={{maxWidth:"100%"}} expand={expand} className="mb-3">
           <Container fluid  >
-            <Navbar.Brand>Ministry Of Lands Housing And Urban Developmen</Navbar.Brand>
+            <Navbar.Brand style={{maxWidth:"100%" , wordWrap:"wrap"}}><h4 className="text-wrap">Ministry Of Lands Housing And Urban Development</h4></Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`}  />
             <Navbar.Offcanvas 
               id={`offcanvasNavbar-expand-${expand}`}
@@ -33,7 +33,7 @@ function MyNav(){
 
                   <MySpan><Link to="/aboutland"  className="mylink"><strong>Tenure_Info</strong></Link></MySpan>
                   
-                  <MySpan><Link to="/adminportal"  className="mylink">admin</Link></MySpan>
+                  {/* <MySpan><Link to="/adminportal"  className="mylink">admin</Link></MySpan> */}
                   
                 </Nav>
               </Offcanvas.Body>

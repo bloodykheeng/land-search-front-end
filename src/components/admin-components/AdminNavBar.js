@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import styled from "styled-components";
 import axios from 'axios';
 import { isAdminAuth , isAdminData ,isAdminSession} from '../../pages/adminpages/AdminAuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+
 import { useNavigate } from 'react-router-dom';
 
 const AdminNavBar = () => {
@@ -18,6 +20,9 @@ const logouthandler = ()=>{
             setAdminData(null);
             setAdminSession("logged out");
             navigate("/adminlogin");
+        }).catch((err)=>{
+          console.log(err);
+          toast.error("Server Down");
         })
     }
   return (
@@ -30,9 +35,9 @@ const logouthandler = ()=>{
       <div className="item">
         <strong> {adminData.firstName} </strong>
         </div>
-        <div className="item">
+        <div style={{border : "1px solid rgba(255,255,255,0.40)"}} className="item">
           <img
-            src="/images/emblem.jpeg"
+            src="/images/coatOfArms.png"
             alt="emblem"
             className="avatar"
           />
@@ -46,6 +51,17 @@ const logouthandler = ()=>{
         </div>
       </div>
     </div>
+    <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
   </NavBar>
   )
 }

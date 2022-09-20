@@ -5,6 +5,7 @@ import AdminTable from '../../components/admin-components/AdminTable';
 import MyButton from '../../components/form-components/MyButton';
 import Lottie from "lottie-react";
 import SearchingLottie from "../../lottiefiles/adminlotties/searchinglottie.json"
+import { ToastContainer, toast } from 'react-toastify';
 import NoData from "../../lottiefiles/adminlotties/nodata.json";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
 
@@ -37,11 +38,13 @@ function AdminSearch(){
 
 
     const click = async ()=>{
+        setIsLoading(true);
         if(!clinnumber){
+            setIsLoading(false);
             seterrors("first enter a clin number");
         }else{
-            seterrors();
             setIsLoading(true);
+            seterrors();
             const data = {
                 clinnumber
             }
@@ -84,7 +87,9 @@ function AdminSearch(){
                 }    
                 
             }catch(err){
+                setIsLoading(false);
                 console.log(err);
+                toast.error("Server Down");
             }
         }   
         console.log("admin search button clicked");
@@ -130,9 +135,9 @@ function AdminSearch(){
          }
 
                 {isLoading && 
-                    <div style={{display:"flex", justifyContent:"center",alignItems:"center",flexDirection:"column",padding:"20px"}}>
+                    <div style={{display:"flex", justifyContent:"center",alignItems:"center",flexDirection:"column",padding:"20px",width:"100%",height:"100%"}}>
                     <div style={{display:"flex", justifyContent:"center",alignItems:"center"}}>
-                    <Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/>
+                    <Lottie style={{width:"200px",height:"200px"}} animationData={loadingCircle} loop={true}/>
                     </div>
                     </div>
                 }
@@ -171,6 +176,17 @@ function AdminSearch(){
                   </div>
                   }
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
      </AdminContainer>    
   );
 }

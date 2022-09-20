@@ -9,7 +9,11 @@ import Axios from "axios";
 import { isAdminAuth, isAdminData , isAdminSession} from './AdminAuthContext';
 import MyAlert from "../../components/form-components/MyAlert";
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Lottie from "lottie-react";
+import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
+
 
 
 function MyForm(){
@@ -21,6 +25,7 @@ function MyForm(){
     const [password , setpassword] = useState("");
     const [message , setMessage] = useState("fill in to LogIn");
     const [loginStatus, setLoginStatus] = useState("");
+    const [isLoading,setIsLoading] = useState(false);
 
 
     useEffect(()=>{
@@ -33,6 +38,7 @@ function MyForm(){
         if(!username || !password ){
             setMessage("some inputs are empty");
         }else{
+            setIsLoading(true);
             const data = {
                 username: username,
                 password:password
@@ -40,6 +46,7 @@ function MyForm(){
           
             Axios.post("/login",data, {withCredentials : false})
             .then((response)=>{
+                setIsLoading(false);
                 if(!response.data.auth){
                     setAdminAuth(false);
                     setLoginStatus(false)
@@ -52,12 +59,18 @@ function MyForm(){
                     setAdminSession(true)
                     navigate("/admindashboard");
                 }
-            });
+            }).catch(
+                (err)=>{
+                    console.log(err)
+                    setIsLoading(false);
+                    toast.error("Server Down");
+                }
+                );
         }
-       
-
-        
+      
     }
+
+
     return(
         <MySection style={{
             display:"flex",
@@ -72,9 +85,10 @@ function MyForm(){
                 {loginStatus === "" && <MyAlert variant="success" msg={message} />  }
                 {loginStatus === true && <MyAlert variant="success" msg={message} />  }
                 {loginStatus === false && <MyAlert variant="danger" msg={message} /> }
-            <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter firstname"/>
-            <MyInput type="password" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter password"/>
+            <MyInput type="text" autoComplete="off" onChange={(e)=>setusername(e.target.value)} placeholder="enter firstname"/>
+            <MyInput type="password" autoComplete="off" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter password"/>
             <MyButton type="submit" onClick={login} placeholder="Login"/><br></br>
+            {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> }
             
             <h4><Link style={{textDecoration :"none"}} to="/forgotpassword">Forgot Password</Link></h4>
             <Link style={{textDecoration :"none"}} to="/adminportal"  className="mylink"><strong>Back</strong></Link>

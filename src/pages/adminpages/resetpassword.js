@@ -12,6 +12,8 @@ import Lottie from "lottie-react";
 import InvalidToken from "../../lottiefiles/adminlotties/invalidtoken.json";
 import PasswordUpdate from "../../lottiefiles/adminlotties/passwordupdate.json";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -58,7 +60,9 @@ function ResetPassword(){
                 }
                    
             }catch(err){
+                setIsLoading(false);
                 console.log(err);
+                toast.error("Server Down");
             }
         }
       
@@ -115,7 +119,17 @@ function ResetPassword(){
 
             
         </MyFormStyled>
-        
+        <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
 
     </MySection>
   )

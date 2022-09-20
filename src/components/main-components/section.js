@@ -26,9 +26,10 @@ const fadein = keyframes`
 `;
 
 const CustomBody = Styled.div`
-  min-height :100vh;
-  min-width:100vh;
+  height :100%;
+  width:100vw;
   background: linear-gradient(to bottom right , var(--pink-light), var(--cyan-light));
+  padding:20px;
 
   background-attachment: fixed;
   &::before , &::after{
@@ -39,17 +40,17 @@ const CustomBody = Styled.div`
     position:fixed;
     left:0;
     top:0;
-    height:100%;
-    width:100%;
+    min-height:100vh;
+    min-width:100vw;
     background-color: var(--green-yellow);
     z-index:-1;
     opacity:0.12;
     font-size:10px;
     color:var(--blue-dark);
     line-height:1.5;
-    overflow-x : hidden;
+    overflow : hidden;
     -webkit-top-highlight-color: transparent;
-    padding: 5vh 15px;
+    padding: 5px 15px;
   }
   
 `;
@@ -57,10 +58,10 @@ const CustomBody = Styled.div`
 const CustomSection = Styled.section`
 background-color: var(--white-alpha-25);
   border:1px solid var(--white-alpha-40);
-  min-height: 100vh;
   border-radius:30px;
   backdrop-filter: var(--backdrop-filter-blur);
-  min-height:calc(100vh - 70px);
+  min-height:calc(98vh);
+  max-width:100vw;
   display:flex;
   align-items:center;
   justify-content:center;

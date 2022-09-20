@@ -4,6 +4,7 @@ import React,{useState} from "react";
  import MyButton from "../../components/form-components/MyButton";
  import {Link} from "react-router-dom";
 import AdminContainer from "../../components/admin-components/AdminContainer";
+import { ToastContainer, toast } from 'react-toastify';
 
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
@@ -12,7 +13,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
 import Axios from "axios";
-import MyAlert from "../../components/form-components/MyAlert";
 import Lottie from "lottie-react";
 import PasswordUpdate from "../../lottiefiles/adminlotties/passwordupdate.json";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
@@ -69,7 +69,11 @@ import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
                         setsignupmsg(`signup successfull : ${response.data.message}`);
                         setShowForm(false)
                     }
-            })   
+            }).catch((err)=>{
+                setIsLoading(false);
+                console.log("signup err : ".err);
+                toast.error("Server Down");
+            })  
         }
     }
 
@@ -82,7 +86,7 @@ import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
                 {signupstatus === true && <h3 style={{color:"red"}}>{signupmsg}</h3>  }
                 {signupstatus === false &&<h3 style={{ color:"red",wordWrap : "wrap",width:"100%"}}>{signupmsg}</h3> }
                 <br />
-                <Box sx={{ minWidth: 120 }}>
+                <Box sx={{ minWidth: "85%" }}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">AccountType</InputLabel>
                     <Select
@@ -97,17 +101,17 @@ import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
                     </Select>
                 </FormControl>
                 </Box>
-                <MyInput type="text" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
-                <MyInput type="text" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
-                <MyInput type="text" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
-                <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="enter Email"/>
+                <MyInput type="text"  autoComplete="off" onChange={(e)=>setfirstname(e.target.value)} placeholder="enter firstname"/>
+                <MyInput type="text" autoComplete="off" onChange={(e)=>setlastname(e.target.value)} placeholder="enter LastName"/>
+                <MyInput type="text" autoComplete="off" onChange={(e)=>setusername(e.target.value)} placeholder="enter UserName"/>
+                <MyInput type="email" autoComplete="off" onChange={(e)=>setemail(e.target.value)} placeholder="enter Email"/>
                 </MyFormStyled>
                 <MyFormStyled>
                 <strong>Enter Date Of Birth</strong>
-                <MyInput type="date" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
-                <MyInput type="tel" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
-                <MyInput type="password" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
-                <MyInput type="password" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
+                <MyInput type="date" autoComplete="off" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
+                <MyInput type="tel" autoComplete="off" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
+                <MyInput type="password" autoComplete="off" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
+                <MyInput type="password" autoComplete="off" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
                 <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
 
                 {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> } 
@@ -128,6 +132,17 @@ import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
             }
         
         </div>
+        <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
       </AdminContainer>
     )
  }

@@ -30,11 +30,15 @@ function HomeSection(){
 const HomeRow = Styled.div`
   display:flex;
   flex-wrap:wrap;
-  align-items:center;
-
+  align-items:stretch;
+  
   .align-items-center{
-    align-items:center;
+    align-items:stretch;
   }
+  @media (max-width : 650px){
+    flex-direction : column
+  }
+ 
   
   .home-img{
     background-color:green;
@@ -42,9 +46,16 @@ const HomeRow = Styled.div`
   .home-text, .home-img{
   width : 50%;
   padding:15px;
+  @media (max-width : 650px){
+    width : 100%;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    align-items : center;
+  }
   }
 
-  .home-img ,home-box{
+  .home-img {
     max-width:360px;
     background-color:var(--white-alpha-25);
     border-radius:50%;

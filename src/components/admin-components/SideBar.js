@@ -4,14 +4,14 @@ import {useContext} from 'react';
 import axios from 'axios';
 import { isAdminAuth , isAdminData ,isAdminSession } from '../../pages/adminpages/AdminAuthContext';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
-import {
-    Dashboard ,
-    ExitToApp, 
-    } from "@mui/icons-material";
+    import {Dashboard ,ExitToApp } from "@mui/icons-material";
     import CloudUploadIcon from '@mui/icons-material/CloudUpload';
     import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
+    import DesignServicesIcon from '@mui/icons-material/DesignServices';
+    import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 
     
 
@@ -29,6 +29,9 @@ const SideBar = () => {
               setAdminData(null);
               navigate("/adminlogin");
               setAdminSession("logged out");
+          }).catch((err)=>{
+            console.log(err);
+            toast.error("Server Down");
           })
       }
 
@@ -67,7 +70,7 @@ const SideBar = () => {
         {/* create admin */}
         {adminData.accountTypeName === "creator_admin" && <Link to="/adminsignup" style={{ textDecoration: "none" }}>
             <li>
-              <ScreenSearchDesktopIcon className="icon" />
+              <DesignServicesIcon className="icon" />
               <span>CreateAdmin</span>
             </li>
           </Link> }
@@ -76,7 +79,7 @@ const SideBar = () => {
           
           <Link to="/adminusers" style={{ textDecoration: "none" }}>
             <li>
-              <ScreenSearchDesktopIcon className="icon" />
+              <SupervisorAccountIcon className="icon" />
               <span>Administrators</span>
             </li>
           </Link>
@@ -89,6 +92,17 @@ const SideBar = () => {
           </li>
         </ul>
       </div>
+      <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
       </AdminSideBar>
   )
 }

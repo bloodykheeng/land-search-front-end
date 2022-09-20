@@ -8,10 +8,13 @@ import {Link} from "react-router-dom";
 import MyAlert from "../../components/form-components/MyAlert";
 import Axios from "axios";
 
+//import CheckConnection from "../../components/admin-components/CheckConnection";
+
 import Lottie from "lottie-react";
 import NoUser from "../../lottiefiles/adminlotties/usernotfound.json";
 import EmailSent from "../../lottiefiles/adminlotties/emailsent.json";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
+import { ToastContainer, toast } from 'react-toastify';
 
 import emailjs from "@emailjs/browser";
 
@@ -66,9 +69,11 @@ function ForgotPassword(){
                           setMessage("A link has been sent to your email inbox valid for 15 minutes go check it and click on it");
                           setShow("successfull");
                           setIsLoading(false);
-                     
+                          console.log("send email response : ",response);
                     }catch(err){
-                      console.log("send email error : ",err);
+                        setIsLoading(false);
+                        //console.log("send email error : ",err.status);
+                      err.status === 0 &&  toast.error("Check Your Internet connection");
                     }
                         
                 }else{
@@ -77,7 +82,9 @@ function ForgotPassword(){
                 }
                    
             }catch(err){
+                setIsLoading(false);
                 console.log(err);
+                toast.error("Server Down");
             }
         }
       
@@ -92,14 +99,16 @@ function ForgotPassword(){
         height:"100%",
         width:"100%"
     }}>
+        
         <MinistryBar />
         <MyFormStyled>
         {!show && 
             <>
             {message && <MyAlert variant="danger" msg={message} />  }
-        <MyInput type="email" onChange={(e)=>setemail(e.target.value)} placeholder="enter email"/>
+        <MyInput type="email" autoComplete="off" onChange={(e)=>setemail(e.target.value)} placeholder="enter email"/>
         
         <MyButton type="submit" onClick={checkemail} placeholder="Submit"/><br></br>
+
         {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> }
 
         <Link style={{textDecoration :"none"}} to="/adminlogin"  className="mylink"><strong>Back</strong></Link>
@@ -130,8 +139,17 @@ function ForgotPassword(){
             }
             
         </MyFormStyled>
-        
-
+        <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
     </MySection>
   )
 }

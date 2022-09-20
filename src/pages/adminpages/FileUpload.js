@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Lottie from "lottie-react";
 import Surveyor from "../../lottiefiles/adminlotties/filling.json";
 import DataCenter from "../../lottiefiles/adminlotties/datacenter.json";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 import AdminContainer from '../../components/admin-components/AdminContainer';
@@ -29,6 +30,7 @@ const FileUpload = () => {
     const [uploadpercentage, setuploadpercentage] = useState(0);
     const [success , setsuccess] = useState("");
     const [result , setresult] = useState("");
+
   
 
     const onChange = (e)=>{
@@ -99,7 +101,7 @@ const FileUpload = () => {
                     setuploadpercentage(0);
                     setfile(null);
                     setzipfile(null);
-                },1000);
+                },100);
 
                 if(res.data.status === "cookie-failed"){
                     setmessage(res.data.auth);
@@ -122,12 +124,8 @@ const FileUpload = () => {
                 // console.log(fileName);
                 // setuploadedfile({fileName,filePath});
                 }catch(err){
-                // if(err.response.status === 500){
-                //     setmessage("There was a problem with the server");
-                // }else{
-                //     setmessage(err.response.data.msg);
-                // }
-               
+                console.log(err);
+                toast.error("Server Down");
                 if(err.response){
                     if(err.response.status === 500){
                             setmessage("There was a problem with the server");
@@ -338,7 +336,17 @@ const FileUpload = () => {
       {showtable && <> <h1>Errors</h1> <AdminTable columns={columns} rows={errrows[0]} /> </>  } 
       {!showtable && <Lottie style={{height:"100%"}} animationData={Surveyor} loop={true}/>}
       </TableContainer>
-      
+      <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
       </AdminContainer>
   )
 }
