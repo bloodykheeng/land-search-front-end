@@ -64,6 +64,12 @@ const [isLoading, setIsLoading] = useState(false);
             }else if(response.data.status === "user not found"){
                 setshowhometext(false);
                 setnouser(true);
+            }else if(response.data.status === "failed"){
+                setIsLoading(false);
+                setisempty(false)
+                setshowhometext(true);
+                toast.error("Server problem");
+                setclinnumber(null);
             }
             
             
@@ -71,7 +77,7 @@ const [isLoading, setIsLoading] = useState(false);
             console.log(err);
             setIsLoading(false);
             setisempty(false)
-        setshowhometext(true);
+            setshowhometext(true);
             toast.error("Server Down");
         }
        
@@ -125,7 +131,7 @@ return(
 
                   {nouser && <div style={{height:"100%"}}>
                     <div style={{height:"30%"}}>
-                    <h1>No record found attached to this clin number : {clinnumber}</h1>
+                    <h1>No record found attached to this clin number : <span>{clinnumber}</span></h1>
                     <MyButton  placeholder="Back" onClick={handleback}/>
                     </div>
                     <div style={{height:"70%"}}>
@@ -159,20 +165,20 @@ return(
                             setMailolandclick(false);
                             setLeaseHoldclick(false);
                         }} />
-                        <MyButton placeholder="free hold" style={{margin:"10px"}}  onClick={()=>{
+                        <MyButton placeholder="free_hold" style={{margin:"10px"}}  onClick={()=>{
                             setfreeholdclick(true);
                             setcustomaryclick(false);
                             setMailolandclick(false);
                             setLeaseHoldclick(false);
                             }}/>
-                        <MyButton placeholder="Mailo land" style={{margin:"10px"}}  onClick={()=>{
+                        <MyButton placeholder="Mailo_land" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(false);
                             setfreeholdclick(false);
                             setMailolandclick(true);
                             setLeaseHoldclick(false);
     
                             }}/>
-                        <MyButton placeholder="Lease Hold" style={{margin:"10px"}}  onClick={()=>{
+                        <MyButton placeholder="Lease_Hold" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(false);
                             setfreeholdclick(false);
                             setMailolandclick(false);

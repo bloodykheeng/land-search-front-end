@@ -13,7 +13,7 @@ const AdminHome = ()=>{
             <div className="greating">
             <h1><strong>Hello Admin You are welcome</strong></h1>
             <strong>feel free to  </strong>
-            <Link to="/adminlogin"><MyButton placeholder="Navigate"/></Link>
+            <Link to="/adminlogin" style={{textDecoration:"none"}}><MyButton placeholder="Navigate"/></Link>
              <Link style={{textDecoration:"none"}} to="/" className="mylink"><strong>User Search</strong></Link>
             </div>
             </MyDiv>

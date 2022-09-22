@@ -121,7 +121,7 @@ function ForgotPassword(){
                      <Lottie style={{width:"100%"}} animationData={EmailSent} loop={true}/>
                 </div>
 
-                <Link to="/adminlogin"><MyButton placeholder="Back"/></Link>
+                <Link style={{textDecoration :"none"}} to="/adminlogin"><MyButton placeholder="Back"/></Link>
            
             </div>
             }
@@ -133,7 +133,7 @@ function ForgotPassword(){
                      <Lottie style={{width:"100%"}} animationData={NoUser} loop={true}/>
                 </div>
 
-                <Link to="/adminlogin"><MyButton placeholder="Back"/></Link>
+                <Link style={{textDecoration :"none"}} to="/adminlogin"><MyButton placeholder="Back"/></Link>
            
             </div>
             }

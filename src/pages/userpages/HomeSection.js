@@ -15,7 +15,7 @@ function HomeSection(){
                   <p>Land</p>
                   <h1>Search</h1>
                   <h2>Information System</h2>
-                  <Link to="/search"><MyButton placeholder="Explore"></MyButton></Link>
+                  <Link style={{textDecoration:"none"}} to="/search"><MyButton placeholder="Explore"></MyButton></Link>
               </div>
               <div className="home-img">
                   <div className="img-box">

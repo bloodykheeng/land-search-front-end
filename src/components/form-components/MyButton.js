@@ -4,7 +4,7 @@ function MyButton({type, placeholder, ...other}){
     return(
         <MyButtonStyled>
         <div className="submit-btn">
-         <button type={type} {...other} className="btn">{placeholder} </button>
+         <button type={type} {...other} className="btn"> {placeholder} </button>
         </div>
         </MyButtonStyled>
     )
@@ -29,6 +29,11 @@ const MyButtonStyled = Styled.div`
     overflow:hidden;
     vertical-align:middle;
     transition: color 0.3s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-weight:bold;
 }
 
 .btn::before{

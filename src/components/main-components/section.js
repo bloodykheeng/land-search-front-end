@@ -26,29 +26,28 @@ const fadein = keyframes`
 `;
 
 const CustomBody = Styled.div`
-  height :100%;
-  width:100vw;
+  width:100%;
   background: linear-gradient(to bottom right , var(--pink-light), var(--cyan-light));
   padding:20px;
-
+  overflow : hidden;
   background-attachment: fixed;
   &::before , &::after{
     box-sizing:border-box;
+    overflow : hidden;
   }
   &::before{
     content:'';
     position:fixed;
     left:0;
     top:0;
-    min-height:100vh;
-    min-width:100vw;
+    min-height:100%;
+    min-width:100%;
     background-color: var(--green-yellow);
     z-index:-1;
     opacity:0.12;
     font-size:10px;
     color:var(--blue-dark);
     line-height:1.5;
-    overflow : hidden;
     -webkit-top-highlight-color: transparent;
     padding: 5px 15px;
   }
@@ -67,6 +66,7 @@ background-color: var(--white-alpha-25);
   justify-content:center;
   padding:50px 0;
   margin:0 5%;
+  overflow : hidden;
   ${props => props.className.includes("active") && css`
   display:block;
   animation:${fadein} 0.5s ease-in-out forwards;`}
@@ -75,6 +75,7 @@ background-color: var(--white-alpha-25);
   .mycontainer{
     width:100%;
      padding:0 40px;
+     overflow : hidden;
    }
 `;
 
