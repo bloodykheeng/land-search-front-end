@@ -24,7 +24,7 @@ function App() {
   
   const [adminAuth , setAdminAuth] = useState(false);
   const [adminData , setAdminData] = useState([]);
-  const [adminSession , setAdminSession] = useState(false);
+  const [adminSession , setAdminSession] = useState("");
   const {pathname} = useLocation();
   const navigate = useNavigate();
 
@@ -38,13 +38,12 @@ function App() {
         console.log(response.data.data);
         console.log("admindata after : ",adminData);
         setAdminAuth(response.data.auth);
-        setAdminSession(true)
         navigate(pathname);
         }else{
           setAdminData(null);
-          setAdminSession(false)
           setAdminAuth(response.data.auth);
-          if(pathname.includes("admindashboard") || pathname.includes("adminupload") ){
+          //setAdminSession("session expired");
+          if(pathname.includes("admindashboard") || pathname.includes("adminupload") || pathname.includes("adminsearch") || pathname.includes("adminsignup") || pathname.includes("adminusers") ){
             navigate("/adminlogin");
           }else{
             navigate(pathname);
@@ -73,13 +72,16 @@ function App() {
                   <Route exact path="/adminportal" element={<AdminHome/> }/>
 
                   <Route exact path="/adminlogin" element={
+              <isAdminSession.Provider value={{adminSession, setAdminSession}}>
                   <isAdminAuth.Provider value={{adminAuth , setAdminAuth}}>
                     <isAdminData.Provider value={{adminData , setAdminData}}>
-                    <isAdminSession.Provider value={{adminSession , setAdminSession}}>
+                    
                     <LoginForm/>
-                    </isAdminSession.Provider>
+
                     </isAdminData.Provider> 
-                    </isAdminAuth.Provider>}/>
+                    </isAdminAuth.Provider>
+              </isAdminSession.Provider>
+                  }/>
 
                     
                     

@@ -12,14 +12,14 @@ const AdminNavBar = () => {
   const {setAdminSession} = useContext(isAdminSession);
 const {setAdminAuth} = useContext(isAdminAuth);
 const { adminData ,setAdminData} = useContext(isAdminData);
-const navigate = useNavigate();
+//const navigate = useNavigate();
     
 const logouthandler = ()=>{
         axios.post("/logout").then((response)=>{
             setAdminAuth(response.data.auth);
             setAdminData(null);
             setAdminSession("logged out");
-            navigate("/adminlogin");
+            //navigate("/adminlogin");
         }).catch((err)=>{
           console.log(err);
           toast.error("Server Down");

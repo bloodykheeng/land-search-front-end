@@ -27,8 +27,8 @@ const SideBar = () => {
           axios.post("/logout").then((response)=>{
               setAdminAuth(response.data.auth);
               setAdminData(null);
-              navigate("/adminlogin");
               setAdminSession("logged out");
+              //navigate("/adminlogin");
           }).catch((err)=>{
             console.log(err);
             toast.error("Server Down");

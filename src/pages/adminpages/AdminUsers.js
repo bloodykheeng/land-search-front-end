@@ -1,4 +1,4 @@
-import React, { useState,useContext ,useEffect,useMemo} from 'react'
+import React, { useState,useContext ,useEffect} from 'react'
 import AdminContainer from '../../components/admin-components/AdminContainer';
 import AdminTable from '../../components/admin-components/AdminTable';
 import Lottie from "lottie-react";
@@ -14,17 +14,17 @@ import { normal_admin_column} from './AdminUsersColumns';
 import Axios from "axios";
 
 import { isAdminData ,isAdminAuth ,isAdminSession } from './AdminAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function AdminUsers(){
+    const navigate = useNavigate();
     const {setAdminAuth} = useContext(isAdminAuth);
-    const {setAdminSession} = useContext(isAdminSession);
+    const {adminSession , setAdminSession} = useContext(isAdminSession);
     const {adminData,setAdminData } = useContext(isAdminData);
 
     const[showtable , setshowtable] = useState(false); 
     const [isLoading , setIsLoading] = useState(false);
     const [tableRows , setTableRows] = useState();
-
-    const [adminstatus , setAdminStatus] = useState();
 
   
 
@@ -37,15 +37,18 @@ function AdminUsers(){
                 setIsLoading(false);
                 
                 if(res.data.status === "cookie-failed"){
+                    console.log("admin user cookie failed");
+                    console.log("admin user cookie set adminsession : ",adminSession);
                     console.log(res.data.auth);
                     setAdminAuth(res.data.auth);
+                    setAdminData(null);
                     setAdminSession("session expired");
-                    setAdminData(false);
                 }else if(res.data.status === "token-failed"){
+                    console.log("admin user token failed");
                     console.log(res.data.message)
                     setAdminAuth(res.data.auth)
-                    setAdminSession("session expired");
-                    setAdminData(false);
+                    setAdminSession("token expired");
+                    setAdminData(null);
                 }else if(res.data.status === "successfull"){
                     setTableRows(res.data.data);  
                     setshowtable(true);
@@ -63,37 +66,8 @@ function AdminUsers(){
         
     },[]);
     
-
-    useMemo(async()=>{
-        setIsLoading(true);
-        try{
-            let res = await Axios.post("/updateadminuserstatus",adminstatus,{withCredentials : false});
-            console.log(res.data);
-            setIsLoading(false);
-            
-            if(res.data.status === "cookie-failed"){
-                console.log(res.data.auth);
-                setAdminAuth(res.data.auth);
-                setAdminSession("session expired");
-                setAdminData(false);
-            }else if(res.data.status === "token-failed"){
-                console.log(res.data.message)
-                setAdminAuth(res.data.auth)
-                setAdminSession("session expired");
-                setAdminData(false);
-            }else if(res.data.status === "successfull"){
-
-                setTableRows(res.data.data);  
-                setshowtable(true);
-                console.log("succesfully fetched data : ",res.data.data);
-             }
-            
-        }catch(err){
-            console.log(err);
-            setIsLoading(false);
-            toast.error("Server Down");
-        }
-    },[adminstatus]);
+       // console.log("admin user admin status is : ",adminstatus);
+    
 
      
 
@@ -108,9 +82,49 @@ function AdminUsers(){
         adminid = id; 
         adminStatusId = 2;
     }
-    setAdminStatus({adminid,adminStatusId});
+    let adminstatus = {adminid,adminStatusId}
+    // setAdminStatus({adminid,adminStatusId});
+    //adminStatusMemo();
+    const updateadminstatus = async({adminid,adminStatusId})=>{
+        setIsLoading(true);
+        let data = {adminid,adminStatusId};
+        try{
+            let res = await Axios.post("/updateadminuserstatus",data,{withCredentials : false});
+            console.log(res.data);
+            setIsLoading(false);
+            
+            if(res.data.status === "cookie-failed"){
+                console.log("cookie failed");
+                console.log(res.data.auth);
+               setAdminAuth(res.data.auth);
+                setAdminData(false);
+                setAdminSession("session expired");
+                navigate("/adminlogin");
+            }else if(res.data.status === "token-failed"){
+                console.log(res.data.message);
+                console.log("token failed");
+                setAdminAuth(res.data.auth)
+                setAdminData(false);
+                setAdminSession("session expired");
+            }else if(res.data.status === "successfull"){
+
+                setTableRows(res.data.data);  
+                setshowtable(true);
+                console.log("succesfully fetched data : ",res.data.data);
+             }
+            
+        }catch(err){
+            console.log(err);
+            setIsLoading(false);
+            toast.error("Server Down");
+        }
+    }
+
+    updateadminstatus(adminstatus);
+   
    }
 
+  
    
 
     let creator_admin_column = [

@@ -27,16 +27,18 @@ function MyForm(){
     const [loginStatus, setLoginStatus] = useState("");
     const [isLoading,setIsLoading] = useState(false);
 
-
+     console.log("login initial  admin sesion value is : ",adminSession);
     useEffect(()=>{
-       
+        console.log("login admin sesion use effect says : ",adminSession);
          adminSession === "session expired" && toast("Session expired");
          adminSession === "logged out" && toast("logged out");   
-    },[adminSession])
+    },[adminSession]);
 
     const login = ()=>{
         if(!username || !password ){
             setMessage("some inputs are empty");
+        }else if(password.length < 8){
+            setMessage("password too short");
         }else{
             setIsLoading(true);
             const data = {
@@ -85,7 +87,7 @@ function MyForm(){
                 {loginStatus === "" && <MyAlert variant="success" msg={message} />  }
                 {loginStatus === true && <MyAlert variant="success" msg={message} />  }
                 {loginStatus === false && <MyAlert variant="danger" msg={message} /> }
-            <MyInput type="text" autoComplete="off" onChange={(e)=>setusername(e.target.value)} placeholder="enter firstname"/>
+            <MyInput type="text" autoComplete="off" onChange={(e)=>setusername(e.target.value)} placeholder="enter username"/>
             <MyInput type="password" autoComplete="off" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter password"/>
             <MyButton type="submit" onClick={login} placeholder="Login"/><br></br>
             {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> }

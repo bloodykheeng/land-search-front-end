@@ -57,13 +57,13 @@ function AdminSearch(){
                 if(res.data.status === "cookie-failed"){
                     console.log(res.data.auth);
                     setAdminAuth(res.data.auth);
-                    setAdminSession("session expired");
                     setAdminData(false);
+                    setAdminSession("session expired");
                 }else if(res.data.status === "token-failed"){
                     console.log(res.data.message)
                     setAdminAuth(res.data.auth)
-                    setAdminSession("session expired");
                     setAdminData(false);
+                    setAdminSession("session expired");
                 }else if(res.data.status === "successfull"){
                     setAdminSession(true);
                     setshowtable(true);
