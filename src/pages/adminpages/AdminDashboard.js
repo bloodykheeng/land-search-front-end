@@ -12,7 +12,7 @@ export const AdminDashboard = () => {
     <AdminContainer>
       <div style={{display : "flex",alignItems:"center", padding:"20px"}}>
         <div style={{width:"50%"}}>
-            <strong>Hello Mr {adminData.firstName} !</strong>
+            <strong>Hello {adminData.firstName} !</strong>
             <p>You  can use this panel to Alter Data in this system</p>
             <p>Therefore You can easily route to different services through the sideNav Links</p>
         </div>
