@@ -27,11 +27,12 @@ function MyForm(){
     const [loginStatus, setLoginStatus] = useState("");
     const [isLoading,setIsLoading] = useState(false);
 
-     console.log("login initial  admin sesion value is : ",adminSession);
+     //console.log("login initial  admin sesion value is : ",adminSession);
     useEffect(()=>{
-        console.log("login admin sesion use effect says : ",adminSession);
+        //console.log("login admin sesion use effect says : ",adminSession);
          adminSession === "session expired" && toast("Session expired");
-         adminSession === "logged out" && toast("logged out");   
+         adminSession === "logged out" && toast("logged out"); 
+         setAdminSession(null)  
     },[adminSession]);
 
     const login = ()=>{
