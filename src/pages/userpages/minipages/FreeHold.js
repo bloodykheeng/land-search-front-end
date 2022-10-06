@@ -1,8 +1,14 @@
-import React from 'react'
+import React from 'react';
+import {motion} from "framer-motion";
 
 const FreeHold = ()=>{
   return (
-    <div>
+    <motion.div
+    initial ={{width:0}}
+    animate={{width : "95%"}}
+    exit={{x:window.innerWidth , transition : {duration : 0.3}}}  
+    style={{padding:"20px",borderTop:"2px solid gold"}}   
+    >
         <div>
             <h1><strong>Freehold Land Tenure System in Uganda</strong></h1>
             <p>Freehold Land Tenure System is the way of owning land in Perpetuity or Time Without end and was set up by an agreement between the Kingdoms and the British Government. Grants of land in freehold were made by the Crown and later by the Uganda Land Commission. The grantee of land in freehold was and is entitled to a certificate of title. Most of this land was issued to church missionaries and academic Institutions and some individuals. Freehold is the premier mode of private land ownership under English law. Freehold tenure is among other four <strong>types of land tenure systems in Uganda</strong> under which people hold ownership of land.</p>
@@ -41,7 +47,7 @@ const FreeHold = ()=>{
 
             <p>Customary land tenure on the other has not titles since the land is owned communally by clans, tribes, families or communities. Demarcations under customary tenure are determined locals on the ground. Plant demarcations or tentative mark stones are common under this tenure. One chance with the customary tenure system is that it can be converted into freehold tenure after surveying and documentations. Once a freehold status is attained, then a leasehold arrangement can also be granted by the freehold title holder.</p>
                                                                                         </div>
-    </div>
+    </motion.div>
   )
 }
 

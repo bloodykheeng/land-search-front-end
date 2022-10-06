@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {motion} from "framer-motion";
 
 const TenureTypes = ()=>{
   return (
-    <div style={{padding:"20px",borderTop:"2px solid gold"}}>
+    <motion.div 
+    initial ={{width:0}}
+    animate={{width : "95%"}}
+    exit={{x:window.innerWidth , transition : {duration : 0.3}}} 
+    style={{padding:"20px",borderTop:"2px solid gold"}}>
     <h3>
         <strong>
             Types of Land Tenure Systems in Uganda – Land Ownership in Uganda
@@ -37,7 +42,7 @@ const TenureTypes = ()=>{
         <p>Customary Land Tenure System is a tenure arrangement where land is owned communally under families or clans. Such land is disposed of under customary regulations. Family and clan heads guide are very instrumental in guiding the management of this tenure system. This tenure can be converted in freehold tenure system.</p>
         <h2>Leasehold Land Tenure System in Uganda</h2>
         <p>Leasehold tenure system is where a someone ones a property for a given period of time. Leasehold tenure system is an ownership of a temporary right to hold land in which a tenant holds rights to the land with a leasehold title from the landlord The use and fees involved are all entailed in the lease agreement signed between the leaser and the lessee.</p>
-    </div>
+    </motion.div>
   )
 }
 

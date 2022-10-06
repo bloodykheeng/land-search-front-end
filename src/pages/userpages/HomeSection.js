@@ -5,6 +5,7 @@ import Styled from "styled-components";
 import MyButton from "../../components/form-components/MyButton";
 import Ministrybar from "../../components/main-components/MinistryBar";
 
+
 function HomeSection(){
 
     return(
@@ -15,7 +16,9 @@ function HomeSection(){
                   <p>Land</p>
                   <h1>Search</h1>
                   <h2>Information System</h2>
-                  <Link style={{textDecoration:"none"}} to="/search"><MyButton placeholder="Explore"></MyButton></Link>
+                  <Link style={{textDecoration:"none",display:"inline-block"}} to="/search">
+                    <MyButton placeholder="Explore" />
+                    </Link>
               </div>
               <div className="home-img">
                   <div className="img-box">

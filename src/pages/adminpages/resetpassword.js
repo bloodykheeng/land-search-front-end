@@ -4,7 +4,7 @@ import MySection  from "../../components/main-components/Section";
  import styled from "styled-components";
  import MyButton from "../../components/form-components/MyButton";
 import MinistryBar from "../../components/main-components/MinistryBar";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import MyAlert from "../../components/form-components/MyAlert";
 import Axios from "axios";
 

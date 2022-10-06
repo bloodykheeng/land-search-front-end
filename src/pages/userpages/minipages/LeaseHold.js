@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {motion} from "framer-motion";
 
 const LeaseHold = ()=>{
   return (
-    <div style={{padding:"20px",borderTop:"2px solid gold"}}>
+    <motion.div 
+    initial ={{width:0}}
+    animate={{width : "95%"}}
+    exit={{x:window.innerWidth , transition : {duration : 0.3}}} 
+    style={{padding:"20px",borderTop:"2px solid gold"}}>
         <div>
             <h1>Leasehold Land Tenure System</h1>
             <p>Leasehold Land Tenure System is a kind of land ownership for a particular period of time. In Uganda one can get a lease from an individual, a local authority, an organization or Company, an institution like Buganda Kingdom or from Uganda government for a period usually 49 or 99 years or in between under agreed terms and conditions.</p>
@@ -20,7 +25,7 @@ const LeaseHold = ()=>{
             <p>
             The lease is usually in return for a rent which may be for a capital sum termed as a premium or for both a rent and a premium but may be in return for services or may be free of any required return. Under this tenure, both the landlord and the tenant may, subject to the terms and conditions of the lease and having due regard for the interests of the other party, exercise such of the powers of a freehold owner as are appropriate and possible given the specific nature of a leasehold tenure system.</p>
                                                                                     </div>
-    </div>
+    </motion.div>
   )
 }
 

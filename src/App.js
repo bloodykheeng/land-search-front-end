@@ -5,6 +5,7 @@ import AdminHome from "./pages/adminpages/AdminHome";
 import LoginForm from "./pages/adminpages/Login";
 import AdminDashboard from "./pages/adminpages/AdminDashboard";
 import {Routes,Route, useLocation,useNavigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import SignUp from "./pages/adminpages/SignUp";
 import FileUpload from "./pages/adminpages/FileUpload";
 import AdminSearch from "./pages/adminpages/AdminSearch";
@@ -21,7 +22,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import axios from "axios";
 
 function App() {
-  
+  const location = useLocation();
   const [adminAuth , setAdminAuth] = useState(false);
   const [adminData , setAdminData] = useState([]);
   const [adminSession , setAdminSession] = useState("");
@@ -57,7 +58,8 @@ function App() {
   
   return (
     <>
-        <Routes>
+    <AnimatePresence>
+        <Routes location= {location} key={location.pathname}>
                   <Route exact path="/" element={<HomeSection/> }/>
               
                   <Route exact path="/search" element={<SearchSection/> }/>
@@ -105,6 +107,7 @@ function App() {
               </Route>
               {/* protected route end */}
          </Routes>
+         </AnimatePresence>
        
     </>
   );

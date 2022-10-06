@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {motion} from "framer-motion";
 
 function BuyingProcess(){
   return (
-    <div style={{padding:"20px",borderTop:"2px solid gold"}}>
+    <motion.div
+    initial ={{width:0}}
+    animate={{width : "95%"}}
+    exit={{x:window.innerWidth , transition : {duration : 1}}} 
+    style={{padding:"20px",borderTop:"2px solid gold"}}>
         <h3>Understanding the process of buying land in Uganda</h3>
         <p>Land in Uganda is riddled with conmen and fraudsters and the buying process most times takes a turn in an unimaginable direction.</p>
         <p>The article below is to enlighten you about the legal process of acquiring titled land in Uganda, and in this case, we are going to use a Private Mailo title</p>
@@ -99,7 +104,7 @@ his client can then meet the seller and negotiate on how much to pay for the lan
             
             
         </div>
-    </div>
+    </motion.div>
   )
 }
 

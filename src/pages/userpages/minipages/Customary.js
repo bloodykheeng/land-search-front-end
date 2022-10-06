@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {motion} from "framer-motion";
 
 const Customary = ()=>{
   return (
-    <div style={{padding:"20px",borderTop:"2px solid gold"}}>
+    <motion.div
+    initial ={{width:0}}
+    animate={{width : "95%"}}
+    exit={{x:window.innerWidth , transition : {duration : 0.3}}}  
+    style={{padding:"20px",borderTop:"2px solid gold"}}>
         <h1>Customary Land Tenure System</h1>
         <p>The Customary Land Tenure System is an arrangement under which land is owned by Indigenous communities and administered in line with their customs and norms.</p>
         <p>This system is opposed to statutory tenure brought up during the colonial periods.</p>
@@ -146,7 +151,7 @@ const Customary = ()=>{
             <p>Any party aggrieved by the decision of the board may appeal to the land tribunal; and the tribunal may confirm, reverse, vary or modify the decision and make such orders as it is empowered to make by this Act.</p>
         </div>
        
-    </div>
+    </motion.div>
   )
 }
 

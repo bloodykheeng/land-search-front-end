@@ -1,4 +1,4 @@
-import React ,{useContext, useState,useEffect} from 'react';
+import React ,{ useState} from 'react';
 import MySection  from "../../components/main-components/Section";
  import MyInput from "../../components/form-components/MyInput";
  import styled from "styled-components";
@@ -28,7 +28,7 @@ function ForgotPassword(){
 
 
     const checkemail = async ()=>{
-        if(!email  ){
+        if(!email ){
             setMessage("please you must first enter an email");
         }else{
             const data = {

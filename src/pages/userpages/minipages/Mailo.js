@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {motion} from "framer-motion";
 
 const Mailo = ()=>{
   return (
-    <div style={{padding:"20px",borderTop:"2px solid gold"}}>
+    <motion.div
+    initial ={{width:0}}
+    animate={{width : "95%"}}
+    exit={{x:window.innerWidth , transition : {duration : 0.3}}}  
+    style={{padding:"20px",borderTop:"2px solid gold"}}>
         <div>
             <h1>Mailo Land Tenure System in Uganda: The Indefinite Ownership of Land</h1>
             <p>The Mailo Land Tenure System is where land is registered and owned in eternity or perpetuity with its holder having a land title for it. This land tenure in Uganda has its basis from the allocation of land pursuant to the 1900 Uganda Agreement, subject to legislative qualifications. <strong>Land in Uganda</strong> held under mailo tenure is mainly confined to the Central region of Uganda. The system confers freehold granted by the colonial government in exchange for political co-operation under the 1900 Buganda Agreement.</p>
@@ -31,7 +36,7 @@ const Mailo = ()=>{
             <li>For a company owned by foreigners can only own mailo land in Uganda if that firm is registered in with a Ugandan having a majority shares in it say 51% shares. And the foreigners holding 49% shares. These should be non-transferable shares for the mailo land status to remain considered.</li>
             </ul>
                                                                                     </div>
-    </div>
+    </motion.div>
   )
 }
 

@@ -4,7 +4,9 @@ function MyButton({type, placeholder, ...other}){
     return(
         <MyButtonStyled>
         <div className="submit-btn">
-         <button type={type} {...other} className="btn"> {placeholder} </button>
+         <button type={type} {...other} className="btn">
+                {placeholder} 
+        </button>
         </div>
         </MyButtonStyled>
     )
