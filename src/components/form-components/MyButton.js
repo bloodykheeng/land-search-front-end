@@ -5,7 +5,7 @@ function MyButton({type, placeholder, ...other}){
         <MyButtonStyled>
         <div className="submit-btn">
          <button type={type} {...other} className="btn">
-                {placeholder} 
+            {placeholder}      
         </button>
         </div>
         </MyButtonStyled>
@@ -45,13 +45,14 @@ const MyButtonStyled = Styled.div`
     top:0;
     height:100%;
     width:0%;
-    background-color:var(--main-color);
     z-index:-1;
+    background-color:var(--main-color);
     transition: width 0.3s ease;
 }
 .btn:hover::before{
 width:100%;
 }
+
 .btn:hover{
     color:var(--white);
 }

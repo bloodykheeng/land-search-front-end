@@ -91,7 +91,7 @@ function MyForm(){
             <MyInput type="text" autoComplete="off" onChange={(e)=>setusername(e.target.value)} placeholder="enter username"/>
             <MyInput type="password" autoComplete="off" onChange={(e)=>setpassword(e.target.value)}  placeholder="enter password"/>
             <MyButton type="submit" onClick={login} placeholder="Login"/><br></br>
-            {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> }
+            {isLoading &&  <div><Lottie style={{height:"100px"}} animationData={loadingCircle} loop={true}/></div> }
             
             <h4><Link style={{textDecoration :"none"}} to="/forgotpassword">Forgot Password</Link></h4>
             <Link style={{textDecoration :"none"}} to="/adminportal"  className="mylink"><strong>Back</strong></Link>

@@ -78,7 +78,7 @@ import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
     }
 
     return(
-        <AdminContainer>
+        <AdminContainer activeTab="signup">
         <div style={{display : "flex",alignItems:"center", padding:"20px"}}>
             {showform && 
             <>
@@ -109,7 +109,7 @@ import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
                 <MyFormStyled>
                 <strong>Enter Date Of Birth</strong>
                 <MyInput type="date" autoComplete="off" onChange={(e)=>setdateofbirth(e.target.value)} placeholder="enter Date OF Birth"/>
-                <MyInput type="tel" autoComplete="off" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
+                <MyInput type="number" autoComplete="off" onChange={(e)=>setphonenumber(e.target.value)} placeholder="enter PhoneNumber"/>
                 <MyInput type="password" autoComplete="off" onChange={(e)=>setpassword(e.target.value)} placeholder="enter password"/>
                 <MyInput type="password" autoComplete="off" onChange={(e)=>setconfirmpassword(e.target.value)} placeholder="repeat Password "/>
                 <MyButton type="submit" onClick={signuphandler} placeholder="SignUp"/><br></br>
@@ -121,13 +121,12 @@ import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
 
         {!showform  && 
                 <div>
-                <h1>{signupmsg}</h1>
+                <h4>{signupmsg}</h4>
                 <div>
-                <Lottie style={{width:"100%"}} animationData={PasswordUpdate} loop={true}/>
+                <Lottie style={{height:"300px"}} animationData={PasswordUpdate} loop={true}/>
                 </div>
 
-                <Link to="/adminsignup"><MyButton placeholder="Back"/></Link>
-           
+                <MyButton onClick={()=>setShowForm(true)} placeholder="Back"/>
             </div>
             }
         

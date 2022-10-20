@@ -96,7 +96,7 @@ function ResetPassword(){
             <div>
                 <h1>Succesfully updated password</h1>
                 <div>
-                     <Lottie style={{width:"100%"}} animationData={PasswordUpdate} loop={true}/>
+                     <Lottie style={{height:"300px"}} animationData={PasswordUpdate} loop={true}/>
                 </div>
 
                 <Link to="/adminlogin"><MyButton placeholder="Back"/></Link>

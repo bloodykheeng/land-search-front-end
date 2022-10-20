@@ -112,7 +112,7 @@ function AdminSearch(){
   
 
   return (
-    <AdminContainer>
+    <AdminContainer activeTab="search" >
          <div style={{width:"100%",height : "100%" , position:"relative"}}>
 
 

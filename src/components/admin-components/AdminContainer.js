@@ -3,10 +3,10 @@ import SideBar from './SideBar';
 import AdminNavBar from './AdminNavBar';
 import styled from 'styled-components';
 
-const AdminContainer = ({children}) => {
+const AdminContainer = ({children,activeTab}) => {
   return (
     <Container>
-      <SideBar />
+      <SideBar activeTab = {activeTab}/>
         <div className="homeContainer">
             <AdminNavBar/>
             <div className = "children">

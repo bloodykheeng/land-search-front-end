@@ -1,9 +1,15 @@
-import Styled,{keyframes,css} from "styled-components";
+import Styled from "styled-components";
+import {motion} from "framer-motion";
 function MySection({children ,style}){
 
     return( 
       <CustomBody>
-        <CustomSection id="home" className="home-section align-items-center active">
+        <CustomSection as={motion.section} 
+        initial ={{width:0}}
+        animate={{width : "90vw"}}
+         exit={{x:window.innerWidth , transition : {duration : 0.3}}}
+         id="home" 
+         className="home-section align-items-center active">
             <div className="mycontainer" style={{...style}}>  
               {children}
               </div>
@@ -11,19 +17,27 @@ function MySection({children ,style}){
           </CustomBody>
     );
 }
-const fadeOut = keyframes`
-0%{
-    opacity:1;
-}
-100%{
-    opacity:0;
-}
-`;
 
-const fadein = keyframes`
-0%{opacity:0;}
-100%{opacity:1;}
-`;
+// animate={{opacity:1}}
+//  exit={{opacity:0}}
+// const fadeOut = keyframes`
+// 0%{
+//     opacity:1;
+// }
+// 100%{
+//     opacity:0;
+// }
+// `;
+
+// const fadein = keyframes`
+// 0%{opacity:0;}
+// 100%{opacity:1;}
+// `;
+// ${props => props.className.includes("active") && css`
+//   display:block;
+//   animation:${fadein} 0.5s ease-in-out forwards;`}
+//   ${props => props.className.includes("fade-out") && css `
+//   animation:${fadeOut} 0.5s ease-in-out forwards;`}
 
 const CustomBody = Styled.div`
   width:100%;
@@ -67,11 +81,6 @@ background-color: var(--white-alpha-25);
   padding:50px 0;
   margin:0 5%;
   overflow : hidden;
-  ${props => props.className.includes("active") && css`
-  display:block;
-  animation:${fadein} 0.5s ease-in-out forwards;`}
-  ${props => props.className.includes("fade-out") && css `
-  animation:${fadeOut} 0.5s ease-in-out forwards;`}
   .mycontainer{
     width:100%;
      padding:0 40px;

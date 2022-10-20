@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {useContext} from 'react';
+import {useContext,useState} from 'react';
 import axios from 'axios';
 import { isAdminAuth , isAdminData ,isAdminSession } from '../../pages/adminpages/AdminAuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -16,13 +16,15 @@ import { ToastContainer, toast } from 'react-toastify';
     
 
 
-const SideBar = () => {
+const SideBar = ({activeTab}) => {
   const {setAdminSession} = useContext(isAdminSession);
   const {setAdminAuth} = useContext(isAdminAuth);
   const {adminData,setAdminData} = useContext(isAdminData);
-  const navigate = useNavigate();
+  const [active , setActive] = useState(activeTab);
+  //const navigate = useNavigate();
   //console.log("admin account type:  ", adminData.accountTypeName);
-
+  //setActive(activeTab);
+  
   const logouthandler = ()=>{
           axios.post("/logout").then((response)=>{
               setAdminAuth(response.data.auth);
@@ -47,29 +49,39 @@ const SideBar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to="/admindashboard" style={{ textDecoration: "none" }}>
-          <li>
+          <Link to="/admindashboard" 
+          onClick={()=> setActive("dashboard")} 
+          style={{ 
+            textDecoration: "none"
+          }}>
+          <li style={{background: active === "dashboard" && "#ece8ff" }}>
             <Dashboard className="icon" />
             <span>Dashboard</span>
           </li>
           </Link>
           <p className="title">SERVICES</p>
-          <Link to="/adminupload" style={{ textDecoration: "none" }}>
-            <li>
+          <Link to="/adminupload" 
+          onClick={()=> setActive("fileupload")}
+          style={{ textDecoration: "none" }}>
+            <li style={{background: active === "fileupload" && "#ece8ff" }}>
               <CloudUploadIcon className="icon" />
               <span>File Upload</span>
             </li>
           </Link>
-          <Link to="/adminsearch" style={{ textDecoration: "none" }}>
-            <li>
+          <Link to="/adminsearch" 
+          onClick={()=> setActive("search")}
+          style={{ textDecoration: "none" }}>
+            <li style={{background: active === "search" && "#ece8ff" }}>
               <ScreenSearchDesktopIcon className="icon" />
               <span>Search</span>
             </li>
           </Link>
 
         {/* create admin */}
-        {adminData.accountTypeName === "creator_admin" && <Link to="/adminsignup" style={{ textDecoration: "none" }}>
-            <li>
+        {adminData.accountTypeName === "creator_admin" && <Link to="/adminsignup"
+        onClick={()=> setActive("signup")}
+         style={{ textDecoration: "none" }}>
+            <li style={{background: active === "signup" && "#ece8ff" }}>
               <DesignServicesIcon className="icon" />
               <span>CreateAdmin</span>
             </li>
@@ -77,8 +89,10 @@ const SideBar = () => {
 
           {/* viewadmin users */}
           
-          <Link to="/adminusers" style={{ textDecoration: "none" }}>
-            <li>
+          <Link to="/adminusers" 
+          onClick={()=> setActive("adminusers")}
+          style={{ textDecoration: "none" }}>
+            <li style={{background: active === "adminusers" && "#ece8ff" }}>
               <SupervisorAccountIcon className="icon" />
               <span>Administrators</span>
             </li>

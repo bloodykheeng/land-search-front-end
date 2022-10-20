@@ -22,8 +22,8 @@ import emailjs from "@emailjs/browser";
 function ForgotPassword(){
 
     const [email , setemail] = useState("");
-    const [message , setMessage] = useState("fill in to LogIn");
-    const [show , setShow] = useState("");
+    const [message , setMessage] = useState("enter your email");
+    const [show , setShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -38,7 +38,6 @@ function ForgotPassword(){
             try{
                 const res = await Axios.post("/fogotpassword",data, {withCredentials : false});
                 
-
                 if(res.data.status === "SUCESSFULL" ){
 
                     const serviceid = "service_mrf6ewt";
@@ -77,6 +76,7 @@ function ForgotPassword(){
                     }
                         
                 }else{
+                    setIsLoading(false);
                     setMessage(res.data.message);
                     setShow("failed");
                 }
@@ -109,31 +109,31 @@ function ForgotPassword(){
         
         <MyButton type="submit" onClick={checkemail} placeholder="Submit"/><br></br>
 
-        {isLoading &&  <div><Lottie style={{width:"100%"}} animationData={loadingCircle} loop={true}/></div> }
+        {isLoading &&  <div><Lottie style={{height:"100px"}} animationData={loadingCircle} loop={true}/></div> }
 
         <Link style={{textDecoration :"none"}} to="/adminlogin"  className="mylink"><strong>Back</strong></Link>
             </>}
 
             {show === "successfull" && 
                 <div>
-                <h1>{message}</h1>
+                <h4>{message}</h4>
                 <div>
-                     <Lottie style={{width:"100%"}} animationData={EmailSent} loop={true}/>
+                     <Lottie style={{height:"300px"}} animationData={EmailSent} loop={true}/>
                 </div>
 
-                <Link style={{textDecoration :"none"}} to="/adminlogin"><MyButton placeholder="Back"/></Link>
+               <MyButton onClick={()=> setShow(false)} placeholder="Back"/>
            
             </div>
             }
 
             {show === "failed" && 
                 <div>
-                <h1>{message}</h1>
+                <h4>{message}</h4>
                 <div>
-                     <Lottie style={{width:"100%"}} animationData={NoUser} loop={true}/>
+                     <Lottie style={{height:"300px"}} animationData={NoUser} loop={true}/>
                 </div>
 
-                <Link style={{textDecoration :"none"}} to="/adminlogin"><MyButton placeholder="Back"/></Link>
+                <MyButton onClick={()=>setShow(false)} placeholder="Back"/>
            
             </div>
             }

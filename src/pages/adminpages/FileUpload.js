@@ -229,7 +229,7 @@ const FileUpload = () => {
       }
 
   return (
-    <AdminContainer>
+    <AdminContainer activeTab="fileupload">
          <UploadContainer>
                 <div style={{width:"100%",marginBottom:"10px"}}>
                 <MyProgress percentage={uploadpercentage}/>

@@ -9,7 +9,7 @@ export const AdminDashboard = () => {
     
 
   return (
-    <AdminContainer>
+    <AdminContainer activeTab="dashboard">
       <div style={{display : "flex",alignItems:"center", padding:"20px"}}>
         <div style={{width:"50%"}}>
             <strong>Hello {adminData.firstName} !</strong>

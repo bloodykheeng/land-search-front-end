@@ -25,7 +25,7 @@ function App() {
   const location = useLocation();
   const [adminAuth , setAdminAuth] = useState(false);
   const [adminData , setAdminData] = useState([]);
-  const [adminSession , setAdminSession] = useState("");
+  const [adminSession , setAdminSession] = useState(null);
   const {pathname} = useLocation();
   const navigate = useNavigate();
 
@@ -35,15 +35,20 @@ function App() {
     axios.post("/refresh").then(
       (response)=>{
         if(response.data.auth){
+        setAdminSession(null);
         setAdminData(response.data.data);
-        console.log(response.data.data);
-        console.log("admindata after : ",adminData);
+         //console.log(response.data.data);
+         console.log("admindata after : ",adminData);
         setAdminAuth(response.data.auth);
-        navigate(pathname);
+        //console.log("adminauth after : ",response.data.auth);
+        console.log("adminauth after : ",adminAuth );
+        navigate("/admindashboard");
+        //console.log("refersh if part");
         }else{
+          //console.log("refersh else part");
           setAdminData(null);
           setAdminAuth(response.data.auth);
-          //setAdminSession("session expired");
+          setAdminSession(null);
           if(pathname.includes("admindashboard") || pathname.includes("adminupload") || pathname.includes("adminsearch") || pathname.includes("adminsignup") || pathname.includes("adminusers") ){
             navigate("/adminlogin");
           }else{
