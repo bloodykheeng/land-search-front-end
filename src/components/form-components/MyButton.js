@@ -1,11 +1,11 @@
 import Styled from "styled-components";
 
-function MyButton({type, placeholder, ...other}){
+function MyButton({type, active, placeholder, ...other}){
     return(
-        <MyButtonStyled>
+        <MyButtonStyled active={active}>
         <div className="submit-btn">
          <button type={type} {...other} className="btn">
-            {placeholder}      
+            <span>{placeholder}</span>      
         </button>
         </div>
         </MyButtonStyled>
@@ -15,11 +15,11 @@ function MyButton({type, placeholder, ...other}){
 const MyButtonStyled = Styled.div`
 .btn{
     line-height:1.5;
-    background-color:(var(--white-alpha-25));
+    background-color:${({active})=>active ? "var(--main-color)" : "(var(--white-alpha-25))" };
     padding:10px 28px;
     display:inline-block;
     border-radius:30px;
-    color:var(--main-color);
+    color:${({active})=> active ? "var(--white)" : "var(--main-color)" };
     font-weight:500;
     text-transform:capitalize;
     border:1px solid var(--white-alpha-40);
@@ -45,7 +45,6 @@ const MyButtonStyled = Styled.div`
     top:0;
     height:100%;
     width:0%;
-    z-index:-1;
     background-color:var(--main-color);
     transition: width 0.3s ease;
 }
@@ -55,6 +54,9 @@ width:100%;
 
 .btn:hover{
     color:var(--white);
+}
+.btn span{
+    z-index:2;
 }
 `;
 

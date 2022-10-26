@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Axios from "axios";
 import UserTable from "./UserTable";
 import {cldcolumn , ownercolumn, neighbourcolumn , witnesscolumn } from "./UserColumns";
+import {motion , AnimatePresence} from "framer-motion";
 
 
 function SearchSection(){
@@ -32,6 +33,7 @@ const [Mailolandclick , setMailolandclick] = useState(false);
 const [LeaseHoldclick , setLeaseHoldclick] = useState(false);
 
 const [isLoading, setIsLoading] = useState(false);
+
 
 
 
@@ -134,14 +136,14 @@ return(
                     <h1>No record found attached to this clin number : <span>{clinnumber}</span></h1>
                     <MyButton  placeholder="Back" onClick={handleback}/>
                     </div>
-                    <div style={{height:"70%"}}>
+                    <div  style={{height:"70%"}}>
                         <Lottie style={{height:"200px"}} animationData={FileLost} loop={true}/>
                     </div>
                   </div> }
 
                   {isLoading && <div style={{height:"100%"}}>
-                    <div style={{height:"70%"}}>
-                        <Lottie style={{height:"600px"}} animationData={Loading} loop={true}/>
+                    <div  style={{height:"70%"}}>
+                        <Lottie style={{height:"300px"}} animationData={Loading} loop={true}/>
                     </div>
                   </div> }
 
@@ -159,35 +161,46 @@ return(
                         <div className="row align-items-center search" >
                         <div className="contact-form" style={{display:"flex"}}>
                        <div className="contact-form-buttons">
-                        <MyButton placeholder="customary" style={{margin:"10px"}}  onClick={()=>{
+                        <MyButton active = {customaryclick} placeholder="customary" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(true);
                             setfreeholdclick(false);
                             setMailolandclick(false);
                             setLeaseHoldclick(false);
                         }} />
-                        <MyButton placeholder="free_hold" style={{margin:"10px"}}  onClick={()=>{
+                        <MyButton active = {freeholdclick} placeholder="free_hold" style={{margin:"10px"}}  onClick={()=>{
                             setfreeholdclick(true);
                             setcustomaryclick(false);
                             setMailolandclick(false);
                             setLeaseHoldclick(false);
                             }}/>
-                        <MyButton placeholder="Mailo_land" style={{margin:"10px"}}  onClick={()=>{
+                        <MyButton active = {Mailolandclick} placeholder="Mailo_land" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(false);
                             setfreeholdclick(false);
                             setMailolandclick(true);
                             setLeaseHoldclick(false);
     
                             }}/>
-                        <MyButton placeholder="Lease_Hold" style={{margin:"10px"}}  onClick={()=>{
+                        <MyButton active = {LeaseHoldclick} placeholder="Lease_Hold" style={{margin:"10px"}}  onClick={()=>{
                             setcustomaryclick(false);
                             setfreeholdclick(false);
                             setMailolandclick(false);
                             setLeaseHoldclick(true);
                             }}/>
                        </div>
-                       <div style={{display : "flex", flexDirection : "column", justifyContent : "Center",alignItems : "center",width:"100%"}}>
+
+                    
+                       <div
+                        style={{display : "flex", flexDirection : "column", justifyContent : "Center",alignItems : "center"}}>
                         
-                        {customaryclick && <div className="row" style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
+                        {customaryclick && 
+                        <motion.div
+                        key="customary" 
+                        initial ={{width:"0px",y:"50%", opacity:0, scale:0.5}}
+                        animate={{width:"100%",y:0, opacity:1, scale:1}}
+                        transition={{duration:0.5,ease:"easeOut"}}
+                         exit={{width:"1px",y:"50%" ,opacity:0, transition : {duration : 0.5}}}
+                        className="row" 
+                        style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
     
                                     {isempty && <p style={{color:"red"}}>{isempty}</p>}
                                 
@@ -197,28 +210,48 @@ return(
                                     </div>
                                     <MyButton placeholder="search" onClick={search} />
                                     
-                                </div>}
+                                </motion.div>
+                                }
     
                                 {freeholdclick && 
-                                <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
+                                <motion.div
+                                key="freehold" 
+                                initial ={{width:"0px",y:"50%", opacity:0, scale:0.5}}
+                                animate={{width:"100%",y:0, opacity:1, scale:1}}
+                                transition={{duration:0.5,ease:"easeOut"}}
+                                exit={{width:"1px",y:"50%" ,opacity:0, transition : {duration : 0.5}}}  
+                                style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
                                 <strong style={{color:"green"}}>Free Hold Land Data not yet set</strong>
                                 <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
-                                </div> }
+                                </motion.div> }
+
                                 {Mailolandclick &&
-                                <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
+                                <motion.div
+                                key="mailo" 
+                                initial ={{width:"0px",y:"50%", opacity:0, scale:0.5}}
+                                animate={{width:"100%",y:0, opacity:1, scale:1}}
+                                transition={{duration:0.5,ease:"easeOut"}}
+                                exit={{width:"1px",y:"50%" ,opacity:0, transition : {duration : 0.5}}} 
+                                style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
                                     <strong style={{color:"brown"}}>Mailo Land Data not yet set</strong>
                                     <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
-                                </div>
+                                </motion.div>
                                 }
                                 {LeaseHoldclick && 
-                                <div style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
+                                <motion.div 
+                                key="leasehold" 
+                                initial ={{width:"0px",y:"50%", opacity:0, scale:0.5}}
+                                animate={{width:"100%",y:0, opacity:1, scale:1}}
+                                transition={{duration:0.5,ease:"easeOut"}}
+                                exit={{width:"1px",y:"50%" ,opacity:0, transition : {duration : 0.5}}} 
+                                style={{display : "flex",flexDirection : "column", justifyContent : "Center",alignItems : "center",paddingTop:"30px"}}>
                                     <strong style={{color:"red"}}>Lease Hold Data not yet set</strong>
                                     <Lottie style={{width:"60%"}} animationData={NoData} loop={true}/>
-                                </div>
+                                </motion.div>
                                 }
                        
                        </div>
-                       
+                    
     
                             
                         </div>

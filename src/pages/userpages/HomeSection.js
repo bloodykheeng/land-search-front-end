@@ -1,4 +1,5 @@
 //import "./home-section.css";
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import MySection from "../../components/main-components/Section";
 import Styled from "styled-components";
@@ -7,7 +8,7 @@ import Ministrybar from "../../components/main-components/MinistryBar";
 
 
 function HomeSection(){
-
+ const [active, setActive] = useState(false)
     return(
         <MySection>  
           <HomeRow className="row align-items-center">
@@ -17,7 +18,7 @@ function HomeSection(){
                   <h1>Search</h1>
                   <h2>Information System</h2>
                   <Link style={{textDecoration:"none",display:"inline-block"}} to="/search">
-                    <MyButton placeholder="Explore" />
+                    <MyButton onClick={()=>{setActive(true)}} active={active} placeholder="Explore" />
                     </Link>
               </div>
               <div className="home-img">

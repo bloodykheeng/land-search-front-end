@@ -41,6 +41,7 @@ function MySection({children ,style}){
 
 const CustomBody = Styled.div`
   width:100%;
+  min-height:100%;
   background: linear-gradient(to bottom right , var(--pink-light), var(--cyan-light));
   padding:20px;
   overflow : hidden;
@@ -73,8 +74,6 @@ background-color: var(--white-alpha-25);
   border:1px solid var(--white-alpha-40);
   border-radius:30px;
   backdrop-filter: var(--backdrop-filter-blur);
-  min-height:calc(98vh);
-  max-width:100vw;
   display:flex;
   align-items:center;
   justify-content:center;

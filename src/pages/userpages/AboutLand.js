@@ -25,7 +25,7 @@ const [aboutLeaseHoldclick , setaboutLeaseHoldclick] = useState(false);
         <MinistryBar />
             <div className="contentContainer">
                 <div style={{display : "flex", flexWrap : "wrap"}}>
-                <MyButton placeholder="Tenure Types" style={{margin:"10px"}} onClick={()=>{
+                <MyButton active={tenuretypesclick} placeholder="Tenure Types" style={{margin:"10px"}} onClick={()=>{
                         settenuretypesclick(true);
                         setaboutmajorstepsclick(false);
                         setaboutcustomaryclick(false);
@@ -34,7 +34,7 @@ const [aboutLeaseHoldclick , setaboutLeaseHoldclick] = useState(false);
                         setaboutLeaseHoldclick(false); 
                         console.log("tenure types");
                     }} />
-                <MyButton placeholder="Buying Process" style={{margin:"10px"}} onClick={()=>{
+                <MyButton active={aboutmajorstepsclick} placeholder="Buying Process" style={{margin:"10px"}} onClick={()=>{
                         settenuretypesclick(false);
                         setaboutmajorstepsclick(true);
                         setaboutcustomaryclick(false);
@@ -43,7 +43,7 @@ const [aboutLeaseHoldclick , setaboutLeaseHoldclick] = useState(false);
                         setaboutLeaseHoldclick(false); 
                         console.log("Major Steps");
                     }} />
-                <MyButton placeholder="customary" style={{margin:"10px"}} onClick={()=>{
+                <MyButton active={aboutcustomaryclick} placeholder="customary" style={{margin:"10px"}} onClick={()=>{
                         settenuretypesclick(false);
                         setaboutmajorstepsclick(false);
                         setaboutcustomaryclick(true);
@@ -52,7 +52,7 @@ const [aboutLeaseHoldclick , setaboutLeaseHoldclick] = useState(false);
                          setaboutLeaseHoldclick(false); 
                         console.log("clicked customary");
                     }} />
-                    <MyButton placeholder="free hold" style={{margin:"10px"}} onClick={()=>{
+                    <MyButton active={aboutfreeholdclick} placeholder="free hold" style={{margin:"10px"}} onClick={()=>{
                         settenuretypesclick(false);
                         setaboutmajorstepsclick(false);
                         setaboutcustomaryclick(false);
@@ -61,7 +61,7 @@ const [aboutLeaseHoldclick , setaboutLeaseHoldclick] = useState(false);
                          setaboutLeaseHoldclick(false); 
                         console.log("clicked free hold");
                         }}/>
-                    <MyButton placeholder="Mailo land" style={{margin:"10px"}} onClick={()=>{
+                    <MyButton active={aboutMailolandclick} placeholder="Mailo land" style={{margin:"10px"}} onClick={()=>{
                         settenuretypesclick(false);
                         setaboutmajorstepsclick(false);
                         setaboutcustomaryclick(false);
@@ -71,7 +71,7 @@ const [aboutLeaseHoldclick , setaboutLeaseHoldclick] = useState(false);
                         console.log("clicked Mailo Land");
 
                         }}/>
-                    <MyButton placeholder="Lease Hold" style={{margin:"10px"}} onClick={()=>{
+                    <MyButton active={aboutLeaseHoldclick} placeholder="Lease Hold" style={{margin:"10px"}} onClick={()=>{
                         settenuretypesclick(false);
                         setaboutmajorstepsclick(false);
                         setaboutcustomaryclick(false);
