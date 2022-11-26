@@ -1,44 +1,51 @@
 //import "./home-section.css";
-import {useState} from "react";
-import {Link} from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import MySection from "../../components/main-components/Section";
 import Styled from "styled-components";
 import MyButton from "../../components/form-components/MyButton";
 import Ministrybar from "../../components/main-components/MinistryBar";
 
-
-function HomeSection(){
- const [active, setActive] = useState(false)
-    return(
-        <MySection>  
-          <HomeRow className="row align-items-center">
-            <Ministrybar />
-              <div className="home-text">
-                  <p>Land</p>
-                  <h1>Search</h1>
-                  <h2>Information System</h2>
-                  <Link style={{textDecoration:"none",display:"inline-block"}} to="/search">
-                    <MyButton onClick={()=>{setActive(true)}} active={active} placeholder="Explore" />
-                    </Link>
-              </div>
-              <div className="home-img">
-                  <div className="img-box">
-                      <img  src="images/coatOfArms.png" alt="home-img" />
-                  </div>
-              </div>
-          </HomeRow>
-          </MySection>
-    );
+function HomeSection() {
+  const [active, setActive] = useState(false);
+  return (
+    <MySection>
+      <HomeRow>
+        <Ministrybar />
+        <div className="home-text">
+          <p>Land</p>
+          <h1>Search</h1>
+          <h2>Information System</h2>
+          <Link
+            style={{ textDecoration: "none", display: "inline-block" }}
+            to="/search"
+          >
+            <MyButton
+              onClick={() => {
+                setActive(true);
+              }}
+              active={active}
+              placeholder="Explore"
+            />
+          </Link>
+        </div>
+        <div className="home-img">
+          <div className="img-box">
+            <img src="images/coatOfArms.png" alt="home-img" />
+          </div>
+        </div>
+      </HomeRow>
+    </MySection>
+  );
 }
 
 const HomeRow = Styled.div`
   display:flex;
   flex-wrap:wrap;
-  align-items:stretch;
+  align-items:center;
+  justify-content:center;
   
-  .align-items-center{
-    align-items:stretch;
-  }
+
   @media (max-width : 650px){
     flex-direction : column
   }

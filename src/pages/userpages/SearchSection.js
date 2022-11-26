@@ -103,7 +103,7 @@ function SearchSection() {
   return (
     <MySection>
       <MyNav />
-      <SearchSectionDiv className="row align-items-center">
+      <SearchSectionDiv>
         <Ministrybar />
 
         {showtable && (
@@ -412,6 +412,8 @@ const SearchSectionDiv = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
+  align-items: center;
+  justify-content: center;
 
   .hometextcontainer {
     display: flex;

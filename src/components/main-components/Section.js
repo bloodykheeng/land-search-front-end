@@ -1,21 +1,22 @@
 import Styled from "styled-components";
-import {motion} from "framer-motion";
-function MySection({children ,style}){
-
-    return( 
-      <CustomBody>
-        <CustomSection as={motion.section} 
-        initial ={{width:0}}
-        animate={{width : "90vw"}}
-         exit={{x:window.innerWidth , transition : {duration : 0.3}}}
-         id="home" 
-         className="home-section align-items-center active">
-            <div className="mycontainer" style={{...style}}>  
-              {children}
-              </div>
-          </CustomSection>
-          </CustomBody>
-    );
+import { motion } from "framer-motion";
+function MySection({ children, style }) {
+  return (
+    <CustomBody>
+      <CustomSection
+        as={motion.section}
+        initial={{ width: 0 }}
+        animate={{ width: "90vw" }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
+        id="home"
+        className="home-section align-items-center active"
+      >
+        <div className="mycontainer" style={{ ...style }}>
+          {children}
+        </div>
+      </CustomSection>
+    </CustomBody>
+  );
 }
 
 // animate={{opacity:1}}
@@ -40,12 +41,16 @@ function MySection({children ,style}){
 //   animation:${fadeOut} 0.5s ease-in-out forwards;`}
 
 const CustomBody = Styled.div`
-  width:100%;
-  min-height:100%;
+min-height:100vh;
+min-width:100%;
+box-sizing: border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   background: linear-gradient(to bottom right , var(--pink-light), var(--cyan-light));
-  padding:20px;
-  overflow : hidden;
+  overflow : auto;
   background-attachment: fixed;
+  overflow:hidden;
   &::before , &::after{
     box-sizing:border-box;
     overflow : hidden;
@@ -55,8 +60,8 @@ const CustomBody = Styled.div`
     position:fixed;
     left:0;
     top:0;
-    min-height:100%;
-    min-width:100%;
+    min-height:100vh;
+    min-width:100vw;
     background-color: var(--green-yellow);
     z-index:-1;
     opacity:0.12;
@@ -81,12 +86,14 @@ background-color: var(--white-alpha-25);
   margin:0 5%;
   overflow : hidden;
   .mycontainer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
     width:100%;
-     padding:0 40px;
+     padding:0 10px;
      overflow : hidden;
    }
 `;
 
-
 export default MySection;
-

@@ -2,7 +2,7 @@
   "name": "land-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://landsearch.herokuapp.com",
+  "proxy": "https://land-search-backend-git-bloodykheeng-dev.apps.sandbox.x8i5.p1.openshiftapps.com/",
   "dependencies": {
     "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.0",
