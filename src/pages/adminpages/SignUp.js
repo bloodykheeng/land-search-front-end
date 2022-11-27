@@ -17,6 +17,8 @@ import Lottie from "lottie-react";
 import PasswordUpdate from "../../lottiefiles/adminlotties/passwordupdate.json";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
 
+import { URL } from "../../config";
+
 const SignUp = () => {
   const [signupstatus, setsignupstatus] = useState("start");
   const [signupmsg, setsignupmsg] = useState("");
@@ -53,7 +55,9 @@ const SignUp = () => {
         phoneNumber: phonenumber,
         password: password,
       };
-      Axios.post("/signup", data, { withCredentials: true })
+
+      let url = `${URL}/signup`;
+      Axios.post(url, data, { withCredentials: true })
         .then((response) => {
           setIsLoading(false);
           console.log(response.data);

@@ -8,6 +8,7 @@ import SearchingLottie from "../../lottiefiles/adminlotties/searchinglottie.json
 import { ToastContainer, toast } from "react-toastify";
 import NoData from "../../lottiefiles/adminlotties/nodata.json";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
+import { URL } from "../../config";
 
 import {
   cldcolumn,
@@ -53,8 +54,10 @@ function AdminSearch() {
         clinnumber,
       };
       //bellow we call our adminsearch api from the backend to fetch data from the database
+
+      let url = `${URL}/adminsearch`;
       try {
-        let res = await Axios.post("/adminsearch", data, {
+        let res = await Axios.post(url, data, {
           withCredentials: true,
         });
         console.log(res.data);

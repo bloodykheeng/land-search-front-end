@@ -14,6 +14,7 @@ import PasswordUpdate from "../../lottiefiles/adminlotties/passwordupdate.json";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { URL } from "../../config";
 
 function ResetPassword() {
   const { adminid, token } = useParams();
@@ -37,8 +38,10 @@ function ResetPassword() {
       };
 
       setIsLoading(true);
+
+      let url = `${URL}/resetpassword`;
       try {
-        const res = await Axios.post("/resetpassword", data, {
+        const res = await Axios.post(url, data, {
           withCredentials: true,
         });
         setIsLoading(false);

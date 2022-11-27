@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Lottie from "lottie-react";
 import loadingCircle from "../../lottiefiles/adminlotties/loadingCircle.json";
+import { URL } from "../../config";
 
 function MyForm() {
   const navigate = useNavigate();
@@ -45,7 +46,8 @@ function MyForm() {
         password: password,
       };
 
-      Axios.post("/login", data, { withCredentials: true })
+      let url = `${URL}/login`;
+      Axios.post(url, data, { withCredentials: true })
         .then((response) => {
           setIsLoading(false);
           if (!response.data.auth) {

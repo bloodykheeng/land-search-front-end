@@ -7,6 +7,7 @@ import MinistryBar from "../../components/main-components/MinistryBar";
 import { Link } from "react-router-dom";
 import MyAlert from "../../components/form-components/MyAlert";
 import Axios from "axios";
+import { URL } from "../../config";
 
 //import CheckConnection from "../../components/admin-components/CheckConnection";
 
@@ -32,8 +33,10 @@ function ForgotPassword() {
         email: email,
       };
       setIsLoading(true);
+
+      let url = `${URL}/fogotpassword`;
       try {
-        const res = await Axios.post("/fogotpassword", data, {
+        const res = await Axios.post(url, data, {
           withCredentials: true,
         });
 

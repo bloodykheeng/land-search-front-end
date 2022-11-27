@@ -14,6 +14,7 @@ import Axios from "axios";
 
 import { isAdminData, isAdminAuth, isAdminSession } from "./AdminAuthContext";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../../config";
 
 function AdminUsers() {
   const navigate = useNavigate();
@@ -28,8 +29,10 @@ function AdminUsers() {
   useEffect(() => {
     const fetchadmins = async () => {
       setIsLoading(true);
+
+      let url = `${URL}/adminusers`;
       try {
-        let res = await Axios.post("/adminusers", { withCredentials: true });
+        let res = await Axios.post(url, { withCredentials: true });
         console.log(res.data);
         setIsLoading(false);
 
@@ -80,8 +83,10 @@ function AdminUsers() {
     const updateadminstatus = async ({ adminid, adminStatusId }) => {
       setIsLoading(true);
       let data = { adminid, adminStatusId };
+      let url = `${URL}/updateadminuserstatus`;
+
       try {
-        let res = await Axios.post("/updateadminuserstatus", data, {
+        let res = await Axios.post(url, data, {
           withCredentials: false,
         });
         console.log(res.data);
