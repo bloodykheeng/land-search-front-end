@@ -54,13 +54,9 @@ function SearchSection() {
       console.log("the data is ", data);
 
       try {
-        let response = await Axios.post(
-          "https://land-search-backend-git-bloodykheeng-dev.apps.sandbox.x8i5.p1.openshiftapps.com/usersearch",
-          data,
-          {
-            withCredentials: false,
-          }
-        );
+        let response = await Axios.post("/usersearch", data, {
+          withCredentials: true,
+        });
         console.log(response.data);
         setIsLoading(false);
         if (response.data.status === "successfull") {
