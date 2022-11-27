@@ -9,7 +9,7 @@ import NoData from "../../lottiefiles/userlotties/nodata.json";
 import FileLost from "../../lottiefiles/userlotties/filelost.json";
 import Loading from "../../lottiefiles/userlotties/loading.json";
 import { ToastContainer, toast } from "react-toastify";
-
+import { URL } from "../../config";
 import Axios from "axios";
 import UserTable from "./UserTable";
 import {
@@ -54,7 +54,7 @@ function SearchSection() {
       console.log("the data is ", data);
 
       try {
-        let response = await Axios.post("/usersearch", data, {
+        let response = await Axios.post(`${URL}/usersearch`, data, {
           withCredentials: true,
         });
         console.log(response.data);

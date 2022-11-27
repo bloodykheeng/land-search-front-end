@@ -13,6 +13,8 @@ import ForgotPassword from "./pages/adminpages/forgotpassword";
 import ResetPassword from "./pages/adminpages/resetpassword";
 import AdminUsers from "./pages/adminpages/AdminUsers";
 
+import { URL } from "./config";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import AboutLand from "./pages/userpages/AboutLand";
@@ -36,7 +38,7 @@ function App() {
   useEffect(() => {
     console.log("refresh");
     console.log(pathname);
-    axios.post("/refresh").then((response) => {
+    axios.post(`${URL}/refresh`).then((response) => {
       if (response.data.auth) {
         setAdminSession(null);
         setAdminData(response.data.data);
