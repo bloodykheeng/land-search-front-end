@@ -52,11 +52,15 @@ function SearchSection() {
 
       console.log("The search clin number is : ", clinnumber);
       console.log("the data is ", data);
-
+      console.log("user search url is : ", URL);
       try {
-        let response = await Axios.post(`${URL}/usersearch`, data, {
-          withCredentials: true,
-        });
+        let response = await Axios.post(
+          "https://land-search-backend-production.up.railway.app/usersearch",
+          data,
+          {
+            withCredentials: true,
+          }
+        );
         console.log(response.data);
         setIsLoading(false);
         if (response.data.status === "successfull") {

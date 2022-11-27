@@ -38,7 +38,8 @@ function App() {
   useEffect(() => {
     console.log("refresh");
     console.log(pathname);
-    axios.post(`${URL}/refresh`).then((response) => {
+    const url = `${URL}/refresh`;
+    axios.post(url).then((response) => {
       if (response.data.auth) {
         setAdminSession(null);
         setAdminData(response.data.data);
