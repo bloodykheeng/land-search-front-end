@@ -47,7 +47,7 @@ function MyForm() {
       };
 
       let url = `${URL}/login`;
-      Axios.post(url, data, { withCredentials: true })
+      Axios.post(url, data, { withCredentials: true, crossorigin: true })
         .then((response) => {
           setIsLoading(false);
           if (!response.data.auth) {
