@@ -48,7 +48,6 @@ function MyForm() {
 
       let url = `${URL}/login`;
       Axios.post(url, data, {
-        headers: { "Content-Type": "application/json" },
         withCredentials: true,
         crossorigin: true,
       })

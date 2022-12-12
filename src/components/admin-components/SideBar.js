@@ -1,42 +1,45 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {useContext,useState} from 'react';
-import axios from 'axios';
-import { isAdminAuth , isAdminData ,isAdminSession } from '../../pages/adminpages/AdminAuthContext';
-import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { useContext, useState } from "react";
+import axios from "axios";
+import {
+  isAdminAuth,
+  isAdminData,
+  isAdminSession,
+} from "../../pages/adminpages/AdminAuthContext";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
+import { Dashboard, ExitToApp } from "@mui/icons-material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 
-    import {Dashboard ,ExitToApp } from "@mui/icons-material";
-    import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-    import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
-    import DesignServicesIcon from '@mui/icons-material/DesignServices';
-    import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-
-    
-
-
-const SideBar = ({activeTab}) => {
-  const {setAdminSession} = useContext(isAdminSession);
-  const {setAdminAuth} = useContext(isAdminAuth);
-  const {adminData,setAdminData} = useContext(isAdminData);
-  const [active , setActive] = useState(activeTab);
+const SideBar = ({ activeTab }) => {
+  const { setAdminSession } = useContext(isAdminSession);
+  const { setAdminAuth } = useContext(isAdminAuth);
+  const { adminData, setAdminData } = useContext(isAdminData);
+  const [active, setActive] = useState(activeTab);
   //const navigate = useNavigate();
   //console.log("admin account type:  ", adminData.accountTypeName);
   //setActive(activeTab);
-  
-  const logouthandler = ()=>{
-          axios.post("/logout").then((response)=>{
-              setAdminAuth(response.data.auth);
-              setAdminData(null);
-              setAdminSession("logged out");
-              //navigate("/adminlogin");
-          }).catch((err)=>{
-            console.log(err);
-            toast.error("Server Down");
-          })
-      }
 
+  const logouthandler = () => {
+    axios
+      .post("/logout")
+      .then((response) => {
+        setAdminAuth(response.data.auth);
+        setAdminData(null);
+        setAdminSession("logged out");
+        //navigate("/adminlogin");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Server Down");
+      });
+  };
 
   return (
     <AdminSideBar>
@@ -49,55 +52,82 @@ const SideBar = ({activeTab}) => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to="/admindashboard" 
-          onClick={()=> setActive("dashboard")} 
-          style={{ 
-            textDecoration: "none"
-          }}>
-          <li style={{background: active === "dashboard" && "#ece8ff" }}>
-            <Dashboard className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <Link
+            to="/admindashboard"
+            onClick={() => setActive("dashboard")}
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <li style={{ background: active === "dashboard" && "#ece8ff" }}>
+              <Dashboard className="icon" />
+              <span>Dashboard</span>
+            </li>
           </Link>
           <p className="title">SERVICES</p>
-          <Link to="/adminupload" 
-          onClick={()=> setActive("fileupload")}
-          style={{ textDecoration: "none" }}>
-            <li style={{background: active === "fileupload" && "#ece8ff" }}>
+          <Link
+            to="/adminupload"
+            onClick={() => setActive("fileupload")}
+            style={{ textDecoration: "none" }}
+          >
+            <li style={{ background: active === "fileupload" && "#ece8ff" }}>
               <CloudUploadIcon className="icon" />
               <span>File Upload</span>
             </li>
           </Link>
-          <Link to="/adminsearch" 
-          onClick={()=> setActive("search")}
-          style={{ textDecoration: "none" }}>
-            <li style={{background: active === "search" && "#ece8ff" }}>
+          <Link
+            to="/adminsearch"
+            onClick={() => setActive("search")}
+            style={{ textDecoration: "none" }}
+          >
+            <li style={{ background: active === "search" && "#ece8ff" }}>
               <ScreenSearchDesktopIcon className="icon" />
               <span>Search</span>
             </li>
           </Link>
 
-        {/* create admin */}
-        {adminData.accountTypeName === "creator_admin" && <Link to="/adminsignup"
-        onClick={()=> setActive("signup")}
-         style={{ textDecoration: "none" }}>
-            <li style={{background: active === "signup" && "#ece8ff" }}>
-              <DesignServicesIcon className="icon" />
-              <span>CreateAdmin</span>
-            </li>
-          </Link> }
+          {/* create admin */}
+          {adminData.accountTypeName === "creator_admin" && (
+            <Link
+              to="/adminsignup"
+              onClick={() => setActive("signup")}
+              style={{ textDecoration: "none" }}
+            >
+              <li style={{ background: active === "signup" && "#ece8ff" }}>
+                <DesignServicesIcon className="icon" />
+                <span>CreateAdmin</span>
+              </li>
+            </Link>
+          )}
+
+          {/* below admin creators views his transactions */}
+          {adminData.accountTypeName === "creator_admin" && (
+            <Link
+              to="/transactions"
+              onClick={() => setActive("transactions")}
+              style={{ textDecoration: "none" }}
+            >
+              <li
+                style={{ background: active === "transactions" && "#ece8ff" }}
+              >
+                <ReceiptIcon className="icon" />
+                <span>Transactions</span>
+              </li>
+            </Link>
+          )}
 
           {/* viewadmin users */}
-          
-          <Link to="/adminusers" 
-          onClick={()=> setActive("adminusers")}
-          style={{ textDecoration: "none" }}>
-            <li style={{background: active === "adminusers" && "#ece8ff" }}>
+
+          <Link
+            to="/adminusers"
+            onClick={() => setActive("adminusers")}
+            style={{ textDecoration: "none" }}
+          >
+            <li style={{ background: active === "adminusers" && "#ece8ff" }}>
               <SupervisorAccountIcon className="icon" />
               <span>Administrators</span>
             </li>
           </Link>
-       
 
           <p className="title">LEAVE</p>
           <li onClick={logouthandler}>
@@ -107,19 +137,19 @@ const SideBar = ({activeTab}) => {
         </ul>
       </div>
       <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-      </AdminSideBar>
-  )
-}
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </AdminSideBar>
+  );
+};
 const AdminSideBar = styled.div`
 
     flex: 1;
@@ -139,7 +169,7 @@ const AdminSideBar = styled.div`
         color: #6439ff;
       }
     }
-  
+    ReceiptIcon
     hr {
       height: 0;
       border: 0.5px solid rgb(230, 227, 227);

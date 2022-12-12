@@ -51,8 +51,9 @@ function ForgotPassword() {
           let adminlastName = res.data.adminlastName;
           let email = res.data.email;
 
-          //let link = `http://localhost:3000/resetpassword/${adminid}/${token}`;
-          let link = `https://land-search-backend-production.up.railway.app/${adminid}/${token}`;
+          let link = `http://localhost:3000/resetpassword/${adminid}/${token}`;
+          //let resetURl = `${URL}/${adminid}/${token}`;
+          //let link = resetURl;
 
           const data = {
             from_name: "LandSearch",

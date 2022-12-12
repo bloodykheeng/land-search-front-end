@@ -1,28 +1,29 @@
 import Styled from "styled-components";
 
-function MyButton({type, active, placeholder, ...other}){
-    return(
-        <MyButtonStyled active={active}>
-        <div className="submit-btn">
-         <button type={type} {...other} className="btn">
-            <span>{placeholder}</span>      
+function MyButton({ type, active, placeholder, ...other }) {
+  return (
+    <MyButtonStyled active={active}>
+      <div className="submit-btn">
+        <button type={type} {...other} className="btn">
+          <span>{placeholder}</span>
         </button>
-        </div>
-        </MyButtonStyled>
-    )
+      </div>
+    </MyButtonStyled>
+  );
 }
 
 const MyButtonStyled = Styled.div`
 .btn{
     line-height:1.5;
-    background-color:${({active})=>active ? "var(--main-color)" : "(var(--white-alpha-25))" };
+    background-color:${({ active }) =>
+      active ? "var(--main-color)" : "(var(--white-alpha-25))"};
     padding:10px 28px;
     display:inline-block;
     border-radius:30px;
-    color:${({active})=> active ? "var(--white)" : "var(--main-color)" };
+    color:${({ active }) => (active ? "var(--white)" : "var(--main-color)")};
     font-weight:500;
     text-transform:capitalize;
-    border:1px solid var(--white-alpha-40);
+    border:3px solid var(--white-alpha-40);
     font-family:inherit;
     font-size:16px;
     cursor:pointer;

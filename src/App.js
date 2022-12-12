@@ -12,12 +12,15 @@ import AdminSearch from "./pages/adminpages/AdminSearch";
 import ForgotPassword from "./pages/adminpages/forgotpassword";
 import ResetPassword from "./pages/adminpages/resetpassword";
 import AdminUsers from "./pages/adminpages/AdminUsers";
+import Transactions from "./pages/adminpages/Transactions";
 
 import { URL } from "./config";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import AboutLand from "./pages/userpages/AboutLand";
+
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import {
   isAdminAuth,
@@ -72,64 +75,73 @@ function App() {
 
   return (
     <>
-      <AnimatePresence>
-        <Routes location={location} key={location.pathname}>
-          <Route exact path="/" element={<HomeSection />} />
+      <PayPalScriptProvider
+        options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}
+      >
+        <AnimatePresence>
+          <Routes location={location} key={location.pathname}>
+            <Route exact path="/" element={<HomeSection />} />
 
-          <Route exact path="/search" element={<SearchSection />} />
+            <Route exact path="/search" element={<SearchSection />} />
 
-          <Route exact path="/aboutland" element={<AboutLand />} />
+            <Route exact path="/aboutland" element={<AboutLand />} />
 
-          <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
 
-          <Route
-            exact
-            path="/resetpassword/:adminid/:token"
-            element={<ResetPassword />}
-          />
+            <Route
+              exact
+              path="/resetpassword/:adminid/:token"
+              element={<ResetPassword />}
+            />
 
-          <Route exact path="/adminportal" element={<AdminHome />} />
+            <Route exact path="/adminportal" element={<AdminHome />} />
 
-          <Route
-            exact
-            path="/adminlogin"
-            element={
-              <isAdminSession.Provider
-                value={{ adminSession, setAdminSession }}
-              >
-                <isAdminAuth.Provider value={{ adminAuth, setAdminAuth }}>
-                  <isAdminData.Provider value={{ adminData, setAdminData }}>
-                    <LoginForm />
-                  </isAdminData.Provider>
-                </isAdminAuth.Provider>
-              </isAdminSession.Provider>
-            }
-          />
+            <Route
+              exact
+              path="/adminlogin"
+              element={
+                <isAdminSession.Provider
+                  value={{ adminSession, setAdminSession }}
+                >
+                  <isAdminAuth.Provider value={{ adminAuth, setAdminAuth }}>
+                    <isAdminData.Provider value={{ adminData, setAdminData }}>
+                      <LoginForm />
+                    </isAdminData.Provider>
+                  </isAdminAuth.Provider>
+                </isAdminSession.Provider>
+              }
+            />
 
-          {/* The component bellow  helps us to make our admin routes secure thus we pass our routes through a protected routes component then we wrap our protected component with providers to pass in our use context variables */}
-          {/* protected route start */}
-          <Route
-            element={
-              <isAdminSession.Provider
-                value={{ adminSession, setAdminSession }}
-              >
-                <isAdminAuth.Provider value={{ adminAuth, setAdminAuth }}>
-                  <isAdminData.Provider value={{ adminData, setAdminData }}>
-                    <ProtectedRoutes />
-                  </isAdminData.Provider>
-                </isAdminAuth.Provider>
-              </isAdminSession.Provider>
-            }
-          >
-            <Route exact path="/admindashboard" element={<AdminDashboard />} />
-            <Route exact path="/adminupload" element={<FileUpload />} />
-            <Route exact path="/adminsearch" element={<AdminSearch />} />
-            <Route exact path="/adminsignup" element={<SignUp />} />
-            <Route exact path="/adminusers" element={<AdminUsers />} />
-          </Route>
-          {/* protected route end */}
-        </Routes>
-      </AnimatePresence>
+            {/* The component bellow  helps us to make our admin routes secure thus we pass our routes through a protected routes component then we wrap our protected component with providers to pass in our use context variables */}
+            {/* protected route start */}
+            <Route
+              element={
+                <isAdminSession.Provider
+                  value={{ adminSession, setAdminSession }}
+                >
+                  <isAdminAuth.Provider value={{ adminAuth, setAdminAuth }}>
+                    <isAdminData.Provider value={{ adminData, setAdminData }}>
+                      <ProtectedRoutes />
+                    </isAdminData.Provider>
+                  </isAdminAuth.Provider>
+                </isAdminSession.Provider>
+              }
+            >
+              <Route
+                exact
+                path="/admindashboard"
+                element={<AdminDashboard />}
+              />
+              <Route exact path="/adminupload" element={<FileUpload />} />
+              <Route exact path="/adminsearch" element={<AdminSearch />} />
+              <Route exact path="/adminsignup" element={<SignUp />} />
+              <Route exact path="/adminusers" element={<AdminUsers />} />
+              <Route exact path="/transactions" element={<Transactions />} />
+            </Route>
+            {/* protected route end */}
+          </Routes>
+        </AnimatePresence>
+      </PayPalScriptProvider>
     </>
   );
 }
